@@ -1,0 +1,79 @@
+/* Importing Bootstrap SCSS file. */
+//@import 'bootstrap/scss/bootstrap';
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+:root {
+    --font-family-default: 'Roboto', sans-serif;
+	--background-color-default: #f5f7fa;
+
+	/* Buttons */
+
+    --btn-color-primary: #0052cc;
+	--btn-color-primary-contrast: #ffffff;
+	--btn-color-primary-border: transparent;
+	--btn-color-primary-hover: #0046ad;
+	--btn-color-primary-off: #aaabc0;
+
+	--btn-color-secondary: #fcb92c;
+	--btn-color-secondary-contrast: #ffffff;
+	--btn-color-secondary-border: transparent;
+	--btn-color-secondary-hover: #fcc44c;
+	--btn-color-secondary-off: #aaabc0;
+
+	--btn-color-tertiary: #31374a;
+	--btn-color-tertiary-contrast: #ffffff;
+	--btn-color-tertiary-border: transparent;
+	--btn-color-tertiary-hover: #222834;
+	--btn-color-tertiary-off: #aaabc0;
+
+	--btn-color-danger: #fa3b1d;
+	--btn-color-danger-contrast: #ffffff;
+	--btn-color-danger-border: transparent;
+	--btn-color-danger-hover: #cc1b00;
+	--btn-color-danger-off: #aaabc0;
+
+	--btn-color-success: #25b003;
+	--btn-color-success-contrast: #ffffff;
+	--btn-color-success-border: transparent;
+	--btn-color-success-hover: #23890b;
+	--btn-color-success-off: #aaabc0;
+
+	/* Imput form */
+
+	--input-form-color: #525b75;
+	--input-form-border-size: 1px;
+	--input-form-color-border: #cbd0dd;
+	--input-form-error: #fa3b1d;
+
+	/* Alerts */
+
+	--alert-color: #b81800;
+	--alert-border-color: #f48270;
+	--alert-background-color: #ffe0db;
+
+
+
+	/* Asaid */
+	--asaid-backgroound-color: #222e3c;
+	--asaid-border-right-color: #222e3c;
+
+	/* sidebar */
+	--sidebar-color: #adb5bd;
+	--sidebar-hover-color: #fff;
+	--sidebar-hover-background-color: #eff2f6; 
+	--sidebar-active-option: #3874ff;
+
+	/* header */
+	--border-bottom-color: #cbd0dd;
+
+	/* Table */
+	--table-bakcground-color: #fff;
+	--table-font-size: 12px;
+	--table-row-hover: #e0ebfe;
+	--table-border-button-color: #e3e6ed;
+	--table-row-height: 50px;
+	--table-border-type: collapse;
+}
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';

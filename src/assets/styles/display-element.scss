@@ -1,0 +1,13 @@
+.display-none{
+    &__md {
+        @media(width <= 720px) {
+            display: none;
+        }
+    }
+    
+    &__sm {
+        @media(width <= 540px) {
+            display: none;
+        }
+    }
+}

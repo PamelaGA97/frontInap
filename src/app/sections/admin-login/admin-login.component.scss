@@ -1,0 +1,62 @@
+.login {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	
+	.content {
+		height: auto;
+		width: 400px;
+		background: var(--btn-color-primary-contrast);
+		border-radius: 10px;
+		padding: 1em;
+		border: 1px solid var(--input-form-color-border);
+		.head {
+			padding: 1em;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.button-section {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 1em 2em;
+		}
+	}
+
+	.btn-triage {
+		width: 100%;
+	}
+}
+
+
+
+.view {
+	display: flex;
+	height: 100%;
+
+	.left-content {
+		width: 50%;
+		background-color: red;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.right-content {
+		width: 50%;
+		background-color: blue;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		.login-card {
+			padding: 0.75em;
+			width: 400px;
+			height: 500px;
+			background-color: white;
+			border-radius: 10px;
+		}
+	}
+}

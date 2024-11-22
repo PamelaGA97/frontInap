@@ -1,0 +1,48 @@
+.form-triage {
+    padding: 1em;
+    .form-group {
+        //padding: 0 1em;
+        display: flex;
+        flex-direction: column;
+        label {
+            font-size: 11px;
+            font-family: var(--font-family-default);
+            margin: 0 0 0.5em 1em;
+            text-transform: uppercase;
+            color: var(--input-form-color);
+        }
+
+        input, select {
+            width: auto;
+            height: 40px;
+            padding-left: 0.8em;
+            border: var(--input-form-border-size) solid var(--input-form-color-border);
+            border-radius: 5px;
+            outline: none;
+            &:focus {
+                border: var(--input-form-border-size) solid var(--btn-color-primary);
+                box-shadow: 0 4px 8px 0 rgba(0,77, 255, 0.2), 0 6px 20px 0 rgba(0, 77, 255, 0.19);
+            }
+        }
+
+        .select {
+            color: var(--input-form-color);
+            option {
+                font-size: 4px;
+            }
+        }
+    }
+}
+
+.is-required::after {
+    content: '*';
+    margin-left: 3px;
+    color: var(--alert-color);
+    font-weight: bold;
+}
+
+.error-content {
+    font-size: 11px;
+    color: var(--alert-color);
+    margin-left: 0.8em;
+}

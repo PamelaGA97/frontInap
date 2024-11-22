@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "assets/styles/buttons.scss";
+@import "assets/styles/form.scss";
+@import "assets/styles/margin.scss";
+@import "assets/styles/display-element.scss";
+@import "assets/styles/table.scss";
+@import "assets/styles/card.scss";
+@import "assets/styles/triage-card.scss";
+//@import "ngx-toastr/toastr";
+
+* {
+    font-family: var(--font-family-default);
+    margin: 0;
+    height: 100vh;
+}
