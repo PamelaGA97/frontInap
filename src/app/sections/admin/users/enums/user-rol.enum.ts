@@ -1,6 +1,6 @@
 export enum UserRolEnum {
     STUDENT = 'ESTUDIANTE',
-    ADMIN = 'ADMINISTRADOR',
+    ADMIN = 'ADMIN',
     TEACHER = 'DOCENTE',
     SECRETARY =  'SECRETARIA',
     INAP_ADMIN = 'ADMINISTRATIVO'
