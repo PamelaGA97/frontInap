@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UserRolEnum } from '../../../../../shared/enums/user-rol.enum';
+import { UserRolEnum } from '../../enums/user-rol.enum';
 import { FormStatus } from '../../../../../shared/enums/form-status.enum';
 import { ValidatioErrorMessage } from '../../../../../core/validation-error-message';
 import { ToastService } from '../../../../../shared/services/toast.service';

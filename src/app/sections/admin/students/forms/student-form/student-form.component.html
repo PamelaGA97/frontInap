@@ -1,0 +1,67 @@
+<form action="" class="form-triage" [formGroup]="studentForm">
+    <div formGroupName="user">
+        <div class="form-group mb-3">
+            <label for="name" class="is-required">Nombres</label>
+            <input type="text" name="name" formControlName="firstName">
+            @if(this.firstName !== undefined && this.firstName?.touched && this.firstName?.status === formStatusEnum.INVALID) {
+                <div class="error-content">
+                    @if(this.firstName?.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+                </div>
+            }
+        </div>
+        <div class="form-group mb-3">
+            <label for="second-name" class="is-required">Apellidos</label>
+            <input type="text" name="second-name" formControlName="secondName">
+            @if(this.secondName !== undefined && this.secondName?.touched && this.secondName?.status === formStatusEnum.INVALID) {
+                <div class="error-content">
+                    @if(this.secondName?.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+                </div>
+            }
+        </div>
+        <div class="form-group mb-3">
+            <label for="ci" class="is-required">Ci</label>
+            <input type="text" name="ci" formControlName="ci">
+            @if(this.ci !== undefined && this.ci?.touched && this.ci?.status === formStatusEnum.INVALID) {
+                <div class="error-content">
+                    @if(this.ci?.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+                </div>
+            }
+        </div>
+        <div class="form-group mb-3">
+            <label for="cellphone" class="is-required">Telefono</label>
+            <input type="number" name="cellphone" appBlockInvalidNumberKeys formControlName="cellphone">
+            @if(this.cellphone !== undefined && this.cellphone?.touched && this.cellphone?.status === formStatusEnum.INVALID) {
+                <div class="error-content">
+                    @if(this.cellphone?.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+                </div>
+            }
+        </div>
+    </div>	
+    <div class="form-group mb-3">
+        <label for="highschool" class="is-required">Colegio</label>
+        <input type="text" name="highschool" formControlName="highschool">
+        @if(this.highschool !== undefined && this.highschool.touched && this.highschool.status === formStatusEnum.INVALID) {
+            <div class="error-content">
+                @if(this.highschool.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+            </div>
+        }
+    </div>
+    <div class="form-group mb-3">
+        <label for="graduationYear" class="is-required">Año de graduacion</label>
+        <input type="text" name="graduationYear" formControlName="graduationYear">
+        @if(this.graduationYear !== undefined && this.graduationYear.touched && this.graduationYear.status === formStatusEnum.INVALID) {
+            <div class="error-content">
+                @if(this.graduationYear.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+            </div>
+        }
+    </div>
+    <div class="form-group mb-3">
+        <label for="career" class="is-required">Carrera</label>
+        <input type="text" name="career" formControlName="career">
+        @if(this.career !== undefined && this.career.touched && this.career.status === formStatusEnum.INVALID) {
+            <div class="error-content">
+                @if(this.career.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+            </div>
+        }
+    </div>
+</form>
