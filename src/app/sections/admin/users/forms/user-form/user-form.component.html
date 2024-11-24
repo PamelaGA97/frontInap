@@ -1,0 +1,51 @@
+<form action="" class="form-triage" [formGroup]="userForm">
+	<div class="form-group mb-3">
+		<label for="name" class="is-required">Nombre</label>
+		<input type="text" name="name" formControlName="firstName">
+		@if(this.firsName.touched && this.firsName.status === formStatusEnum.INVALID) {
+			<div class="error-content">
+				@if(this.firsName.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+			</div>
+		}
+	</div>
+	<div class="form-group mb-3">
+		<label for="second-name" class="is-required">Apellido</label>
+		<input type="text" name="second-name" formControlName="secondName">
+		@if (this.secondName.touched && this.secondName.status === formStatusEnum.INVALID) {
+			<div class="error-content">
+				@if(this.secondName.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+			</div>
+		}
+	</div>
+	<div class="form-group mb-3">
+		<label for="password" class="is-required">Password</label>
+		<input type="password" name="password" formControlName="password" autocomplete="off">
+		@if(this.password.touched && this.password.status === formStatusEnum.INVALID) {
+			<div class="error-content">
+				@if(this.password.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+			</div>
+		}
+	</div>
+	<div class="form-group mb-3">
+		<label for="re-pass" class="is-required">Repetir contrasena</label>
+		<input type="password" name="re-pass" formControlName="rePassword" autocomplete="off">
+		@if(this.rePassword.touched && this.password.status === formStatusEnum.INVALID) {
+			<div class="error-content">
+				@if(this.rePassword.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+			</div>
+		}
+	</div>
+	<div class="form-group mb-3">
+		<label for="rol" class="is-required">Rol</label>
+		<select name="rol" formControlName="rol">
+			@for (userRol of userRolsEnum; track $index) {
+				<option value="{{userRol}}">{{userRol}}</option>
+			}
+		</select>
+		@if(this.rol.touched && this.rol.status === formStatusEnum.INVALID) {
+			<div class="error-content">
+				@if(this.rol.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+			</div>
+		}
+	</div>
+</form>
