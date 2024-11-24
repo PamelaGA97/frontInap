@@ -10,6 +10,6 @@ export const pages: ViewPage[] = [
     },
     {
         name: 'Usuarios',
-        path: `${environment.baseUrl}${adminPath}/users`
+        path: `${environment.baseUrl}${adminPath}/dashboard/users`
     }
 ]
