@@ -12,7 +12,7 @@ import { Login } from './models/login.model';
 export class AdminLoginComponent {
 	@ViewChild('loginFormComponent') loginFormComponent?: LoginFormComponent;
 	isDisableButton: boolean = false;
-	inaptImagePath: string = 'C:/Users/SERGIO_FERNANDEZ/Documents/Catolica/frontInap/src/assets/images/inap-image.jpg';
+	inaptImagePath: string = 'assets/image/inap.jpg';
 
 	constructor() {}
 

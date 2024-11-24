@@ -11,13 +11,22 @@
 	</div>
 </div>
 -->
+
 <div class="view">
-	<div class="left-content">
-		<img [src]="inaptImagePath" alt="">
+	<div class="view__left-content">
+		<img src="{{inaptImagePath}}" alt="" />
 	</div>
-	<div class="right-content">
+	<div class="view__right-content">
 		<div class="login-card">
-			
+			<div class="login-card__head">
+				<h2>Autenticarse</h2>
+			</div>
+			<div class="login-card__content">
+				<app-login-form #loginFormComponent (submitFormEvent)="submitLoginForm($event)"></app-login-form>
+				<div class="button-section">
+					<button class="btn btn__solid-primary" [disabled]="isDisableButton" (click)="onSubmit()">Ingresar</button>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

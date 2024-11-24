@@ -1,0 +1,38 @@
+.sidebar {
+	list-style: none;
+	padding: 0.5em 1em;
+	font-size: 13px;
+    .nav-item {
+		width: 100%;
+		min-height: 40px;
+		display: flex;
+		align-content: center;
+		a {
+			text-decoration: none;
+			display: flex;
+			align-items: center;
+			width: 100%;
+			.item {
+				padding: 0 0 0 1em;
+				width: 100%;
+				color: var(--sidebar-color);
+				&.active {
+					color: var(--sidebar-active-option);
+				}
+			}
+            .item:hover {
+                color: var(--sidebar-hover-color);
+            }
+		}
+	}
+	li:hover {
+		border-radius: 10px;
+	}
+}
+
+@media (width <= 720px) {
+	.sidebar {
+		position: sticky;
+		top: 0;
+	}
+}

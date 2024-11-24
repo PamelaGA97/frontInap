@@ -1,0 +1,35 @@
+<div class="user-list">
+    <div class="user-list__header">
+        <h2 class="title">
+            Usuarios
+        </h2>
+        <button class="btn-triage btn__solid-primary" (click)="addUser()">
+            + Agregar
+        </button>
+    </div>
+    <div class="user-list__content">
+        <table class="advanced-table">
+            <thead>
+                <tr class="table-header">
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Rol</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (user of users; track $index) {
+                    <tr class="table__body" [ngClass]="{'shadow-row': $index%2 === 0}">
+                        <td>{{user.name}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.rol}}</td>
+                        <td class="position-right">
+                            <button class="btn-triage btn__solid-primary option" (click)="openUserEdit(user.id)">ver detalle</button>
+                            <button class="btn-triage btn__solid-danger option" (click)="deleteUser(user.id)">eliminar</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

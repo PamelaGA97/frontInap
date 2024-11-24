@@ -1,0 +1,14 @@
+<div class="container">
+	<div class="user-create">
+		<div class="user-create__header">
+			<h3>Crear usuario</h3>
+		</div>
+		<div class="user-create__content">
+			<app-user-form #userForm></app-user-form>
+		</div>
+		<div class="user-create__footer">
+			<button class="btn-triage btn__solid-primary mr-2 option" (click)="createUser()">crear</button>
+			<button class="btn-triage btn__solid-tertiary option" (click)="closeModal()">cancelar</button>
+		</div>
+	</div>
+</div>
