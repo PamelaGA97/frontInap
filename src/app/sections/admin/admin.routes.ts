@@ -4,6 +4,7 @@ import { AdminComponent } from './admin.component';
 import { UsersComponent } from './users/users.component';
 import { Component } from '@angular/core';
 import { StudentsComponent } from './students/students.component';
+import { SecretariesComponent } from './secretaries/secretaries.component';
 
 export const ADMIN_ROUTES: Routes = [
 	{
@@ -23,6 +24,11 @@ export const ADMIN_ROUTES: Routes = [
 				path: 'students',
 				component: StudentsComponent,
 				loadChildren: () => import('./students/routes').then(mod => mod.STUDENT_ROUTES)
+			},
+			{
+				path: 'secretaries',
+				component: SecretariesComponent,
+				loadChildren: () => import('./secretaries/routes').then(mod => mod.SECRETARY_ROUTES)
 			}
 		]
 	},
