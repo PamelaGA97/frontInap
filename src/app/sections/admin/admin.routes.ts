@@ -32,8 +32,9 @@ export const ADMIN_ROUTES: Routes = [
 				loadChildren: () => import('./secretaries/routes').then(mod => mod.SECRETARY_ROUTES)
 			},
 			{
-				path: 'profesors',
-				component: ProfessorsComponent
+				path: 'professors',
+				component: ProfessorsComponent,
+				loadChildren: () => import('./professors/routes').then(mod => mod.PROFESSOR_ROUTES)
 			}
 		]
 	},
