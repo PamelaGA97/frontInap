@@ -39,3 +39,16 @@
         }
     }
 }
+
+.default-table-list {
+    width: 100%;
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 2em;
+    }
+    &__content {
+        width: 100%;
+        overflow: auto;
+    }
+}
