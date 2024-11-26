@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { Login } from './models/login.model';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-admin-login',
@@ -13,8 +14,11 @@ export class AdminLoginComponent {
 	@ViewChild('loginFormComponent') loginFormComponent?: LoginFormComponent;
 	isDisableButton: boolean = false;
 	inaptImagePath: string = 'assets/image/inap.jpg';
+	path: string = '/admin';
 
-	constructor() {}
+	constructor(
+		private router: Router
+	) {}
 
 	public submitLoginForm(loginForm: Login): void {
 		this.isDisableButton = false;
@@ -24,5 +28,6 @@ export class AdminLoginComponent {
 	public onSubmit(): void {
 		this.isDisableButton = true;
 		this.loginFormComponent?.submit();
+		this.router.navigate([this.path])
 	}
 }
