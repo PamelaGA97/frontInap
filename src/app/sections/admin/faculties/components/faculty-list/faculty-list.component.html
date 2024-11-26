@@ -22,6 +22,7 @@
                 @for (faculty of faculties; track $index) {
                     <tr class="table__body" [ngClass]="{'shadow-row': $index%2 === 0}">
                         <td>{{faculty.name}}</td>
+                        <td></td>
                         <td class="position-right">
                             <button class="btn-triage btn__solid-primary option" (click)="openProfessorEdit(faculty.id)">ver detalle</button>
                             <button class="btn-triage btn__solid-danger option" (click)="deleteProfessor(faculty.id)">eliminar</button>
