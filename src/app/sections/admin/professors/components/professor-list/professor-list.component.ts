@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserRolEnum } from '../../../users/enums/user-rol.enum';
 import { Professor } from '../../models/professor.model';
+import { SwalAlertResponse } from '../../../../../core/services/swal-alert/swal-alert-response.enum';
+import { SwalService } from '../../../../../core/services/swal-alert/swal.service';
 
 @Component({
   selector: 'app-professor-list',
@@ -43,7 +45,8 @@ export class ProfessorListComponent {
   ];
 
   constructor(
-    private router: Router
+    private router: Router,
+    private swalService: SwalService
   ) {}
 
   addProfessor(): void {
@@ -54,7 +57,10 @@ export class ProfessorListComponent {
     console.log(professorsId)
   }
 
-  deleteProfessor(professorsId: string): void {
-    console.log(professorsId)
-  }
+  async deleteProfessor(professor: Professor): Promise<void> {
+		const confirmationResponse = await this.swalService.openConfirmationModal(`¿Estas seguro de eliminar el docente ${professor.user.firstName} ${professor.user.secondName}?`, '');
+		if (confirmationResponse === SwalAlertResponse.CONFIRM) {
+			console.log('Eliminar el usuario')
+		}
+	}
 }

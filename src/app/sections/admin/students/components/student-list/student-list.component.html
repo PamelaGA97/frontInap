@@ -31,8 +31,8 @@
                         <td>{{student.graduationYear}}</td>
                         <td>{{student.career}}</td>
                         <td class="position-right">
-                            <button class="btn-triage btn__solid-primary option" (click)="openUserEdit(student.id)">ver detalle</button>
-                            <button class="btn-triage btn__solid-danger option" (click)="deleteUser(student.id)">eliminar</button>
+                            <button class="btn-triage btn__solid-primary option" (click)="openStudentEdit(student.id)">ver detalle</button>
+                            <button class="btn-triage btn__solid-danger option" (click)="deleteStudent(student)">eliminar</button>
                         </td>
                     </tr>
                 }
