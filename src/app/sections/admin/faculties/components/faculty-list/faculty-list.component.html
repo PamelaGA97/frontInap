@@ -19,22 +19,16 @@
                 </tr>
             </thead>
             <tbody>
-                <!--
-                @for (professor of professors; track $index) {
+                @for (faculty of faculties; track $index) {
                     <tr class="table__body" [ngClass]="{'shadow-row': $index%2 === 0}">
-                        <td>{{professor.user!.firstName}}</td>
-                        <td>{{professor.user!.secondName}}</td>
-                        <td>{{professor.user!.ci}}</td>
-                        <td>{{professor.user!.cellphone}}</td>
-                        <td>{{professor.career}}</td>
-                        <td>{{professor.course}}</td>
+                        <td>{{faculty.name}}</td>
+                        <td></td>
                         <td class="position-right">
-                            <button class="btn-triage btn__solid-primary option" (click)="openProfessorEdit(professor.id)">ver detalle</button>
-                            <button class="btn-triage btn__solid-danger option" (click)="deleteProfessor(professor.id)">eliminar</button>
+                            <button class="btn-triage btn__solid-primary option" (click)="openProfessorEdit(faculty.id)">ver detalle</button>
+                            <button class="btn-triage btn__solid-danger option" (click)="deleteProfessor(faculty.id)">eliminar</button>
                         </td>
                     </tr>
                 }
-                -->
             </tbody>
         </table>
     </div>

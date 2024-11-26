@@ -1,0 +1,11 @@
+<form action="" class="form-triage" [formGroup]="facultyForm">
+    <div class="form-group mb-3">
+        <label for="name" class="is-required">Nombre facultad</label>
+        <input type="text" name="name" formControlName="name">
+        @if(this.name !== undefined && this.name?.touched && this.name?.status === formStatusEnum.INVALID) {
+            <div class="error-content">
+                @if(this.name?.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+            </div>
+        }
+    </div>
+</form>

@@ -1,1 +1,14 @@
-<p>faculty-create works!</p>
+<div class="container">
+    <div class="faculty-create">
+        <div class="faculty-create__header">
+            <h3>Crear Facultad</h3>
+        </div>
+        <div class="faculty-create__content">
+            <app-faculty-form #facultyForm (submitFormEvent)="saveFaculty($event)"></app-faculty-form>
+        </div>
+        <div class="faculty-create__footer">
+            <button class="btn-triage btn__solid-primary mr-2 options" (click)="createfaculty()">Crear</button>
+            <button class="btn-triage btn__solid-tertiary option" (click)="backTofacultyList()">Cancelar</button>
+        </div>
+    </div>
+</div>
