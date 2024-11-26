@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
 import { StudentsComponent } from './students/students.component';
 import { SecretariesComponent } from './secretaries/secretaries.component';
 import { ProfessorsComponent } from './professors/professors.component';
+import { FacultyComponent } from './faculty/faculty.component';
 
 export const ADMIN_ROUTES: Routes = [
 	{
@@ -35,6 +36,10 @@ export const ADMIN_ROUTES: Routes = [
 				path: 'professors',
 				component: ProfessorsComponent,
 				loadChildren: () => import('./professors/routes').then(mod => mod.PROFESSOR_ROUTES)
+			},
+			{
+				path: 'facultades',
+				component: FacultyComponent
 			}
 		]
 	},
