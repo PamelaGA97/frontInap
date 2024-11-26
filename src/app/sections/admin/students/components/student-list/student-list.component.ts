@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { UserRolEnum } from '../../../users/enums/user-rol.enum';
 import { Student } from '../../models/student.model';
 import { CommonModule } from '@angular/common';
+import { SwalAlertResponse } from '../../../../../core/services/swal-alert/swal-alert-response.enum';
+import { SwalService } from '../../../../../core/services/swal-alert/swal.service';
 
 @Component({
   selector: 'app-student-list',
@@ -45,18 +47,22 @@ export class StudentListComponent {
   ];
 
   constructor(
-    private router: Router
+    private router: Router,
+    private swalService: SwalService,
   ) {}
 
   addStudent(): void {
     this.router.navigate([this.path, 'create'])
   }
 
-  openUserEdit(studentId: string): void {
+  openStudentEdit(studentId: string): void {
     console.log('Accion de editar usuario')
   }
-
-  deleteUser(studentId: string): void {
-    console.log('Eliminar estudiante')
-  }
+  
+  async deleteStudent(student: Student): Promise<void> {
+		const confirmationResponse = await this.swalService.openConfirmationModal(`¿Estas seguro de eliminar el estdiante ${student.user.firstName} ${student.user.secondName}?`, '');
+		if (confirmationResponse === SwalAlertResponse.CONFIRM) {
+			console.log('Eliminar el usuario')
+		}
+	}
 }

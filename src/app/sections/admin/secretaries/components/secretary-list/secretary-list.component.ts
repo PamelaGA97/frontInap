@@ -5,6 +5,8 @@ import { TurnsJob } from '../../../../../shared/enums/turns-job.enum';
 import { Branch } from '../../../../../shared/enums/branch.enum';
 import { UserRolEnum } from '../../../users/enums/user-rol.enum';
 import { CommonModule } from '@angular/common';
+import { SwalAlertResponse } from '../../../../../core/services/swal-alert/swal-alert-response.enum';
+import { SwalService } from '../../../../../core/services/swal-alert/swal.service';
 
 @Component({
   selector: 'app-secretary-list',
@@ -45,7 +47,8 @@ export class SecretaryListComponent {
   ];
 
   constructor(
-    private router: Router
+    private router: Router,
+    private swalService: SwalService
   ) {}
 
   addSecretary() {
@@ -56,8 +59,10 @@ export class SecretaryListComponent {
     console.log('vamos a editar la secretaria')
   }
 
-  deleteSecretary(secretaryId: string): void {
-    // open modal de confirmacion  generico
-    console.log('eliminar la secretaria')
-  }
+  async deleteSecretary(secretary: Secretary): Promise<void> {
+		const confirmationResponse = await this.swalService.openConfirmationModal(`¿Estas seguro de eliminar la secretaria ${secretary.user.firstName} ${secretary.user.secondName}?`, '');
+		if (confirmationResponse === SwalAlertResponse.CONFIRM) {
+			console.log('Eliminar el usuario')
+		}
+	}
 }

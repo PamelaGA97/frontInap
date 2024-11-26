@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Faculty } from '../../models/faculty.model';
+import { SwalAlertResponse } from '../../../../../core/services/swal-alert/swal-alert-response.enum';
+import { SwalService } from '../../../../../core/services/swal-alert/swal.service';
 
 @Component({
   selector: 'app-faculty-list',
@@ -29,18 +31,22 @@ export class FacultyListComponent {
   ]
 
   constructor(
-    private router: Router
+    private router: Router,
+    private swalService: SwalService
   ) {}
 
   addFaculty(): void {
     this.router.navigate([this.path, 'create'])
   }
 
-  openProfessorEdit(facultyId: string): void {
+  openFacultyEdit(facultyId: string): void {
 
   }
 
-  deleteProfessor(facultyId: string): void {
-
-  }
+  async deleteFaculty(faculty: Faculty): Promise<void> {
+		const confirmationResponse = await this.swalService.openConfirmationModal(`¿Estas seguro de eliminar la facultad de ${faculty.name}.`, '');
+		if (confirmationResponse === SwalAlertResponse.CONFIRM) {
+			console.log('Eliminar la facultad')
+		}
+	}
 }
