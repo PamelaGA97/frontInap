@@ -4,9 +4,7 @@
             <h3>Crear Docente</h3>
         </div>
         <div class="professor-create__content">
-            <!--
-            <app-professor-form #secretaryForm (submitFormEvent)="saveSecretary($event)"></app-professor-form>
-            -->
+            <app-professor-form #professorForm (submitFormEvent)="saveProfessor($event)"></app-professor-form>
         </div>
         <div class="professor-create__footer">
             <button class="btn-triage btn__solid-primary mr-2 options" (click)="createProfessor()">Crear</button>

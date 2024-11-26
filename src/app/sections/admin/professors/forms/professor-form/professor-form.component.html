@@ -1,4 +1,4 @@
-<form action="" class="form-triage" [formGroup]="studentForm">
+<form action="" class="form-triage" [formGroup]="professorForm">
     <div formGroupName="user">
         <div class="form-group mb-3">
             <label for="name" class="is-required">Nombres</label>
@@ -36,24 +36,6 @@
                 </div>
             }
         </div>
-    </div>	
-    <div class="form-group mb-3">
-        <label for="highschool" class="is-required">Colegio</label>
-        <input type="text" name="highschool" formControlName="highschool">
-        @if(this.highschool !== undefined && this.highschool.touched && this.highschool.status === formStatusEnum.INVALID) {
-            <div class="error-content">
-                @if(this.highschool.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
-            </div>
-        }
-    </div>
-    <div class="form-group mb-3">
-        <label for="graduationYear" class="is-required">Año de graduacion</label>
-        <input type="text" name="graduationYear" formControlName="graduationYear">
-        @if(this.graduationYear !== undefined && this.graduationYear.touched && this.graduationYear.status === formStatusEnum.INVALID) {
-            <div class="error-content">
-                @if(this.graduationYear.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
-            </div>
-        }
     </div>
     <div class="form-group mb-3">
         <label for="faculty" class="is-required">Facultad</label>
