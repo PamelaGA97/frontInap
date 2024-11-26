@@ -1,12 +1,10 @@
 import { BaseModel } from "../../../../shared/models/baseModel.model";
 import { User } from "../../users/model/user.model";
 
-export interface Student extends BaseModel{
+export interface Professor extends BaseModel{
     id: string,
-    user: User,
-    highschool?: string,
-    graduationYear?: string,
-    faculty?: string,
     career?: string,
-    status?: string,
+    course?: string,
+    faculty?: string,
+    user: User
 }

@@ -29,6 +29,7 @@ export class StudentFormComponent {
     this.studentForm = this._formBuilder.group({
       highschool: ['', [Validators.required]],
       graduationYear: ['', [Validators.required]],
+      faculty: ['', [Validators.required]],
       career: ['', [Validators.required]],
       user: this._formBuilder.group({
         firstName: ['', [Validators.required]],
@@ -80,5 +81,9 @@ export class StudentFormComponent {
 
   get career() {
     return this.studentForm.controls['career'];
+  }
+
+  get faculty() {
+    return this.studentForm.controls['faculty']
   }
 }

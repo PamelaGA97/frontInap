@@ -4,11 +4,12 @@ import { Secretary } from '../../models/secretary.model';
 import { TurnsJob } from '../../../../../shared/enums/turns-job.enum';
 import { Branch } from '../../../../../shared/enums/branch.enum';
 import { UserRolEnum } from '../../../users/enums/user-rol.enum';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-secretary-list',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './secretary-list.component.html',
   styleUrl: './secretary-list.component.scss'
 })
