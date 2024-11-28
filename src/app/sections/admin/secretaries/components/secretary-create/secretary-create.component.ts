@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { adminPath } from '../../../../../core/admin-url-path';
 import { SecretaryService } from '../../services/secretary.service';
 import { ToastService } from '../../../../../shared/services/toast.service';
+import { AlertType } from '../../../../../shared/services/alert.enum';
+import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 
 @Component({
   selector: 'app-secretary-create',
@@ -35,8 +37,11 @@ export class SecretaryCreateComponent {
   saveSecretary(secretary: Secretary): void {
     this.secretaryService.create(secretary).subscribe(
       (response) => {
-        this.toastService.showToast('El usuario secretaria fue creado');
+        this.toastService.showToast('El usuario secretaria fue creado', '', AlertType.SUCCESS);
         this.router.navigate([adminPath, 'secretaries'])
-      });
+      }, (error: ErrorHandler) => {
+        this.toastService.showToast(`${error.error} ${error.statusCode}`, `${error.message[0]}`, AlertType.ERROR);
+     }
+    );
   }
 }
