@@ -27,15 +27,16 @@ export class FacultyFormComponent {
   private initializeForm(): void {
     this.facultyForm = this._formBuilder.group({
       name: ['', Validators.required],
-      careers: this._formBuilder.array([
-
-      ])
+      careers: this._formBuilder.array([]),
+      courses: this._formBuilder.array([])
     });
   }
 
   submit(): void {
     if(this.facultyForm.valid) {
       this.submitFormEvent.emit(this.facultyForm.value);
+    } else {
+      console.log('Algo paso con el formulario de creado')
     }
   }
 
@@ -46,8 +47,19 @@ export class FacultyFormComponent {
     this.careers.push(career);
   }
 
+  addCourse(): void {
+    const course = this._formBuilder.group({
+      name: ['', Validators.required]
+    });
+    this.courses.push(course);
+  }
+
   removeCareer(index: number): void {
     this.careers.removeAt(index);
+  }
+
+  removeCourse(index: number): void {
+    this.courses.removeAt(index);
   }
 
   get name() {
@@ -56,5 +68,9 @@ export class FacultyFormComponent {
 
   get careers(): FormArray {
     return this.facultyForm.get('careers') as FormArray;
+  }
+
+  get courses(): FormArray {
+    return this.facultyForm.get('courses') as FormArray;
   }
 }

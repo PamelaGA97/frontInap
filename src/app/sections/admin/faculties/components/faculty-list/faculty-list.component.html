@@ -14,7 +14,8 @@
             <thead>
                 <tr class="table-header">
                     <th>Facultad</th>
-                    <th>Carreras</th>   
+                    <th>Carreras</th>
+                    <th>Materias</th>
                     <th></th>
                 </tr>
             </thead>
@@ -22,7 +23,16 @@
                 @for (faculty of faculties; track $index) {
                     <tr class="table__body" [ngClass]="{'shadow-row': $index%2 === 0}">
                         <td>{{faculty.name}}</td>
-                        <td></td>
+                        <td>
+                            @for (career of faculty.careers; track $index) {
+                                <p>{{$index+1}}: {{career.name}}</p>
+                            }
+                        </td>
+                        <td>
+                            @for (course of faculty.courses; track $index) {
+                                <p>{{$index+1}}: {{course.name}}</p>
+                            }
+                        </td>
                         <td class="position-right">
                             <button class="btn-triage btn__solid-primary option" (click)="openFacultyEdit(faculty.id)">ver detalle</button>
                             <button class="btn-triage btn__solid-danger option" (click)="deleteFaculty(faculty)">eliminar</button>

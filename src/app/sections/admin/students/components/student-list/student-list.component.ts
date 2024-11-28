@@ -17,34 +17,7 @@ import { SwalService } from '../../../../../core/services/swal-alert/swal.servic
 export class StudentListComponent {
   title: string = 'Estudiantes';
   path: string = '/admin/students';
-  students: Student[] = [
-    {
-      id: 'caldsfjlasdfasldfl;',
-      highschool: 'Postel',
-      graduationYear: '2014',
-      career: 'Electronica',
-      user: {
-        rol: UserRolEnum.STUDENT,
-        firstName: 'Andrea',
-        secondName: 'Lopez',
-        ci: '98127391',
-        cellphone: 77954876
-      }
-    },
-    {
-      id: 'ksajdfkajsdfkjl',
-      highschool: 'Merinol',
-      graduationYear: '2024',
-      career: 'Econimia',
-      user: {
-        rol: UserRolEnum.STUDENT,
-        firstName: 'Carlos',
-        secondName: 'Martinez',
-        ci: '983434391',
-        cellphone: 77634876
-      }
-    }
-  ];
+  students: Student[] = [];
 
   constructor(
     private router: Router,
