@@ -8,10 +8,9 @@
             </div>
         }
     </div>
-    <div formArrayName="careers">
+    <div formArrayName="careers" class="space">
         <div class="title-section mb-3">
             <h4>Carreras</h4>
-            <button type="button" class="btn-triage btn__solid-success" (click)="addCareer()">Agregar Carrera</button>
         </div>
         @for (career of careers.controls; track $index) {
             <div [formGroupName]="$index">
@@ -25,5 +24,28 @@
                 </div>
             </div>
         }
+        <div class="footer-section">
+            <button type="button" class="btn-triage btn__solid-success" (click)="addCareer()">Agregar Carrera</button>
+        </div>   
+    </div>
+    <div formArrayName="courses" class="space">
+        <div class="title-section mb-3">
+            <h4>Materias</h4>
+        </div>
+        @for (course of courses.controls; track $index) {
+            <div [formGroupName]="$index">
+                <div class="trash-content">
+                    <p>Materia {{$index +1}}</p>
+                    <span class="icon-trash-2" (click)="removeCourse($index)"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="course-name" class="is-required">Nombre Materia</label>
+                    <input type="text" name="course-name" formControlName="name">
+                </div>
+            </div>
+        }
+        <div class="footer-section">
+            <button type="button" class="btn-triage btn__solid-success" (click)="addCourse()">Agregar Materiaa</button>
+        </div>
     </div>
 </form>
