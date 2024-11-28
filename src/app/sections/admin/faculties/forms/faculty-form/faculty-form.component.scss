@@ -1,0 +1,21 @@
+.title-section {
+    display: flex   ;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.trash-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon-trash-2 {
+    font-size: 25px;
+    color: red;
+}
+
+.btn__solid-success {
+    font-size: 13px;
+    padding: 0.5em;
+}

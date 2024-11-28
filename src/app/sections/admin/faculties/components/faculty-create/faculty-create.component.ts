@@ -26,6 +26,7 @@ export class FacultyCreateComponent {
   }
 
   saveFaculty(faculty: Faculty): void {
+    console.log(faculty)
     console.log('aqui se debe guardar la facultad')
   }
 }
