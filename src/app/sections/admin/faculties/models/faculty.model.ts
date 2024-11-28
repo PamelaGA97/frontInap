@@ -4,5 +4,5 @@ import { Career } from "../../careers/models/career.model"
 export interface Faculty extends BaseModel {
     id: string,
     name?: string
-    carerrs?: Career[],
+    careers?: Career[],
 }
