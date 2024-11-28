@@ -4,6 +4,8 @@ import { SecretaryFormComponent } from "../../forms/secretary-form/secretary-for
 import { Secretary } from '../../models/secretary.model';
 import { Router } from '@angular/router';
 import { adminPath } from '../../../../../core/admin-url-path';
+import { SecretaryService } from '../../services/secretary.service';
+import { ToastService } from '../../../../../shared/services/toast.service';
 
 @Component({
   selector: 'app-secretary-create',
@@ -17,7 +19,9 @@ export class SecretaryCreateComponent {
 
   constructor(
     private location: Location,
-    private router: Router
+    private router: Router,
+    private secretaryService: SecretaryService,
+    private toastService: ToastService
   ) {}
 
   backToSecretaryList(): void {
@@ -29,7 +33,10 @@ export class SecretaryCreateComponent {
   }
 
   saveSecretary(secretary: Secretary): void {
-    console.log('Realizar la conexion a base de datos', secretary);
-    this.router.navigate([adminPath, 'secretaries'])
+    this.secretaryService.create(secretary).subscribe(
+      (response) => {
+        this.toastService.showToast('El usuario secretaria fue creado');
+        this.router.navigate([adminPath, 'secretaries'])
+      });
   }
 }
