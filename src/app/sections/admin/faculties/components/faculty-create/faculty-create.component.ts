@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { ToastService } from '../../../../../shared/services/toast.service';
 import { AlertType } from '../../../../../shared/services/alert.enum';
 import { ToastrModule } from 'ngx-toastr';
+import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 
 @Component({
   selector: 'app-faculty-create',
@@ -42,6 +43,8 @@ export class FacultyCreateComponent {
       (response) => {
         this.toastService.showToast('Facultad creada correctamente', '', AlertType.SUCCESS);
         this.router.navigate([this.path])
+      }, (error: ErrorHandler) => {
+        this.toastService.showHttpError(error);
       });
   }
 }

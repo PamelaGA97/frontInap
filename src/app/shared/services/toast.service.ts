@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { AlertType } from './alert.enum';
+import { ErrorHandler } from '../models/errorHandler.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +31,9 @@ export class ToastService {
     if (alertType === AlertType.INFO) {
       this.toastr.info(message, title, this.config);
     }
+  }
+
+  showHttpError(httpError: ErrorHandler) {
+    this.toastr.error(`${httpError.error} ${httpError.statusCode}`, `${httpError.message[0]}`, this.config);
   }
 }

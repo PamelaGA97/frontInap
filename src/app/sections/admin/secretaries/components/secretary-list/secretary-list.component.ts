@@ -34,10 +34,25 @@ export class SecretaryListComponent {
     this.initialize();
   }
 
+  addSecretary(): void {
+    this.router.navigate([this.path, 'create'])
+  }
+
+  openSecretaryEdit(secretaryId: string): void {
+    console.log('vamos a editar la secretaria')
+  }
+
+  async openModalDelete(secretary: Secretary): Promise<void> {
+    const confirmationResponse = await this.swalService.openConfirmationModal(`¿Estas seguro de eliminar la secretaria ${secretary.user.firstName} ${secretary.user.secondName}?`, '');
+		if (confirmationResponse === SwalAlertResponse.CONFIRM) {
+      this.deleteSecretary(secretary.id);
+		}
+	}
+
   private async initialize(): Promise<void> {
     await this.getAllSecretaries();
   }
-
+  
   private async getAllSecretaries(): Promise<void> {
     this.secretaryService.getAll().subscribe(
       (response) => {
@@ -48,18 +63,13 @@ export class SecretaryListComponent {
     );
   }
 
-  addSecretary() {
-    this.router.navigate([this.path, 'create'])
+  private deleteSecretary(secretaryId: string): void {
+    this.secretaryService.delete(secretaryId).subscribe(
+      (response) => {
+        this.toastService.showToast(`Usuario Eliminado`, ``, AlertType.SUCCESS);
+        this.getAllSecretaries();
+      }, (error) => {
+        this.toastService.showToast(`${error.error} ${error.statusCode}`,`${error.message[0]}`, AlertType.ERROR);
+      });
   }
-
-  openSecretaryEdit(secretaryId: string): void {
-    console.log('vamos a editar la secretaria')
-  }
-
-  async deleteSecretary(secretary: Secretary): Promise<void> {
-		const confirmationResponse = await this.swalService.openConfirmationModal(`¿Estas seguro de eliminar la secretaria ${secretary.user.firstName} ${secretary.user.secondName}?`, '');
-		if (confirmationResponse === SwalAlertResponse.CONFIRM) {
-			console.log('Eliminar el usuario')
-		}
-	}
 }

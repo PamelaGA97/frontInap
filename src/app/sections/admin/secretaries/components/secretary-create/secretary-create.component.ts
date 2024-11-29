@@ -37,7 +37,7 @@ export class SecretaryCreateComponent {
   saveSecretary(secretary: Secretary): void {
     this.secretaryService.create(secretary).subscribe(
       (response) => {
-        this.toastService.showToast('El usuario secretaria fue creado', '', AlertType.SUCCESS);
+        this.toastService.showToast('Secretaria creada', '', AlertType.SUCCESS);
         this.router.navigate([adminPath, 'secretaries'])
       }, (error: ErrorHandler) => {
         this.toastService.showToast(`${error.error} ${error.statusCode}`, `${error.message[0]}`, AlertType.ERROR);
