@@ -7,6 +7,7 @@ import { SwalService } from '../../../../../core/services/swal-alert/swal.servic
 import { FacultyService } from '../../services/facuties.service';
 import { ToastService } from '../../../../../shared/services/toast.service';
 import { AlertType } from '../../../../../shared/services/alert.enum';
+import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 
 @Component({
   selector: 'app-faculty-list',
@@ -29,18 +30,6 @@ export class FacultyListComponent {
     this.initialize();
   }
 
-  private initialize(): void {
-    this.getAllFaculties();
-  }
-
-  private getAllFaculties(): void {
-    this.facultyService.getAll().subscribe(
-      (resposne) => {
-        console.log(resposne)
-        this.faculties = resposne;
-      });
-  }
-
   addFaculty(): void {
     this.router.navigate([this.path, 'create'])
   }
@@ -52,17 +41,34 @@ export class FacultyListComponent {
       });
   }
 
-  async deleteFaculty(faculty: Faculty): Promise<void> {
+  async openDeleteFaculty(faculty: Faculty): Promise<void> {
 		const confirmationResponse = await this.swalService.openConfirmationModal(`¿Estas seguro de eliminar la facultad de ${faculty.name}.`, '');
 		if (confirmationResponse === SwalAlertResponse.CONFIRM) {
-
-      this.facultyService.delete(faculty.id).subscribe(
-        (response) => {
-          console.log(response)
-          this.toastService.showToast(`La facultad ${faculty.name} fue eliminada.`, '', AlertType.SUCCESS);
-          this.getAllFaculties();
-        }
-      );
+      this.deleteFaculty(faculty.id);
 		}
 	}
+
+  private initialize(): void {
+    this.getAllFaculties();
+  }
+
+  private getAllFaculties(): void {
+    this.facultyService.getAll().subscribe(
+      (resposne) => {
+        this.faculties = resposne;
+      }, (error: ErrorHandler) => {
+        this.toastService.showHttpError(error);
+      });
+  }
+
+  private deleteFaculty(facultyId: string): void {
+    this.facultyService.delete(facultyId).subscribe(
+      (response) => {
+        this.toastService.showToast(`La facultad fue eliminada.`, '', AlertType.SUCCESS);
+        this.getAllFaculties();
+      }, (error: ErrorHandler) => {
+        this.toastService.showHttpError(error);
+      }
+    );
+  }
 }

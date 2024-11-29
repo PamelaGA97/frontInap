@@ -4,6 +4,10 @@ import { SecretaryFormComponent } from "../../forms/secretary-form/secretary-for
 import { Secretary } from '../../models/secretary.model';
 import { Router } from '@angular/router';
 import { adminPath } from '../../../../../core/admin-url-path';
+import { SecretaryService } from '../../services/secretary.service';
+import { ToastService } from '../../../../../shared/services/toast.service';
+import { AlertType } from '../../../../../shared/services/alert.enum';
+import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 
 @Component({
   selector: 'app-secretary-create',
@@ -17,7 +21,9 @@ export class SecretaryCreateComponent {
 
   constructor(
     private location: Location,
-    private router: Router
+    private router: Router,
+    private secretaryService: SecretaryService,
+    private toastService: ToastService
   ) {}
 
   backToSecretaryList(): void {
@@ -29,7 +35,13 @@ export class SecretaryCreateComponent {
   }
 
   saveSecretary(secretary: Secretary): void {
-    console.log('Realizar la conexion a base de datos', secretary);
-    this.router.navigate([adminPath, 'secretaries'])
+    this.secretaryService.create(secretary).subscribe(
+      (response) => {
+        this.toastService.showToast('Secretaria creada', '', AlertType.SUCCESS);
+        this.router.navigate([adminPath, 'secretaries'])
+      }, (error: ErrorHandler) => {
+        this.toastService.showToast(`${error.error} ${error.statusCode}`, `${error.message[0]}`, AlertType.ERROR);
+     }
+    );
   }
 }
