@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="professor-create">
+        <div class="professor-create__header">
+            <h3>Crear Curso</h3>
+        </div>
+        <div class="professor-create__content">
+            <app-faculty-course-form #professorForm (submitFormEvent)="saveFacultyCourse($event)"></app-faculty-course-form>
+        </div>
+        <div class="professor-create__footer">
+            <button class="btn-triage btn__solid-primary mr-2 options" (click)="createFacultyCourse()">Crear</button>
+            <button class="btn-triage btn__solid-tertiary option" (click)="backToFacultyCourseList()">Cancelar</button>
+        </div>
+    </div>
+</div>

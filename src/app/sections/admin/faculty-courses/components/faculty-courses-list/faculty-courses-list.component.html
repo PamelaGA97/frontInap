@@ -1,0 +1,45 @@
+<div class="default-table-list">
+    <div class="default-table-list__header">
+        <h2 class="title">
+            {{title}}
+        </h2>
+        <button class="btn-triage btn__solid-primary" (click)="addFacultyCourse()">
+            + Crear nuevo curso
+        </button>
+    </div>
+    
+    <div class="default-table-list__content">
+        <table class="advanced-table">
+            <thead>
+                <tr class="table-header">
+                    <th>Facultad</th>
+                    <th>Docentes</th>
+                    <th>Materias</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (facultyCourse of facultyCourses; track $index) {
+                    <tr class="table__body" [ngClass]="{'shadow-row': $index%2 === 0}">
+                        <td>{{facultyCourse.faculty?.name}}</td>
+                        <td>
+                            @for (professor of facultyCourse.professors; track $index) {
+                                <p>{{$index+1}}: {{professor.user.firstName}}</p>
+                            }
+                        </td>
+                        <td>
+                            @for (course of facultyCourse.courses; track $index) {
+                                <p>{{$index+1}}: {{course.name}}</p>
+                            }
+                        </td>
+                        <td class="position-right">
+                            <button class="btn-triage btn__solid-primary option" (click)="openfacultyCourseEdit(facultyCourse.id)">ver detalle</button>
+                            <button class="btn-triage btn__solid-danger option" (click)="openDeleteFacultyCourse(facultyCourse)">eliminar</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

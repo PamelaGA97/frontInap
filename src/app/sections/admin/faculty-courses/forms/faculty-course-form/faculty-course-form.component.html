@@ -1,0 +1,66 @@
+<form action="" class="form-triage" [formGroup]="facultyCourseForm">
+    <div class="form-group mb-3">
+        <label for="faculty" class="is-required">Facultad</label>
+        <select name="faculty" formControlName="faculty">
+            <option value="" disable selected>Seleccione una facultad</option>
+            @for(facultyOption of faculties; track $index) {
+                <option [ngValue]="facultyOption">{{ facultyOption.name }}</option>
+            }
+        </select>
+        @if(this.faculty !== undefined && this.faculty.touched && this.faculty.status === formStatusEnum.INVALID) {
+            <div class="error-content">
+                @if(this.faculty.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+            </div>
+        }
+    </div>
+    <div class="form-group mb-3">
+        <label for="initDate" class="is-required">Fecha inicio de clases</label>
+        <input type="date" name="initDate" formControlName="initDate">
+        <!--
+        @if(this.firstName !== undefined && this.firstName?.touched && this.firstName?.status === formStatusEnum.INVALID) {
+            <div class="error-content">
+                @if(this.firstName?.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+            </div>
+        }
+        --> 
+    </div>
+    <div class="form-group mb-3">
+        <label for="finishDate" class="is-required">Fecha fin de clases</label>
+        <input type="date" name="finishDate" formControlName="finishDate">
+        <!--
+        @if(this.firstName !== undefined && this.firstName?.touched && this.firstName?.status === formStatusEnum.INVALID) {
+            <div class="error-content">
+                @if(this.firstName?.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+            </div>
+        }
+        -->
+    </div>
+
+    <!--
+    <div formGroupName="user">
+        <div class="form-group mb-3">
+            <label for="name" class="is-required">Nombres</label>
+            <input type="text" name="name" formControlName="firstName">
+            @if(this.firstName !== undefined && this.firstName?.touched && this.firstName?.status === formStatusEnum.INVALID) {
+                <div class="error-content">
+                    @if(this.firstName?.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+                </div>
+            }
+        </div>
+    </div>
+    <div class="form-group mb-3">
+        <label for="course" class="is-required">Materia</label>
+        <select name="course" formControlName="course">
+            <option value="" disable selected>Seleccione una materia</option>
+            @for(courseOption of courses; track $index) {
+                <option [ngValue]="courseOption">{{ courseOption.name }}</option>
+            }
+        </select>
+        @if(this.course !== undefined && this.course.touched && this.course.status === formStatusEnum.INVALID) {
+            <div class="error-content">
+                @if(this.course.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+            </div>
+        }
+    </div>
+    -->
+</form>

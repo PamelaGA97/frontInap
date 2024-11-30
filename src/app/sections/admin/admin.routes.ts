@@ -7,6 +7,7 @@ import { StudentsComponent } from './students/students.component';
 import { SecretariesComponent } from './secretaries/secretaries.component';
 import { ProfessorsComponent } from './professors/professors.component';
 import { FacultiesComponent } from './faculties/faculties.component';
+import { FacultyCoursesComponent } from './faculty-courses/faculty-courses.component';
 
 export const ADMIN_ROUTES: Routes = [
 	{
@@ -41,6 +42,11 @@ export const ADMIN_ROUTES: Routes = [
 				path: 'faculties',
 				component: FacultiesComponent,
 				loadChildren: () => import('./faculties/routes').then(mod => mod.FACULTY_ROUTES)
+			},
+			{
+				path: 'faculty-courses',
+				component: FacultyCoursesComponent,
+				loadChildren: () => import('./faculty-courses/routes').then(mod => mod.FACULTY_COURSES_ROUTES)
 			}
 		]
 	},
