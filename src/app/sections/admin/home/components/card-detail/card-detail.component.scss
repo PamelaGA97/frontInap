@@ -1,0 +1,22 @@
+.card-detail {
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    background-color: white;
+    border: solid 1px grey; min-width: 250px;
+
+    &__header {
+        color: #727cf5;
+        font-weight: 600;
+
+        h4 {
+            font-weight: 600;
+        }
+    }
+
+    &__body {
+        color: #0acf97;
+        font-size: 43px;
+        font-weight: 700;
+        text-align: center;
+    }
+}
