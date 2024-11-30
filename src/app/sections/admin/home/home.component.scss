@@ -1,3 +1,21 @@
 .content {
     padding: 2em;
 }
+
+.home-view {
+    padding: 0.5em 1em;
+    &__row {
+        padding: 0.25em 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__item {
+    }
+}
+
+h3 {
+    font-weight: 600;
+    color: grey;
+}
