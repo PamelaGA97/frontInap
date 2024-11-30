@@ -9,10 +9,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 
-@Api('secretaries')
 export class SecretaryService {
-  apiUrl = environment.apiUrl;
-	resource: string = '';
+ 	apiUrl = environment.apiUrl;
+	resource: string = '/secretaries';
 
 	constructor(private http: HttpClient) {}
 
