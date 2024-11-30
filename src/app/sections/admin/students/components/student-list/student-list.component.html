@@ -17,6 +17,7 @@
                     <th>Telefono</th>
                     <th>Colegio</th>
                     <th>Graduacion</th>
+                    <th>Facultad</th>
                     <th>Carrera</th>
                 </tr>
             </thead>
@@ -28,11 +29,12 @@
                         <td>{{student.user!.ci}}</td>
                         <td>{{student.user!.cellphone}}</td>
                         <td>{{student.highschool}}</td>
-                        <td>{{student.graduationYear}}</td>
-                        <td>{{student.career}}</td>
+                        <td>{{student.graduationYear ? (student.graduationYear | year) : ''}}</td>
+                        <td>{{student.faculty?.name}}</td>
+                        <td>{{student.career?.name}}</td>
                         <td class="position-right">
                             <button class="btn-triage btn__solid-primary option" (click)="openStudentEdit(student.id)">ver detalle</button>
-                            <button class="btn-triage btn__solid-danger option" (click)="deleteStudent(student)">eliminar</button>
+                            <button class="btn-triage btn__solid-danger option" (click)="openDeleteModal(student)">eliminar</button>
                         </td>
                     </tr>
                 }

@@ -2,6 +2,11 @@ import { Component, ViewChild } from '@angular/core';
 import { ProfessorFormComponent } from '../../forms/professor-form/professor-form.component';
 import { Professor } from '../../models/professor.model';
 import { Location } from '@angular/common';
+import { ProfessorService } from '../../services/professors.service';
+import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
+import { ToastService } from '../../../../../shared/services/toast.service';
+import { AlertType } from '../../../../../shared/services/alert.enum';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-professor-create',
@@ -12,9 +17,13 @@ import { Location } from '@angular/common';
 })
 export class ProfessorCreateComponent {
   @ViewChild('professorForm') professorFormComponent!: ProfessorFormComponent;
+  path: string = '/admin/professors';
 
   constructor(
-    private location: Location
+    private location: Location,
+    private professorService: ProfessorService,
+    private toastService: ToastService,
+    private router: Router
   ) {}
 
   createProfessor(): void {
@@ -25,7 +34,13 @@ export class ProfessorCreateComponent {
     this.location.back();
   }
 
-  saveProfessor(value: Professor): void {
-    console.log('Aqui entra el guardar al docente')
+  saveProfessor(professor: Professor): void {
+    this.professorService.create(professor).subscribe(
+      (response) => {
+        this.toastService.showToast(`Professor creado.`, ``, AlertType.SUCCESS);
+        this.router.navigate([this.path]);
+      }, (error: ErrorHandler) => {
+        this.toastService.showHttpError(error);
+      });
   }
 }

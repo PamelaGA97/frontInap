@@ -39,7 +39,12 @@
     </div>
     <div class="form-group mb-3">
         <label for="faculty" class="is-required">Facultad</label>
-        <input type="text" name="faculty" formControlName="faculty">
+        <select name="faculty" formControlName="faculty" (change)="loadCourses()">
+            <option value="" disable selected>Seleccione una facultad</option>
+            @for(facultyOption of faculties; track $index) {
+                <option [ngValue]="facultyOption">{{ facultyOption.name }}</option>
+            }
+        </select>
         @if(this.faculty !== undefined && this.faculty.touched && this.faculty.status === formStatusEnum.INVALID) {
             <div class="error-content">
                 @if(this.faculty.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
@@ -47,11 +52,16 @@
         }
     </div>
     <div class="form-group mb-3">
-        <label for="career" class="is-required">Carrera</label>
-        <input type="text" name="career" formControlName="career">
-        @if(this.career !== undefined && this.career.touched && this.career.status === formStatusEnum.INVALID) {
+        <label for="course" class="is-required">Materia</label>
+        <select name="course" formControlName="course">
+            <option value="" disable selected>Seleccione una materia</option>
+            @for(courseOption of courses; track $index) {
+                <option [ngValue]="courseOption">{{ courseOption.name }}</option>
+            }
+        </select>
+        @if(this.course !== undefined && this.course.touched && this.course.status === formStatusEnum.INVALID) {
             <div class="error-content">
-                @if(this.career.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+                @if(this.course.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
             </div>
         }
     </div>

@@ -10,5 +10,4 @@ export interface Student extends BaseModel{
     graduationYear?: Date,
     faculty?: Faculty,
     career?: Career,
-    status?: string,
 }

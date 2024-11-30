@@ -1,40 +1,40 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Student } from '../models/student.model';
 import { environment } from '../../../../../environments/environment';
 import { Observable } from 'rxjs';
+import { Professor } from '../models/professor.model';
 @Injectable({
 	providedIn: 'root'
 })
 
-export class StudentService {
+export class ProfessorService {
 	apiUrl = environment.apiUrl;
-	resource: string = '/students';
+	resource: string = '/professors';
 
 	constructor(private http: HttpClient) {}
 
-	create(data: Student): Observable<Student> {
+	create(data: Professor): Observable<Professor> {
 		const path = `${this.apiUrl}${this.resource}`;
-		return this.http.post<Student>(path, data);
+		return this.http.post<Professor>(path, data);
 	}
 
-	getAll(term?: string): Observable<Student[]> {
+	getAll(term?: string): Observable<Professor[]> {
 		const path = `${this.apiUrl}${this.resource}`;
-		return this.http.get<Student[]>(path);
+		return this.http.get<Professor[]>(path);
 	}
 
-	get(id: string): Observable<Student> {
+	get(id: string): Observable<Professor> {
 		const path = `${this.apiUrl}${this.resource}/${id}`;
-		return this.http.get<Student>(path);
+		return this.http.get<Professor>(path);
 	}
 
-	delete(id: string): Observable<Student> {
+	delete(id: string): Observable<Professor> {
 		const path = `${this.apiUrl}${this.resource}/${id}`;
-		return this.http.delete<Student>(path);
+		return this.http.delete<Professor>(path);
 	}
 
-	patch(id: string, data: Student): Observable<Student> {
+	patch(id: string, data: Professor): Observable<Professor> {
 		const path = `${this.apiUrl}${this.resource}/${id}`;
-		return this.http.put<Student>(path, data);
+		return this.http.put<Professor>(path, data);
 	}
 }

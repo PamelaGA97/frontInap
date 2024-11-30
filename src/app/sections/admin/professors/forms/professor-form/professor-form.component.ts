@@ -6,6 +6,11 @@ import { UserRolEnum } from '../../../users/enums/user-rol.enum';
 import { ValidatioErrorMessage } from '../../../../../core/validation-error-message';
 import { FormStatus } from '../../../../../shared/enums/form-status.enum';
 import { Professor } from '../../models/professor.model';
+import { FacultyService } from '../../../faculties/services/facuties.service';
+import { Faculty } from '../../../faculties/models/faculty.model';
+import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
+import { ToastService } from '../../../../../shared/services/toast.service';
+import { Course } from '../../../courses/model/course.model';
 
 @Component({
   selector: 'app-professor-form',
@@ -19,16 +24,26 @@ export class ProfessorFormComponent {
   professorForm!: FormGroup;
   validationErrorMessage = ValidatioErrorMessage;
   formStatusEnum = FormStatus;
+  faculties: Faculty[] = [];
+  courses: Course[] = [];
+  dais: string[] = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
+  hours: string[] = []
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private facultyService: FacultyService,
+    private toastService: ToastService
   ) {
+    this.initialize();
+  }
+  
+  private initialize(): void {
     this.initializeForm();
+    this.loadFaculties();
   }
 
-  initializeForm(): void {
+  private initializeForm(): void {
     this.professorForm = this.formBuilder.group({
-      career: ['', Validators.required],
       course: ['', Validators.required],
       faculty: ['', Validators.required],
       user: this.formBuilder.group({
@@ -39,6 +54,20 @@ export class ProfessorFormComponent {
         cellphone: ['', [Validators.required]],
       })
     });
+  }
+
+  private loadFaculties(): void {
+    this.facultyService.getAll().subscribe(
+      (response) => {
+        this.faculties = response;
+    }, (error: ErrorHandler) => {
+      this.toastService.showHttpError(error);
+    });
+  }
+
+  loadCourses(): void {
+    const faculty = this.professorForm.value.faculty;
+    this.courses = faculty.courses;
   }
 
   submit(): void {
