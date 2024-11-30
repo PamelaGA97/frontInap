@@ -7,3 +7,9 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+.year-select {
+  max-height: 200px; /* Altura máxima para el scroll */
+  overflow-y: auto; /* Permitir desplazamiento vertical */
+  width: 100%; /* Ajustar al ancho del contenedor */
+}

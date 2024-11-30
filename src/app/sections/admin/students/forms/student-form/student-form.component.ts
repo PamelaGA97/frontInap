@@ -1,15 +1,19 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, ErrorHandler, EventEmitter, Output } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserRolEnum } from '../../../users/enums/user-rol.enum';
 import { BlockInvalidNumberKeysDirective } from '../../../../../core/directives/block-invalid-number-keys.directive';
 import { Student } from '../../models/student.model';
 import { FormStatus } from '../../../../../shared/enums/form-status.enum';
 import { ValidatioErrorMessage } from '../../../../../core/validation-error-message';
+import { FacultyService } from '../../../faculties/services/facuties.service';
+import { Faculty } from '../../../faculties/models/faculty.model';
+import { Career } from '../../../careers/models/career.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-student-form',
   standalone: true,
-  imports: [ReactiveFormsModule, BlockInvalidNumberKeysDirective],
+  imports: [CommonModule, ReactiveFormsModule, BlockInvalidNumberKeysDirective],
   templateUrl: './student-form.component.html',
   styleUrl: './student-form.component.scss'
 })
@@ -18,11 +22,22 @@ export class StudentFormComponent {
   @Output() submitFormEvent = new EventEmitter<Student>();
   formStatusEnum = FormStatus;
   validationErrorMessage = ValidatioErrorMessage;
+  minYear: string[] = [];
+  faculties: Faculty[] = [];
+  careers: Career[] = [];
+  years: number[] = [];
 
   constructor(
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private facultyService: FacultyService,
   ) {
-    this.initializeForm()
+    this.initialize();
+  }
+  
+  private initialize() {
+    this.initializeForm();
+    this.loadFaculties();
+    this.generateYears();
   }
 
   private initializeForm(): void {
@@ -39,6 +54,29 @@ export class StudentFormComponent {
         cellphone: ['', [Validators.required]],
       })
     })
+  }
+
+  private loadFaculties(): void {
+    this.facultyService.getAll().subscribe(
+      (response) => {
+        this.faculties = response;
+    }, (error) => {
+      console.error(error);
+    });
+  }
+
+  private generateYears(): void {
+    const currentYear = new Date().getFullYear();
+    const startYear = 2000;
+    this.years = Array.from(
+      { length: currentYear - startYear + 1 },
+      (_, i) => currentYear - i
+    );
+  }
+
+  loadCareers(): void {
+    const faculty = this.studentForm.value.faculty;
+    this.careers = faculty.careers;
   }
 
   isInvalidForm(): boolean {
