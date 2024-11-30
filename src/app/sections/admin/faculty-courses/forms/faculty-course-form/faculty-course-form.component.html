@@ -13,6 +13,28 @@
             </div>
         }
     </div>
+    <div class="form-group mb-3">
+        <label for="initDate" class="is-required">Fecha inicio de clases</label>
+        <input type="date" name="initDate" formControlName="initDate">
+        <!--
+        @if(this.firstName !== undefined && this.firstName?.touched && this.firstName?.status === formStatusEnum.INVALID) {
+            <div class="error-content">
+                @if(this.firstName?.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+            </div>
+        }
+        --> 
+    </div>
+    <div class="form-group mb-3">
+        <label for="finishDate" class="is-required">Fecha fin de clases</label>
+        <input type="date" name="finishDate" formControlName="finishDate">
+        <!--
+        @if(this.firstName !== undefined && this.firstName?.touched && this.firstName?.status === formStatusEnum.INVALID) {
+            <div class="error-content">
+                @if(this.firstName?.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+            </div>
+        }
+        -->
+    </div>
 
     <!--
     <div formGroupName="user">
