@@ -1,0 +1,24 @@
+<div class="table-responsive">
+    <table class="table table-bordered text-center">
+      <thead>
+        <tr>
+          <th></th> <!-- Celda vacía para las horas -->
+          @for(day of days; track $index) {
+            <th>{{ day }}</th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for(hour of hours; track $index) {
+            <tr>
+            <td><strong>{{ hour }}</strong></td>
+            @for(day of days; track $index) {
+                <td (click)="addOptionSelected(day, hour)" class="clickable-cell" [ngClass]="{'selected' : searchOptionSelected(day, hour)}">
+                    <!-- Mostrar la materia si existe, o vacío si no -->
+                </td>
+            }
+            </tr>
+        }
+      </tbody>
+    </table>
+  </div>
