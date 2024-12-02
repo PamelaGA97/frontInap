@@ -4,7 +4,8 @@ import { Course } from "../../courses/model/course.model"
 
 export interface Faculty extends BaseModel {
     id: string,
-    name?: string
+    name?: string,
+    code?: string,
     careers?: Career[],
     courses?: Course[]
 }

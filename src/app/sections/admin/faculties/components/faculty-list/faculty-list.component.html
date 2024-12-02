@@ -14,6 +14,7 @@
             <thead>
                 <tr class="table-header">
                     <th>Facultad</th>
+                    <th>Codigo</th>
                     <th>Carreras</th>
                     <th>Materias</th>
                     <th></th>
@@ -23,6 +24,7 @@
                 @for (faculty of faculties; track $index) {
                     <tr class="table__body" [ngClass]="{'shadow-row': $index%2 === 0}">
                         <td>{{faculty.name}}</td>
+                        <td>{{faculty.code}}</td>
                         <td>
                             @for (career of faculty.careers; track $index) {
                                 <p>{{$index+1}}: {{career.name}}</p>
@@ -34,7 +36,8 @@
                             }
                         </td>
                         <td class="position-right">
-                            <button class="btn-triage btn__solid-primary option" (click)="openFacultyEdit(faculty.id)">ver detalle</button>
+                            <button class="btn-triage btn__solid-success option" (click)="viewDetail(faculty.id)">Ver detalle</button>
+                            <button class="btn-triage btn__solid-primary option" (click)="openFacultyEdit(faculty.id)">Editar</button>
                             <button class="btn-triage btn__solid-danger option" (click)="openDeleteFaculty(faculty)">eliminar</button>
                         </td>
                     </tr>

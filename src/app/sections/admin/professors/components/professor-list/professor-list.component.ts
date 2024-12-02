@@ -65,6 +65,10 @@ export class ProfessorListComponent {
     console.log(professorsId)
   }
 
+  viewDetail(professorId: string): void {
+
+  }
+
   async openDeleteModal(professor: Professor): Promise<void> {
 		const confirmationResponse = await this.swalService.openConfirmationModal(`¿Estas seguro de eliminar el docente ${professor.user.firstName} ${professor.user.secondName}?`, '');
 		if (confirmationResponse === SwalAlertResponse.CONFIRM) {

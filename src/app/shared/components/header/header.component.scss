@@ -1,8 +1,9 @@
 .content {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     width: 100%;
-    background-color: aqua;
+    height: 100%;
 }
 
 .logo {
@@ -16,6 +17,10 @@
 }
 
 .profile {
-    background-color: green;
-    width: 60px;
+    width: auto;
+
+    a {
+        margin: 0;
+        cursor: pointer;
+    }
 }

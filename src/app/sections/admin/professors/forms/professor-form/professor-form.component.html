@@ -65,4 +65,8 @@
             </div>
         }
     </div>
+    <div class="form-group mb-3">
+        <label for="course" class="is-required">Seleccione horario</label>
+        <app-schedule-table #classScheduleTable (submitClassSchedule)="addClassHourSelected($event)"></app-schedule-table>
+    </div>
 </form>

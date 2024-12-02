@@ -49,6 +49,10 @@ export class SecretaryListComponent {
 		}
 	}
 
+  viewDetail(secretaryId: string): void {
+    
+  }
+
   private async initialize(): Promise<void> {
     await this.getAllSecretaries();
   }

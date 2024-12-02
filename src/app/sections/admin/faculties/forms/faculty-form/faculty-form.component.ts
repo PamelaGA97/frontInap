@@ -27,6 +27,7 @@ export class FacultyFormComponent {
   private initializeForm(): void {
     this.facultyForm = this._formBuilder.group({
       name: ['', Validators.required],
+      code: ['', Validators.required],
       careers: this._formBuilder.array([]),
       courses: this._formBuilder.array([])
     });
@@ -63,6 +64,10 @@ export class FacultyFormComponent {
   }
 
   get name() {
+    return this.facultyForm.controls['name'];
+  }
+
+  get code() {
     return this.facultyForm.controls['name'];
   }
 

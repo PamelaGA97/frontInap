@@ -48,6 +48,8 @@ export class FacultyListComponent {
 		}
 	}
 
+  viewDetail(facultyId: string): void {}
+
   private initialize(): void {
     this.getAllFaculties();
   }
