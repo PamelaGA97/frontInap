@@ -63,4 +63,8 @@ export class FacultyCoursesListComponent {
       this.deleteFacultyCourse(facultyCourse.id);
 		}
   }
+
+  viewDetail(facultyCourseId: string): void {
+    
+  }
 }

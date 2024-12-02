@@ -33,7 +33,8 @@
                         <td>{{student.faculty?.name}}</td>
                         <td>{{student.career?.name}}</td>
                         <td class="position-right">
-                            <button class="btn-triage btn__solid-primary option" (click)="openStudentEdit(student.id)">ver detalle</button>
+                            <button class="btn-triage btn__solid-primary option" (click)="viewDetail(student.id)">Ver detalle</button>
+                            <button class="btn-triage btn__solid-primary option" (click)="openStudentEdit(student.id)">Editar</button>
                             <button class="btn-triage btn__solid-danger option" (click)="openDeleteModal(student)">eliminar</button>
                         </td>
                     </tr>

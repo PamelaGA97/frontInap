@@ -54,6 +54,10 @@ export class StudentListComponent {
   openStudentEdit(studentId: string): void {
     console.log('Accion de editar usuario')
   }
+
+  viewDetail(stidentId: string): void {
+    
+  }
   
   async openDeleteModal(student: Student): Promise<void> {
 		const confirmationResponse = await this.swalService.openConfirmationModal(`¿Estas seguro de eliminar el estdiante ${student.user.firstName} ${student.user.secondName}?`, '');

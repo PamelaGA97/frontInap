@@ -31,7 +31,8 @@
                         <td>{{professor.faculty?.name}}</td>
                         <td>{{professor.course?.name}}</td>
                         <td class="position-right">
-                            <button class="btn-triage btn__solid-primary option" (click)="openProfessorEdit(professor.id)">ver detalle</button>
+                            <button class="btn-triage btn__solid-primary option" (click)="viewDetail(professor.id)">Ver detalle</button>
+                            <button class="btn-triage btn__solid-primary option" (click)="openProfessorEdit(professor.id)">Editar</button>
                             <button class="btn-triage btn__solid-danger option" (click)="openDeleteModal(professor)">eliminar</button>
                         </td>
                     </tr>
