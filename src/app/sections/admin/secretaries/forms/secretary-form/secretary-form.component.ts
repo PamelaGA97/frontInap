@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserRolEnum } from '../../../users/enums/user-rol.enum';
 import { CommonModule } from '@angular/common';
@@ -17,6 +17,7 @@ import { Secretary } from '../../models/secretary.model';
   styleUrl: './secretary-form.component.scss'
 })
 export class SecretaryFormComponent {
+  @Input() secretaryData?: Secretary; 
   @Output() submitFormEvent = new EventEmitter<Secretary>();
   secretaryForm!: FormGroup;
   validationErrorMessage = ValidatioErrorMessage;
@@ -27,21 +28,33 @@ export class SecretaryFormComponent {
   constructor(
     private _formBuilder: FormBuilder,
   ) {
+    console.log(4)
+    console.log(this.secretaryData)
     this.initializeForm();
   }
 
   private initializeForm(): void {
-    this.secretaryForm = this._formBuilder.group({
-      turn: ['', Validators.required],
-      branch: ['', Validators.required],
-      user: this._formBuilder.group({
-        firstName: ['', [Validators.required]],
-        secondName: ['', [Validators.required]],
-        rol: [UserRolEnum.SECRETARY, [Validators.required]],
-        ci: ['', [Validators.required]],
-        cellphone: ['', [Validators.required]],
-      })
-    });
+    console.log(this.secretaryData)
+    console.log(5)
+
+    if (this.secretaryData) {
+      this.secretaryForm.patchValue(this.secretaryData);
+      console.log('Editar', this.secretaryForm.value)
+    } else {
+      this.secretaryForm = this._formBuilder.group({
+        turn: ['', Validators.required],
+        branch: ['', Validators.required],
+        user: this._formBuilder.group({
+          firstName: ['', [Validators.required]],
+          secondName: ['', [Validators.required]],
+          rol: [UserRolEnum.SECRETARY, [Validators.required]],
+          ci: ['', [Validators.required]],
+          cellphone: ['', [Validators.required]],
+        })
+      });
+    }
+    console.log(6)
+
   }
 
   onTurnChange(turn: any): void {

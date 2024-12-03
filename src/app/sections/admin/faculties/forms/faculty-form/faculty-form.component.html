@@ -31,6 +31,20 @@
                     <label for="career-name" class="is-required">Nombre</label>
                     <input type="text" name="career-name" formControlName="name">
                 </div>
+                <div class="form-group mb-3">
+                    <label for="career-time" class="is-required">Modalidad de ingreso</label>
+                    <select name="career-time" formControlName="courseTime">
+                        <option value="" disable selected>Seleccione una modalidad de ingreso</option>
+                        @for(courseTime of courseTimes; track $index) {
+                            <option [value]="courseTime">{{ courseTime }}</option>
+                        }
+                    </select>
+                    @if(this.courseTime !== undefined && this.courseTime.touched && this.courseTime.status === formStatusEnum.INVALID) {
+                        <div class="error-content">
+                            @if(this.courseTime.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+                        </div>
+                    }
+                </div>
             </div>
         }
         <div class="footer-section">

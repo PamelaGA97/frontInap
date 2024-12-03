@@ -39,7 +39,7 @@ export class SecretaryListComponent {
   }
 
   openSecretaryEdit(secretaryId: string): void {
-    console.log('vamos a editar la secretaria')
+    this.router.navigateByUrl(`/admin/secretaries/edit/${secretaryId}`)
   }
 
   async openModalDelete(secretary: Secretary): Promise<void> {
@@ -50,7 +50,7 @@ export class SecretaryListComponent {
 	}
 
   viewDetail(secretaryId: string): void {
-    
+
   }
 
   private async initialize(): Promise<void> {
