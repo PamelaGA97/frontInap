@@ -17,7 +17,8 @@ import { Secretary } from '../../models/secretary.model';
   styleUrl: './secretary-form.component.scss'
 })
 export class SecretaryFormComponent {
-  @Input() secretaryData?: Secretary; 
+  @Input() secretaryData?: Secretary;
+  @Input() isPreview: boolean = false; 
   @Output() submitFormEvent = new EventEmitter<Secretary>();
   secretaryForm!: FormGroup;
   validationErrorMessage = ValidatioErrorMessage;
@@ -33,6 +34,7 @@ export class SecretaryFormComponent {
   
   ngOnInit() {
     this.addSecretaryDataToForm();
+    console.log(this.isPreview)
   }
   
   private initialize(): void {
