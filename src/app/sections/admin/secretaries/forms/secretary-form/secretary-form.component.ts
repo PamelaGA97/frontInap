@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserRolEnum } from '../../../users/enums/user-rol.enum';
 import { CommonModule } from '@angular/common';
@@ -17,6 +17,8 @@ import { Secretary } from '../../models/secretary.model';
   styleUrl: './secretary-form.component.scss'
 })
 export class SecretaryFormComponent {
+  @Input() secretaryData?: Secretary;
+  @Input() isPreview: boolean = false; 
   @Output() submitFormEvent = new EventEmitter<Secretary>();
   secretaryForm!: FormGroup;
   validationErrorMessage = ValidatioErrorMessage;
@@ -27,6 +29,15 @@ export class SecretaryFormComponent {
   constructor(
     private _formBuilder: FormBuilder,
   ) {
+    this.initialize()
+  }
+  
+  ngOnInit() {
+    this.addSecretaryDataToForm();
+    console.log(this.isPreview)
+  }
+  
+  private initialize(): void {
     this.initializeForm();
   }
 
@@ -43,6 +54,12 @@ export class SecretaryFormComponent {
       })
     });
   }
+  
+  private addSecretaryDataToForm(): void {
+    if (this.secretaryData) {
+      this.secretaryForm.patchValue(this.secretaryData);
+    }
+  }
 
   onTurnChange(turn: any): void {
     const value = turn.target.value as TurnsJob;
@@ -52,12 +69,12 @@ export class SecretaryFormComponent {
   onBranchChange(branch: any): void {
     const value = branch.target.value as TurnsJob;
     this.secretaryForm.controls['branch'].setValue(value)
-    console.log(this.secretaryForm.value)
   }
 
   submit(): void {
     if (this.secretaryForm.valid) {
-      this.submitFormEvent.emit(this.secretaryForm.value);
+      const secretaryDatas = { ...this.secretaryData, ...this.secretaryForm.value };
+      this.submitFormEvent.emit(secretaryDatas);
     }
   }
 

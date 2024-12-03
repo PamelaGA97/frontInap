@@ -38,6 +38,7 @@ export class SecretaryService {
 
 	patch(id: string, data: Secretary): Observable<Secretary> {
 		const path = `${this.apiUrl}${this.resource}/${id}`;
+		console.log(path)
 		return this.http.put<Secretary>(path, data);
 	}
 }
