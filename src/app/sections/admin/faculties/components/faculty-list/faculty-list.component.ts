@@ -46,7 +46,10 @@ export class FacultyListComponent {
 		}
 	}
 
-  viewDetail(facultyId: string): void {}
+  viewDetail(facultyId: string): void {
+    const detailPath = `${this.path}/detail`;
+    this.router.navigate([detailPath, facultyId]);
+  }
 
   private initialize(): void {
     this.getAllFaculties();

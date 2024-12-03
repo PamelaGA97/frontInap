@@ -4,17 +4,18 @@ import { ValidatioErrorMessage } from '../../../../../core/validation-error-mess
 import { FormStatus } from '../../../../../shared/enums/form-status.enum';
 import { Faculty } from '../../models/faculty.model';
 import { CareerTimeEnum } from '../../../careers/enums/career-time.enum';
-import { Course } from '../../../courses/model/course.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-faculty-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './faculty-form.component.html',
   styleUrl: './faculty-form.component.scss'
 })
 export class FacultyFormComponent {
   @Input() facultyData?: Faculty;
+  @Input() isPreview: boolean = false;
   @Output() submitFormEvent = new EventEmitter<Faculty>();
   facultyForm!: FormGroup;
   validationErrorMessage = ValidatioErrorMessage;
@@ -30,6 +31,7 @@ export class FacultyFormComponent {
 
   ngOnInit(): void {
     this.addSecretaryDataToForm();
+    console.log(this.facultyData)
   }
   
   private initialize(): void {

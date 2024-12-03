@@ -9,6 +9,18 @@
 
 	&__content {
 		padding: 0 1em;
+
+		.label-title {
+			font-size: 11px;
+			font-family: var(--font-family-default);
+			margin: 0 0 0.5em 1em;
+			text-transform: uppercase;
+			color: var(--input-form-color);
+		}
+
+		.row-detail {
+			color: red;
+		}
 	}
 
 	&__footer {
@@ -29,4 +41,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.hidden-component {
+	display: none;
 }
