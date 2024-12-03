@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="base-crud">
+        <div class="base-crud__header">
+            <h3>Editar Secretaria</h3>
+        </div>
+        <div class="base-crud__content" >
+            @if (faculty) {
+                <app-faculty-form
+                    #facultyForm
+                    [facultyData]="faculty"
+                    (submitFormEvent)="saveFaculty($event)"
+                >
+                </app-faculty-form>
+                <!--
+                <app-secretary-form
+                    #secretaryForm
+                    [secretaryData]="secretary"
+                    (submitFormEvent)="saveSecretary($event)"
+                >
+                </app-secretary-form>
+            -->
+            }
+        </div>
+        <div class="base-crud__footer">
+            <button class="btn-triage btn__solid-primary mr-2 options" (click)="editFaculty()">Guardar</button>
+            <button class="btn-triage btn__solid-tertiary option" (click)="backToFacultyList()">Cancelar</button>
+        </div>
+    </div>
+</div>
+

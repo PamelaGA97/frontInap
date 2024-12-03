@@ -21,6 +21,8 @@ export class EditSecretaryComponent {
   @ViewChild('secretaryForm') secretaryFormComponent!: SecretaryFormComponent
   resourseId!: string;
   secretary?: Secretary;
+  pageName: string = 'secretaries';
+  toastSuccessMessage: string = 'Secrecretaria Actualizada';
 
   constructor (
     private secretaryService: SecretaryService,
@@ -60,8 +62,8 @@ export class EditSecretaryComponent {
   async saveSecretary(secretary: Secretary): Promise<void> {
     await firstValueFrom(this.secretaryService.patch(secretary.id, secretary))
       .then((response) => {
-        this.toastService.showToast('Secrecretaria Actualizada', '', AlertType.SUCCESS);
-        this.router.navigate([adminPath, 'secretaries']);
+        this.toastService.showToast(this.toastSuccessMessage, '', AlertType.SUCCESS);
+        this.router.navigate([adminPath, this.pageName]);
       })
       .catch((error: ErrorHandler) => {
         this.toastService.showHttpError(error);

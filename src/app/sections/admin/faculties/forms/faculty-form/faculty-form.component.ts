@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ValidatioErrorMessage } from '../../../../../core/validation-error-message';
 import { FormStatus } from '../../../../../shared/enums/form-status.enum';
@@ -14,6 +14,7 @@ import { Course } from '../../../courses/model/course.model';
   styleUrl: './faculty-form.component.scss'
 })
 export class FacultyFormComponent {
+  @Input() facultyData?: Faculty;
   @Output() submitFormEvent = new EventEmitter<Faculty>();
   facultyForm!: FormGroup;
   validationErrorMessage = ValidatioErrorMessage;
@@ -24,6 +25,14 @@ export class FacultyFormComponent {
   constructor(
     private _formBuilder: FormBuilder,
   ) {
+    this.initialize();
+  }
+
+  ngOnInit(): void {
+    this.addSecretaryDataToForm();
+  }
+  
+  private initialize(): void {
     this.initializeForm();
   }
 
@@ -49,11 +58,16 @@ export class FacultyFormComponent {
     });
   }
 
+  private addSecretaryDataToForm(): void {
+    if (this.facultyData) {
+      this.facultyForm.patchValue(this.facultyData);
+    }
+  }
+
   submit(): void {
     if(this.facultyForm.valid) {
-      this.submitFormEvent.emit(this.facultyForm.value);
-    } else {
-      console.log('Algo paso con el formulario de creado')
+      const data = { ...this.facultyData, ...this.facultyForm.value }
+      this.submitFormEvent.emit(data);
     }
   }
 
