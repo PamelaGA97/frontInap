@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="base-crud card">
+        <div class="base-crud__header">
+            <h3>Secretaria</h3>
+        </div>
+        <div class="base-crud__content" >
+            <div>
+                <label class="label-title" for="">Nombre</label>
+                <p class="ml-5">{{faculty?.name}}</p>
+            </div>
+            <div>
+                <label class="label-title" for="">Codigo</label>
+                <p class="ml-5">{{faculty?.code}}</p>
+            </div>
+            <div>
+                <h3>Carreras</h3>
+                @for (career of faculty?.careers; track $index) {
+                    <div class="careers-content card mb-2">
+                        <h5>Carrera {{$index+1}}</h5>
+                        <div>
+                            <label class="label-title" for="">nombre</label>
+                            <p class="ml-5">{{career?.name}}</p>
+                        </div>
+                        <div>
+                            <label class="label-title" for="">Modalidad de ingreso</label>
+                            <p class="ml-5">{{career?.courseTime}}</p>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div>
+                <h3>Materias</h3>
+                @for (course of faculty?.courses; track $index) {
+                    <div>
+                        <label class="label-title" for="">nombre</label>
+                        <p class="ml-5">{{course?.name}}</p>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="base-crud__footer">
+            <button class="btn-triage btn__solid-tertiary option" (click)="backToFacultyList()">Cerrar</button>
+        </div>
+    </div>
+</div>

@@ -35,10 +35,8 @@ export class FacultyListComponent {
   }
 
   openFacultyEdit(facultyId: string): void {
-    this.facultyService.get(facultyId).subscribe(
-      (response) => {
-        console.log(`Este es el detalle de: ${facultyId}`,response);
-      });
+    const editPath = `${this.path}/edit`;
+    this.router.navigate([editPath, facultyId]);
   }
 
   async openDeleteFaculty(faculty: Faculty): Promise<void> {
@@ -48,7 +46,10 @@ export class FacultyListComponent {
 		}
 	}
 
-  viewDetail(facultyId: string): void {}
+  viewDetail(facultyId: string): void {
+    const detailPath = `${this.path}/detail`;
+    this.router.navigate([detailPath, facultyId]);
+  }
 
   private initialize(): void {
     this.getAllFaculties();

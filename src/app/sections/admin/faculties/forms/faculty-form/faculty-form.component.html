@@ -1,7 +1,8 @@
 <form action="" class="form-triage" [formGroup]="facultyForm">
     <div class="form-group mb-3">
         <label for="name" class="is-required">Nombre facultad</label>
-        <input type="text" name="name" formControlName="name">
+        <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.facultyData?.name}}</p>
+        <input type="text" name="name" formControlName="name" [ngClass]="{'hidden-component' : isPreview === true }">
         @if(this.name !== undefined && this.name.touched && this.name.status === formStatusEnum.INVALID) {
             <div class="error-content">
                 @if(this.name.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
@@ -10,7 +11,8 @@
     </div>
     <div class="form-group mb-3">
         <label for="code" class="is-required">Codigo</label>
-        <input type="text" name="code" formControlName="code">
+        <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.facultyData?.code}}</p>
+        <input type="text" name="code" formControlName="code" [ngClass]="{'hidden-component' : isPreview === true }">
         @if(this.code !== undefined && this.code.touched && this.code.status === formStatusEnum.INVALID) {
             <div class="error-content">
                 @if(this.code.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
@@ -25,15 +27,18 @@
             <div [formGroupName]="$index">
                 <div class="trash-content">
                     <p>Carrera {{$index +1}}</p>
-                    <span class="icon-trash-2" (click)="removeCareer($index)"></span>
+                    <span class="icon-trash-2" (click)="removeCareer($index)" [ngClass]="{'hidden-component' : isPreview === true }"></span>
                 </div>
                 <div class="form-group mb-3">
                     <label for="career-name" class="is-required">Nombre</label>
-                    <input type="text" name="career-name" formControlName="name">
+                    <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.facultyData?.careers?.at($index)?.name}}</p>
+                    <input type="text" name="career-name" formControlName="name" [ngClass]="{'hidden-component' : isPreview === true }">
                 </div>
                 <div class="form-group mb-3">
                     <label for="career-time" class="is-required">Modalidad de ingreso</label>
-                    <select name="career-time" formControlName="courseTime">
+                    <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{career}}</p>
+
+                    <select name="career-time" formControlName="courseTime" [ngClass]="{'hidden-component' : isPreview === true }">
                         <option value="" disable selected>Seleccione una modalidad de ingreso</option>
                         @for(courseTime of courseTimes; track $index) {
                             <option [value]="courseTime">{{ courseTime }}</option>
@@ -48,7 +53,7 @@
             </div>
         }
         <div class="footer-section">
-            <button type="button" class="btn-triage btn__solid-success" (click)="addCareer()">Agregar Carrera</button>
+            <button type="button" class="btn-triage btn__solid-success" [ngClass]="{'hidden-component' : isPreview === true }" (click)="addCareer()">Agregar Carrera</button>
         </div>   
     </div>
     <div formArrayName="courses" class="space">
@@ -59,16 +64,17 @@
             <div [formGroupName]="$index">
                 <div class="trash-content">
                     <p>Materia {{$index +1}}</p>
-                    <span class="icon-trash-2" (click)="removeCourse($index)"></span>
+                    <span class="icon-trash-2" (click)="removeCourse($index)" [ngClass]="{'hidden-component' : isPreview === true }"></span>
                 </div>
                 <div class="form-group mb-3">
                     <label for="course-name" class="is-required">Nombre Materia</label>
-                    <input type="text" name="course-name" formControlName="name">
+                    <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.careers.at($index)}}</p>
+                    <input type="text" name="course-name" formControlName="name" [ngClass]="{'hidden-component' : isPreview === true }">
                 </div>
             </div>
         }
-        <div class="footer-section">
-            <button type="button" class="btn-triage btn__solid-success" (click)="addCourse()">Agregar Materiaa</button>
+        <div class="footer-section" >
+            <button type="button" class="btn-triage btn__solid-success" [ngClass]="{'hidden-component' : isPreview === true }" (click)="addCourse()">Agregar Materiaa</button>
         </div>
     </div>
 </form>

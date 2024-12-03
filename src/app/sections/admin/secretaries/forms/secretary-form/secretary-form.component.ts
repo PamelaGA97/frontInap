@@ -32,9 +32,8 @@ export class SecretaryFormComponent {
     this.initialize()
   }
   
-  ngOnInit() {
+  ngOnInit(): void {
     this.addSecretaryDataToForm();
-    console.log(this.isPreview)
   }
   
   private initialize(): void {
