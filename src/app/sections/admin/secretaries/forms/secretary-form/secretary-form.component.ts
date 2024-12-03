@@ -28,33 +28,35 @@ export class SecretaryFormComponent {
   constructor(
     private _formBuilder: FormBuilder,
   ) {
-    console.log(4)
-    console.log(this.secretaryData)
+    this.initialize()
+  }
+  
+  ngOnInit() {
+    this.addSecretaryDataToForm();
+  }
+  
+  private initialize(): void {
     this.initializeForm();
   }
 
   private initializeForm(): void {
-    console.log(this.secretaryData)
-    console.log(5)
-
+    this.secretaryForm = this._formBuilder.group({
+      turn: ['', Validators.required],
+      branch: ['', Validators.required],
+      user: this._formBuilder.group({
+        firstName: ['', [Validators.required]],
+        secondName: ['', [Validators.required]],
+        rol: [UserRolEnum.SECRETARY, [Validators.required]],
+        ci: ['', [Validators.required]],
+        cellphone: ['', [Validators.required]],
+      })
+    });
+  }
+  
+  private addSecretaryDataToForm(): void {
     if (this.secretaryData) {
       this.secretaryForm.patchValue(this.secretaryData);
-      console.log('Editar', this.secretaryForm.value)
-    } else {
-      this.secretaryForm = this._formBuilder.group({
-        turn: ['', Validators.required],
-        branch: ['', Validators.required],
-        user: this._formBuilder.group({
-          firstName: ['', [Validators.required]],
-          secondName: ['', [Validators.required]],
-          rol: [UserRolEnum.SECRETARY, [Validators.required]],
-          ci: ['', [Validators.required]],
-          cellphone: ['', [Validators.required]],
-        })
-      });
     }
-    console.log(6)
-
   }
 
   onTurnChange(turn: any): void {
@@ -65,12 +67,12 @@ export class SecretaryFormComponent {
   onBranchChange(branch: any): void {
     const value = branch.target.value as TurnsJob;
     this.secretaryForm.controls['branch'].setValue(value)
-    console.log(this.secretaryForm.value)
   }
 
   submit(): void {
     if (this.secretaryForm.valid) {
-      this.submitFormEvent.emit(this.secretaryForm.value);
+      const secretaryDatas = { ...this.secretaryData, ...this.secretaryForm.value };
+      this.submitFormEvent.emit(secretaryDatas);
     }
   }
 

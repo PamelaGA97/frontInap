@@ -39,7 +39,8 @@ export class SecretaryListComponent {
   }
 
   openSecretaryEdit(secretaryId: string): void {
-    this.router.navigateByUrl(`/admin/secretaries/edit/${secretaryId}`)
+    const editpath = `${this.path}/edit`;
+    this.router.navigate([editpath, secretaryId]);
   }
 
   async openModalDelete(secretary: Secretary): Promise<void> {
