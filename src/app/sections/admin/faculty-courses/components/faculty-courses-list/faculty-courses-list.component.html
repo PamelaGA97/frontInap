@@ -14,12 +14,29 @@
                 <tr class="table-header">
                     <th>Facultad</th>
                     <th>Docentes</th>
+                    <th>Aula</th>
                     <th>Materias</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
+                <tr class="table__body">
+                    <td>Tecnologia</td>
+                    <td>Alberto Fernandez</td>
+                    <td>24 A</td>
+                    <td>
+                        <p>Matematicas</p>
+                        <p>Biologia</p>
+                    </td>
+                    <td class="position-right">
+                        <button class="btn-triage btn__solid-success option" >Ver detalle</button>
+                        <button class="btn-triage btn__solid-primary option" >Editar</button>
+                        <button class="btn-triage btn__solid-danger option" >eliminar</button>
+                    </td>
+                </tr>
+                <!--
                 @for (facultyCourse of facultyCourses; track $index) {
+                    
                     <tr class="table__body" [ngClass]="{'shadow-row': $index%2 === 0}">
                         <td>{{facultyCourse.faculty?.name}}</td>
                         <td>
@@ -39,6 +56,7 @@
                         </td>
                     </tr>
                 }
+                    -->
             </tbody>
         </table>
     </div>
