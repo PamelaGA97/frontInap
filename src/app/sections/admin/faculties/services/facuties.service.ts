@@ -21,7 +21,6 @@ export class FacultyService {
 	}
 
 	getAll(term?: string): Observable<Faculty[]> {
-		console.log(this.resource)
 		const path = `${this.apiUrl}${this.resource}`;
 		return this.http.get<Faculty[]>(path);
 	}

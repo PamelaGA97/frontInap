@@ -1,4 +1,4 @@
-import { Component, ErrorHandler, EventEmitter, Output } from '@angular/core';
+import { Component, ErrorHandler, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserRolEnum } from '../../../users/enums/user-rol.enum';
 import { BlockInvalidNumberKeysDirective } from '../../../../../core/directives/block-invalid-number-keys.directive';
@@ -9,6 +9,7 @@ import { FacultyService } from '../../../faculties/services/facuties.service';
 import { Faculty } from '../../../faculties/models/faculty.model';
 import { Career } from '../../../careers/models/career.model';
 import { CommonModule } from '@angular/common';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-student-form',
@@ -18,33 +19,38 @@ import { CommonModule } from '@angular/common';
   styleUrl: './student-form.component.scss'
 })
 export class StudentFormComponent {
-  studentForm!: FormGroup;
+  @Input() studentData!: Student;
   @Output() submitFormEvent = new EventEmitter<Student>();
+  studentForm!: FormGroup;
   formStatusEnum = FormStatus;
   validationErrorMessage = ValidatioErrorMessage;
   minYear: string[] = [];
   faculties: Faculty[] = [];
-  careers: Career[] = [];
+  careerList: Career[] = [];
   years: number[] = [];
 
   constructor(
     private _formBuilder: FormBuilder,
     private facultyService: FacultyService,
   ) {
-    this.initialize();
   }
   
-  private initialize() {
+  async ngOnInit(): Promise<void> {
+    await this.initialize();
+    this.addStudentDataToForm()
+  }
+  
+  private async initialize() {
     this.initializeForm();
-    this.loadFaculties();
-    this.generateYears();
+    await this.loadFaculties();
+    await this.generateYears();
   }
 
   private initializeForm(): void {
     this.studentForm = this._formBuilder.group({
       highschool: ['', [Validators.required]],
       graduationYear: ['', [Validators.required]],
-      faculty: ['', [Validators.required]],
+      faculty: [null, [Validators.required]],
       career: ['', [Validators.required]],
       user: this._formBuilder.group({
         firstName: ['', [Validators.required]],
@@ -56,13 +62,13 @@ export class StudentFormComponent {
     })
   }
 
-  private loadFaculties(): void {
-    this.facultyService.getAll().subscribe(
-      (response) => {
+  private async loadFaculties(): Promise<void> {
+    await firstValueFrom(this.facultyService.getAll())
+      .then((response) => {
         this.faculties = response;
-    }, (error) => {
-      console.error(error);
-    });
+      }).catch((error) => {
+        console.error(error);
+      });
   }
 
   private generateYears(): void {
@@ -70,21 +76,43 @@ export class StudentFormComponent {
     const startYear = 2000;
     this.years = Array.from(
       { length: currentYear - startYear + 1 },
-      (_, i) => currentYear - i
+      (_, i) => new Date(`${currentYear - i}-01-01T03:00:00.000Z`).getFullYear()
     );
+  }
+
+  private addStudentDataToForm(): void {
+    if(this.studentData){
+      this.studentForm.patchValue(this.studentData);
+      this.addGraduationYearToForm();
+      this.addFacultyToForm();
+      this.addCareerToForm();
+    }
+  }
+
+  private addGraduationYearToForm(): void {
+    const generateYears = this.parseDateTuNumber();
+    this.studentForm.controls['graduationYear'].setValue(generateYears);
+  }
+
+  private addFacultyToForm(): void {
+    const facultyFounded = this.faculties.find((faculty)=>(faculty.id === this.studentData?.faculty?.id));
+    this.studentForm.controls['faculty'].setValue(facultyFounded);
+    this.loadCareers();
+  }
+
+  private addCareerToForm(): void {
+    const careerFounded = this.careerList.find((career)=>(career.id === this.studentData?.career?.id));
+    this.studentForm.controls['career'].setValue(careerFounded);
+  }
+
+  private parseDateTuNumber(): number {
+    return this.studentData.graduationYear ? new Date(this.studentData.graduationYear).getFullYear() : 2024;
   }
 
   loadCareers(): void {
     const faculty = this.studentForm.value.faculty;
-    this.careers = faculty.careers;
-  }
-
-  isInvalidForm(): boolean {
-    let isValid = false;
-    if(this.studentForm.valid) {
-
-    }
-    return isValid;
+    this.careerList = faculty.careers;
+    this.career.setValue({faculty: null})
   }
 
   submit(): void {

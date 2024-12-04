@@ -10,6 +10,7 @@ import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 import { ToastService } from '../../../../../shared/services/toast.service';
 import { YearPipe } from '../../../../../core/pipes/year.pipe';
 import { AlertType } from '../../../../../shared/services/alert.enum';
+import { adminPath } from '../../../../../core/admin-url-path';
 
 @Component({
   selector: 'app-student-list',
@@ -51,12 +52,13 @@ export class StudentListComponent {
     this.router.navigate([this.path, 'create']);
   }
 
-  openStudentEdit(studentId: string): void {
-    console.log('Accion de editar usuario')
+  editStudent(studentId: string): void {
+    const editPath = `${this.path}/edit`;
+    this.router.navigate([editPath, studentId]);
   }
 
   viewDetail(stidentId: string): void {
-    
+    const detailPath = `${adminPath}/detail`;
   }
   
   async openDeleteModal(student: Student): Promise<void> {
