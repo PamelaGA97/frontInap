@@ -62,9 +62,8 @@ export class StudentListComponent {
   }
   
   async openDeleteModal(student: Student): Promise<void> {
-		const confirmationResponse = await this.swalService.openConfirmationModal(`¿Estas seguro de eliminar el estdiante ${student.user.firstName} ${student.user.secondName}?`, '');
+		const confirmationResponse = await this.swalService.openConfirmationModal(`¿Estas seguro de eliminar el estudiante ${student.user.firstName} ${student.user.secondName}?`, '');
 		if (confirmationResponse === SwalAlertResponse.CONFIRM) {
-			console.log('Eliminar el usuario')
       this.deleteStudent(student.id);
 		}
 	}

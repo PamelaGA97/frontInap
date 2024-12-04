@@ -117,8 +117,14 @@ export class StudentFormComponent {
 
   submit(): void {
     if (this.studentForm.valid) {
+      this.setGraduationDateFormat()
       this.submitFormEvent.emit(this.studentForm.value);
     }
+  }
+
+  private setGraduationDateFormat(): void {
+    const dateString = new Date(`${this.studentForm.value.graduationYear}-01-01T00:00:00.000Z`).toISOString();
+    this.studentForm.controls['graduationYear'].setValue(dateString);
   }
 
   get firstName() {
