@@ -49,9 +49,9 @@
     <div class="form-group mb-3">
         <label for="graduationYear" class="is-required">Año de graduacion</label>
         <select id="year" formControlName="graduationYear" class="year-select">
-            <option [value]="" disable selected>Seleccione un año</option>
+            <option [ngValue]=""disable selected>Seleccione un año</option>
             @for(year of years; track $index) {
-                <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+                <option *ngFor="let year of years" [ngValue]="year">{{ year }}</option>
             }
         </select>
         @if(this.graduationYear !== undefined && this.graduationYear.touched && this.graduationYear.status === formStatusEnum.INVALID) {
@@ -63,7 +63,7 @@
     <div class="form-group mb-3">
         <label for="faculty" class="is-required">Facultad</label>
         <select name="faculty" formControlName="faculty" (change)="loadCareers()">
-            <option value="" disable selected>Seleccione una facultad</option>
+            <option [ngValue]="null" disable selected>Seleccione una facultad</option>
             @for(facultyOption of faculties; track $index) {
                 <option [ngValue]="facultyOption">{{ facultyOption.name }}</option>
             }
@@ -79,7 +79,7 @@
         <label for="career" class="is-required">Carrera</label>
         <select name="career" formControlName="career">
             <option value="" disable selected>Seleccione una carrera</option>
-            @for(careerOption of careers; track $index) {
+            @for(careerOption of careerList; track $index) {
                 <option [ngValue]="careerOption">{{ careerOption.name }}</option>
             }
         </select>

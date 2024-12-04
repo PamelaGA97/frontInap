@@ -34,7 +34,7 @@
                         <td>{{student.career?.name}}</td>
                         <td class="position-right">
                             <button class="btn-triage btn__solid-success option" (click)="viewDetail(student.id)">Ver detalle</button>
-                            <button class="btn-triage btn__solid-primary option" (click)="openStudentEdit(student.id)">Editar</button>
+                            <button class="btn-triage btn__solid-primary option" (click)="editStudent(student.id)">Editar</button>
                             <button class="btn-triage btn__solid-danger option" (click)="openDeleteModal(student)">eliminar</button>
                         </td>
                     </tr>
