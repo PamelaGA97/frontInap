@@ -112,7 +112,7 @@ export class StudentFormComponent {
   loadCareers(): void {
     const faculty = this.studentForm.value.faculty;
     this.careerList = faculty.careers;
-    this.career.setValue({faculty: null})
+    this.career.setValue('')
   }
 
   submit(): void {

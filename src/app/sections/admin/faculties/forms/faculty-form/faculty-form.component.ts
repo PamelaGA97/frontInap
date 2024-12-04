@@ -63,7 +63,12 @@ export class FacultyFormComponent {
   private addSecretaryDataToForm(): void {
     if (this.facultyData) {
       this.facultyForm.patchValue(this.facultyData);
+      this.addCareersToForm();
     }
+  }
+
+  private addCareersToForm(): void {
+    
   }
 
   submit(): void {
