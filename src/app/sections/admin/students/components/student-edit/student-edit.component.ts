@@ -61,6 +61,7 @@ export class StudentEditComponent {
   }
 
   async saveStudent(student: Student): Promise<void> {
+    console.log(student)
     firstValueFrom(this.studentService.patch(this.studentId, student))
       .then((student: Student) => {
         this.toastService.showToast()
