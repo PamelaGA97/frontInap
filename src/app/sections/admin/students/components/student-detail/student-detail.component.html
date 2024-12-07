@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="base-crud card">
+        <div class="base-crud__header">
+            <h3>Detalle del estudiante</h3>
+        </div>
+        <div class="base-crud__content">
+            <app-student-form #studentForm [studentData]="student" [isPreview]="preview"></app-student-form>
+        </div>
+        <div class="base-crud__footer">
+            <button class="btn-triage btn__solid-tertiary option" (click)="backToStudentList()">Cancelar</button>
+        </div>
+    </div>
+</div>

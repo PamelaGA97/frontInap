@@ -19,7 +19,8 @@ import { firstValueFrom } from 'rxjs';
   styleUrl: './student-form.component.scss'
 })
 export class StudentFormComponent {
-  @Input() studentData!: Student;
+  @Input() studentData?: Student;
+  @Input() isPreview: boolean = false;
   @Output() submitFormEvent = new EventEmitter<Student>();
   studentForm!: FormGroup;
   formStatusEnum = FormStatus;
@@ -33,17 +34,15 @@ export class StudentFormComponent {
     private _formBuilder: FormBuilder,
     private facultyService: FacultyService,
   ) {
+    this.initialize();
   }
   
   async ngOnInit(): Promise<void> {
-    await this.initialize();
-    this.addStudentDataToForm()
+    await this.addStudentDataToForm();
   }
   
   private async initialize() {
     this.initializeForm();
-    await this.loadFaculties();
-    await this.generateYears();
   }
 
   private initializeForm(): void {
@@ -80,8 +79,10 @@ export class StudentFormComponent {
     );
   }
 
-  private addStudentDataToForm(): void {
+  private async addStudentDataToForm(): Promise<void> {
     if(this.studentData){
+      await this.loadFaculties();
+      await this.generateYears();
       this.studentForm.patchValue(this.studentData);
       this.addGraduationYearToForm();
       this.addFacultyToForm();
@@ -106,7 +107,7 @@ export class StudentFormComponent {
   }
 
   private parseDateTuNumber(): number {
-    return this.studentData.graduationYear ? new Date(this.studentData.graduationYear).getFullYear() : 2024;
+    return this.studentData?.graduationYear ? new Date(this.studentData.graduationYear).getFullYear() : 2024;
   }
 
   loadCareers(): void {

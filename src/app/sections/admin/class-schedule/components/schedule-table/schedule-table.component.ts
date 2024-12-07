@@ -73,7 +73,6 @@ export class ScheduleTableComponent {
   }
 
   submit(): void {
-    console.log(this.classSchedulesSelected)
     this.submitClassSchedule.emit(this.classSchedulesSelected);
   }
 }

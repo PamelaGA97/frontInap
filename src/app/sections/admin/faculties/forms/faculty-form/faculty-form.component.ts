@@ -5,6 +5,8 @@ import { FormStatus } from '../../../../../shared/enums/form-status.enum';
 import { Faculty } from '../../models/faculty.model';
 import { CareerTimeEnum } from '../../../careers/enums/career-time.enum';
 import { CommonModule } from '@angular/common';
+import { Career } from '../../../careers/models/career.model';
+import { Course } from '../../../courses/model/course.model';
 
 @Component({
   selector: 'app-faculty-form',
@@ -22,7 +24,6 @@ export class FacultyFormComponent {
   formStatusEnum = FormStatus;
   courseTimes = Object.values(CareerTimeEnum);
 
-
   constructor(
     private _formBuilder: FormBuilder,
   ) {
@@ -31,7 +32,6 @@ export class FacultyFormComponent {
 
   ngOnInit(): void {
     this.addSecretaryDataToForm();
-    console.log(this.facultyData)
   }
   
   private initialize(): void {
@@ -62,14 +62,26 @@ export class FacultyFormComponent {
 
   private addSecretaryDataToForm(): void {
     if (this.facultyData) {
-      this.facultyForm.patchValue(this.facultyData);
       this.addCareersToForm();
+      this.addCoursesToForm();
+      this.facultyForm.patchValue(this.facultyData);
     }
   }
 
   private addCareersToForm(): void {
-    
+    this.careers.clear();
+    this.facultyData?.careers?.map((career: Career) => {
+      this.careers.push(this.createCareerGroup());
+    });
   }
+
+  private addCoursesToForm(): void {
+    this.courses.clear();
+    this.facultyData?.courses?.map((course: Course) => {
+      this.courses.push(this.createCourseGroup());
+    });
+  }
+
 
   submit(): void {
     if(this.facultyForm.valid) {

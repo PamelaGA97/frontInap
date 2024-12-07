@@ -60,7 +60,6 @@ export class FacultyListComponent {
       (resposne) => {
         this.faculties = resposne;
       }, (error: ErrorHandler) => {
-        console.log('slflskdklf')
         this.toastService.showHttpError(error);
       });
   }
