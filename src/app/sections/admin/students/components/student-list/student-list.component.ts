@@ -57,8 +57,9 @@ export class StudentListComponent {
     this.router.navigate([editPath, studentId]);
   }
 
-  viewDetail(stidentId: string): void {
-    const detailPath = `${adminPath}/detail`;
+  viewDetail(studentId: string): void {
+    const detailPath = `${this.path}/detail`;
+    this.router.navigate([detailPath, studentId]);
   }
   
   async openDeleteModal(student: Student): Promise<void> {

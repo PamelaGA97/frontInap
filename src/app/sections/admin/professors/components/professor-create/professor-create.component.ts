@@ -35,7 +35,6 @@ export class ProfessorCreateComponent {
   }
 
   saveProfessor(professor: Professor): void {
-    console.log(professor)
     this.professorService.create(professor).subscribe(
       (response) => {
         this.toastService.showToast(`Professor creado.`, ``, AlertType.SUCCESS);

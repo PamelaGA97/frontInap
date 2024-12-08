@@ -47,7 +47,6 @@ export class SwalService {
 		const config = this.getSwalConfig(title, text, false, 'Aceptar');
 		await Swal.fire(config)
 			.then((response) => {
-				console.log(response);
 			});
 	}
 }

@@ -1,7 +1,10 @@
-import { Component, EventEmitter, Output, output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, output } from '@angular/core';
 import { ClassSchedule } from '../../models/class-schedule.model';
 import { ClassScheduleService } from '../../services/class-schedule.service';
 import { CommonModule } from '@angular/common';
+import { firstValueFrom } from 'rxjs';
+import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
+import { ToastService } from '../../../../../shared/services/toast.service';
 
 @Component({
   selector: 'app-schedule-table',
@@ -11,6 +14,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './schedule-table.component.scss'
 })
 export class ScheduleTableComponent {
+  @Input() classScheduleDataList?: ClassSchedule[];
   @Output() submitClassSchedule = new EventEmitter<ClassSchedule[]>;
   classSchedules: ClassSchedule[] = [];
   days: string[] = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
@@ -20,21 +24,32 @@ export class ScheduleTableComponent {
 
   constructor(
     private classScheduleService: ClassScheduleService,
+    private toastService: ToastService
   ) {
     this.initialize();
   }
 
+  async ngOnInit(): Promise<void> {
+    await this.loadClassSchedule();
+    this.initializeMatriz();
+    this.setClassScheduleDataToMatriz();
+  }
+  
   private initialize(): void {
-    this.loadClassSchedule();
+    this.createMatrix();
   }
 
   private async loadClassSchedule(): Promise<void> {
-    this.classScheduleService.getAll().subscribe(
-      (classSchedules: ClassSchedule[]) => {
-        this.classSchedules = classSchedules;
-        this.createMatrix();
-      }
-    );
+    await firstValueFrom(this.classScheduleService.getAll())
+      .then(
+        (classSchedules: ClassSchedule[]) => {
+          this.classSchedules = classSchedules;
+        }
+      ).catch(
+        (error: ErrorHandler) => {
+          this.toastService.showHttpError(error);
+        }
+      );
   }
 
   private createMatrix(): void {
@@ -45,10 +60,23 @@ export class ScheduleTableComponent {
       });
     });
 
+  }
+
+  private initializeMatriz(): void {
     this.classSchedules.map((classSchedule: ClassSchedule) => {
       const { day, hour } = classSchedule;
       this.matrix[day][hour] = classSchedule;
     });
+  }
+
+  private setClassScheduleDataToMatriz(): void {
+    if(this.classScheduleDataList) {
+      this.classScheduleDataList?.map(
+        (classSchedule: ClassSchedule) => {
+          this.classSchedulesSelected.push(this.matrix[classSchedule.day][classSchedule.hour]);
+        }
+      );
+    }
   }
 
   searchOptionSelected(day: string, hour: string): boolean {
@@ -73,7 +101,6 @@ export class ScheduleTableComponent {
   }
 
   submit(): void {
-    console.log(this.classSchedulesSelected)
     this.submitClassSchedule.emit(this.classSchedulesSelected);
   }
 }

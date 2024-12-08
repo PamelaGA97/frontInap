@@ -67,6 +67,6 @@
     </div>
     <div class="form-group mb-3">
         <label for="course" class="is-required">Seleccione horario</label>
-        <app-schedule-table #classScheduleTable (submitClassSchedule)="addClassHourSelected($event)"></app-schedule-table>
+        <app-schedule-table #classScheduleTable [classScheduleDataList]="this.professorData?.classSchedules" (submitClassSchedule)="addClassHourSelected($event)"></app-schedule-table>
     </div>
 </form>

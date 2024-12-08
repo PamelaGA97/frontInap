@@ -16,7 +16,6 @@ export class BaseCrudService<T> {
 	}
 
 	getAll(term?: string): Observable<T[]> {
-		console.log(this.resource)
 		const path = `${this.apiUrl}${this.resource}`;
 		return this.http.get<T[]>(path);
 	}

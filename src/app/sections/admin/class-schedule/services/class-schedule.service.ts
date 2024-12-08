@@ -19,7 +19,6 @@ export class ClassScheduleService {
 	}
 
 	getAll(term?: string): Observable<ClassSchedule[]> {
-		console.log(this.resource)
 		const path = `${this.apiUrl}${this.resource}`;
 		return this.http.get<ClassSchedule[]>(path);
 	}

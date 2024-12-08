@@ -1,13 +1,15 @@
 <div class="container">
     <div class="base-crud card">
         <div class="base-crud__header">
-            <h3>Crear Docente</h3>
+            <h3>Editar Docente</h3>
         </div>
         <div class="base-crud__content">
-            <app-professor-form #professorForm (submitFormEvent)="saveProfessor($event)"></app-professor-form>
+            @if (professor) {
+                <app-professor-form #professorForm [professorData]="professor" (submitFormEvent)="saveProfessor($event)"></app-professor-form>
+            }
         </div>
         <div class="base-crud__footer">
-            <button class="btn-triage btn__solid-primary mr-2 options" (click)="createProfessor()">Crear</button>
+            <button class="btn-triage btn__solid-primary mr-2 options" (click)="editProfessor()">Crear</button>
             <button class="btn-triage btn__solid-tertiary option" (click)="backToProfessorList()">Cancelar</button>
         </div>
     </div>

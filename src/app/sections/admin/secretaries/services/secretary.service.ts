@@ -21,7 +21,6 @@ export class SecretaryService {
 	}
 
 	getAll(term?: string): Observable<Secretary[]> {
-		console.log(this.resource)
 		const path = `${this.apiUrl}${this.resource}`;
 		return this.http.get<Secretary[]>(path);
 	}
@@ -38,7 +37,6 @@ export class SecretaryService {
 
 	patch(id: string, data: Secretary): Observable<Secretary> {
 		const path = `${this.apiUrl}${this.resource}/${id}`;
-		console.log(path)
 		return this.http.put<Secretary>(path, data);
 	}
 }
