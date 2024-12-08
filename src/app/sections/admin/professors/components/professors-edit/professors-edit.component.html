@@ -4,9 +4,9 @@
             <h3>Editar Docente</h3>
         </div>
         <div class="base-crud__content">
-            <app-professor-form #professorForm [professorData]="professor" (submitFormEvent)="saveProfessor($event)"></app-professor-form>
-            <!--
-            -->
+            @if (professor) {
+                <app-professor-form #professorForm [professorData]="professor" (submitFormEvent)="saveProfessor($event)"></app-professor-form>
+            }
         </div>
         <div class="base-crud__footer">
             <button class="btn-triage btn__solid-primary mr-2 options" (click)="editProfessor()">Crear</button>

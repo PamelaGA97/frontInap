@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Professor } from '../../models/professor.model';
 import { firstValueFrom } from 'rxjs';
 import { ProfessorService } from '../../services/professors.service';
@@ -8,6 +8,7 @@ import { ToastService } from '../../../../../shared/services/toast.service';
 import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 import { ProfessorFormComponent } from '../../forms/professor-form/professor-form.component';
 import { AlertType } from '../../../../../shared/services/alert.enum';
+import { adminPath } from '../../../../../core/admin-url-path';
 
 @Component({
   selector: 'app-professors-edit',
@@ -20,12 +21,15 @@ export class ProfessorsEditComponent {
   @ViewChild('professorForm') professorFormComponent!: ProfessorFormComponent;
   professorId!: string;
   professor!: Professor;
+  editMessageSuccess: string = 'Docente actualizado';
+  pageView: string = 'professors';
 
   constructor(
     private activatedRouter: ActivatedRoute,
     private professorService: ProfessorService,
     private location: Location,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private router: Router
   ) {
     this.initialize();
   }
@@ -67,7 +71,8 @@ export class ProfessorsEditComponent {
     await firstValueFrom(this.professorService.patch(this.professorId, professor))
       .then(
         (response) => {
-          this.toastService.showToast('Docente Actualizado', '', AlertType.SUCCESS);
+          this.toastService.showToast(this.editMessageSuccess, '', AlertType.SUCCESS);
+          this.router.navigate([adminPath, this.pageView]);
         }
       ).catch(
         (error: ErrorHandler) => {
