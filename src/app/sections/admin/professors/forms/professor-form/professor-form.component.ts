@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BlockInvalidNumberKeysDirective } from '../../../../../core/directives/block-invalid-number-keys.directive';
 import { UserRolEnum } from '../../../users/enums/user-rol.enum';
@@ -24,6 +24,7 @@ import { ClassScheduleComponent } from '../../../class-schedule/class-schedule.c
 })
 export class ProfessorFormComponent {
   @ViewChild('classScheduleTable') classScheduleTable!: ScheduleTableComponent;
+  @Input() professorData?: Professor;
   @Output() submitFormEvent = new EventEmitter<Professor>();
   professorForm!: FormGroup;
   validationErrorMessage = ValidatioErrorMessage;
