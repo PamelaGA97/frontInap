@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Student } from '../models/student.model';
 import { environment } from '../../../../../environments/environment';
 import { Observable } from 'rxjs';
+import { StudentFacultyCount } from '../../home/model/student-faculty-count.model';
 @Injectable({
 	providedIn: 'root'
 })
@@ -36,5 +37,10 @@ export class StudentService {
 	patch(id: string, data: Student): Observable<Student> {
 		const path = `${this.apiUrl}${this.resource}/${id}`;
 		return this.http.put<Student>(path, data);
+	}
+
+	studentForFaculty(): Observable<{data: StudentFacultyCount[]}> {
+		const path = `${this.apiUrl}${this.resource}/student-for-faculty`;
+		return this.http.get<{data: StudentFacultyCount[]}>(path);
 	}
 }

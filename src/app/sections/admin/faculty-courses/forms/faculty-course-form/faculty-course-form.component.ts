@@ -88,6 +88,10 @@ export class FacultyCourseFormComponent {
     this.career.setValue('');
   }
 
+  async loadCourses(): Promise<void> {
+    
+  }
+
   submit(): void {
     if(this.facultyCourseForm.valid) {
       this.submitFormEvent.emit(this.facultyCourseForm.value);
@@ -123,4 +127,6 @@ export class FacultyCourseFormComponent {
   get students(): FormArray {
     return this.facultyCourseForm.get('students') as FormArray;
   }
+
+
 }
