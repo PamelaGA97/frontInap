@@ -17,6 +17,7 @@ import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 })
 export class ProfessorsDetailComponent {
   @ViewChild('professorForm') professorFormComponent!: ProfessorFormComponent;
+  preview: boolean = true;
   professorId!: string;
   professor!: Professor;
   editMessageSuccess: string = 'Docente actualizado';

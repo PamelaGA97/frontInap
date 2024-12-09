@@ -5,7 +5,7 @@
         </div>
         <div class="base-crud__content">
             @if (professor) {
-                <app-professor-form #professorForm [professorData]="professor"></app-professor-form>
+                <app-professor-form #professorForm [isPreview]="preview" [professorData]="professor"></app-professor-form>
             }
         </div>
         <div class="base-crud__footer">

@@ -25,6 +25,7 @@ import { firstValueFrom } from 'rxjs';
 export class ProfessorFormComponent {
   @ViewChild('classScheduleTable') classScheduleTable!: ScheduleTableComponent;
   @Input() professorData?: Professor;
+  @Input() isPreview: boolean = false;
   @Output() submitFormEvent = new EventEmitter<Professor>();
   professorForm!: FormGroup;
   validationErrorMessage = ValidatioErrorMessage;
