@@ -44,17 +44,17 @@
         }
     </div>
     <div class="form-group mb-3">
-        <label for="career" class="is-required">Profesor</label>
-        <select name="career" formControlName="career">
-            <option value="" disable selected>Seleccione un profesor</option>
+        <label for="professor" class="is-required">Docente</label>
+        <select name="professor" formControlName="professor">
+            <option value="" disable selected>Seleccione un Docente</option>
             @for(professors of professorsList; track $index) {
                 <option [ngValue]="professors">{{ professors.user.firstName }}</option>
             }
         </select>
         <!--
-        @if(this.career !== undefined && this.career.touched && this.career.status === formStatusEnum.INVALID) {
+        @if(this.professor !== undefined && this.professor.touched && this.professor.status === formStatusEnum.INVALID) {
             <div class="error-content">
-                @if(this.career.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+                @if(this.professor.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
             </div>
         }
             -->

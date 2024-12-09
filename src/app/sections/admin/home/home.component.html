@@ -2,48 +2,42 @@
     <div class="home-view">
         <div class="home-view__row mb-5">
             <div class="home-view__item">
-                <app-card-detail [title]="'Docentes'" [count]="6"></app-card-detail>
+                <app-card-detail [title]="'Docentes'" [count]="professorsList.length"></app-card-detail>
             </div>
             <div class="home-view__item">
-                <app-card-detail [title]="'Estudiantes'" [count]="253"></app-card-detail>
+                <app-card-detail [title]="'Estudiantes'" [count]="studentList.length"></app-card-detail>
             </div>
             <div class="home-view__item">
-                <app-card-detail [title]="'Cursos'" [count]="6"></app-card-detail>
+                <app-card-detail [title]="'Cursos'" [count]="facultyCourseList.length"></app-card-detail>
             </div>
             <div class="home-view__item">
                 <app-card-detail [title]="'Estudiantes con deuda'" [count]="12"></app-card-detail>
             </div>
         </div>
         <div class="home-view__table-section">
-            <h3 class="table-title mb-4">Tabla de estudiantes por facultad</h3>
-            <div class="default-table-list__content">
-                <table class="advanced-table">
-                    <thead>
-                        <tr class="table-header">
-                            <th>Tecnologia</th>
-                            <th>Homanidades</th>
-                            <th>Derecho</th>
-                            <th>Medicina</th>
-                            <th>Odontologia</th>
-                            <th>Agronomia</th>
-                            <th>Bioquimica</th>
-                            <th>Institucion militar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="table__body">
-                            <td>23</td>
-                            <td>57</td>
-                            <td>12</td>
-                            <td>37</td>
-                            <td>22</td>
-                            <td>16</td>
-                            <td>36</td>
-                            <td>50</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            @if(facultyList.length > 0) {
+                <h3 class="table-title mb-4">Tabla de estudiantes por facultad</h3>
+                <div class="default-table-list__content">
+                    <table class="advanced-table">
+                        <thead>
+                            <tr class="table-header">
+                                @for(faculty of facultyList; track $index){
+                                    <th>{{faculty.name}}</th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table__body">
+                                @if(facultyList.length > 0) {
+                                    @for(faculty of facultyList; track $index){
+                                        <td>{{searchStudentForFaculty(faculty)}}</td>
+                                    }
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            }
         </div>
     </div>
 </div>
