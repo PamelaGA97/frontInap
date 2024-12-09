@@ -15,6 +15,7 @@ import { ToastService } from '../../../../../shared/services/toast.service';
 })
 export class ScheduleTableComponent {
   @Input() classScheduleDataList?: ClassSchedule[];
+  @Input() isPreview?: boolean = false;
   @Output() submitClassSchedule = new EventEmitter<ClassSchedule[]>;
   classSchedules: ClassSchedule[] = [];
   days: string[] = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];

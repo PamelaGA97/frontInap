@@ -2,7 +2,8 @@
     <div formGroupName="user">
         <div class="form-group mb-3">
             <label for="name" class="is-required">Nombres</label>
-            <input type="text" name="name" formControlName="firstName">
+            <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{ this.professorData?.user?.firstName}}</p>
+            <input type="text" name="name" formControlName="firstName" [ngClass]="{'hidden-component' : isPreview === true }">
             @if(this.firstName !== undefined && this.firstName?.touched && this.firstName?.status === formStatusEnum.INVALID) {
                 <div class="error-content">
                     @if(this.firstName?.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
@@ -11,7 +12,8 @@
         </div>
         <div class="form-group mb-3">
             <label for="second-name" class="is-required">Apellidos</label>
-            <input type="text" name="second-name" formControlName="secondName">
+            <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{ this.professorData?.user?.secondName}}</p>
+            <input type="text" name="second-name" formControlName="secondName" [ngClass]="{'hidden-component' : isPreview === true }">
             @if(this.secondName !== undefined && this.secondName?.touched && this.secondName?.status === formStatusEnum.INVALID) {
                 <div class="error-content">
                     @if(this.secondName?.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
@@ -20,7 +22,8 @@
         </div>
         <div class="form-group mb-3">
             <label for="ci" class="is-required">Ci</label>
-            <input type="text" name="ci" formControlName="ci">
+            <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{ this.professorData?.user?.ci}}</p>
+            <input type="text" name="ci" formControlName="ci" [ngClass]="{'hidden-component' : isPreview === true }">
             @if(this.ci !== undefined && this.ci?.touched && this.ci?.status === formStatusEnum.INVALID) {
                 <div class="error-content">
                     @if(this.ci?.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
@@ -29,7 +32,8 @@
         </div>
         <div class="form-group mb-3">
             <label for="cellphone" class="is-required">Telefono</label>
-            <input type="number" name="cellphone" appBlockInvalidNumberKeys formControlName="cellphone">
+            <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{ this.professorData?.user?.cellphone}}</p>
+            <input type="number" name="cellphone" appBlockInvalidNumberKeys formControlName="cellphone" [ngClass]="{'hidden-component' : isPreview === true }">
             @if(this.cellphone !== undefined && this.cellphone?.touched && this.cellphone?.status === formStatusEnum.INVALID) {
                 <div class="error-content">
                     @if(this.cellphone?.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
@@ -39,7 +43,8 @@
     </div>
     <div class="form-group mb-3">
         <label for="faculty" class="is-required">Facultad</label>
-        <select name="faculty" formControlName="faculty" (change)="loadCourses()">
+        <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{ this.professorData?.faculty?.name}}</p>
+        <select name="faculty" formControlName="faculty" (change)="loadCourses()" [ngClass]="{'hidden-component' : isPreview === true }">
             <option value="" disable selected>Seleccione una facultad</option>
             @for(facultyOption of faculties; track $index) {
                 <option [ngValue]="facultyOption">{{ facultyOption.name }}</option>
@@ -53,7 +58,8 @@
     </div>
     <div class="form-group mb-3">
         <label for="course" class="is-required">Materia</label>
-        <select name="course" formControlName="course">
+        <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{ this.professorData?.course?.name}}</p>
+        <select name="course" formControlName="course" [ngClass]="{'hidden-component' : isPreview === true }">
             <option value="" disable selected>Seleccione una materia</option>
             @for(courseOption of courses; track $index) {
                 <option [ngValue]="courseOption">{{ courseOption.name }}</option>
@@ -67,6 +73,6 @@
     </div>
     <div class="form-group mb-3">
         <label for="course" class="is-required">Seleccione horario</label>
-        <app-schedule-table #classScheduleTable [classScheduleDataList]="this.professorData?.classSchedules" (submitClassSchedule)="addClassHourSelected($event)"></app-schedule-table>
+        <app-schedule-table #classScheduleTable [isPreview]="isPreview" [classScheduleDataList]="this.professorData?.classSchedules" (submitClassSchedule)="addClassHourSelected($event)"></app-schedule-table>
     </div>
 </form>

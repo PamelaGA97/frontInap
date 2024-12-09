@@ -61,13 +61,14 @@ export class ProfessorListComponent {
     this.router.navigate([this.path, 'create'])
   }
 
-  openProfessorEdit(professorsId: string) {
+  openProfessorEdit(professorId: string) {
     const editPath: string = `${this.path}/edit`;
-    this.router.navigate([editPath, professorsId]);
+    this.router.navigate([editPath, professorId]);
   }
 
   viewDetail(professorId: string): void {
-
+    const editPath: string = `${this.path}/detail`;
+    this.router.navigate([editPath, professorId]);
   }
 
   async openDeleteModal(professor: Professor): Promise<void> {
