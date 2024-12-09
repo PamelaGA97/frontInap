@@ -90,14 +90,16 @@ export class ScheduleTableComponent {
   }
 
   addOptionSelected(day: string, hour: string): void {
-    const classScheduleIndex = this.classSchedulesSelected.findIndex(
-      (classSchedules) => (classSchedules.day === day && classSchedules.hour === hour)
-    );
-
-    if (classScheduleIndex === -1) {
-      this.classSchedulesSelected.push(this.matrix[day][hour]);
-    } else {
-      this.classSchedulesSelected.splice(classScheduleIndex,1)
+    if (!this.isPreview) {
+      const classScheduleIndex = this.classSchedulesSelected.findIndex(
+        (classSchedules) => (classSchedules.day === day && classSchedules.hour === hour)
+      );
+  
+      if (classScheduleIndex === -1) {
+        this.classSchedulesSelected.push(this.matrix[day][hour]);
+      } else {
+        this.classSchedulesSelected.splice(classScheduleIndex,1)
+      }
     }
   }
 

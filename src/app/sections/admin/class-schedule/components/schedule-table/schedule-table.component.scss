@@ -26,3 +26,7 @@ cursor: pointer;
 .selected {
     background: #0052cc;
 }
+
+.preview {
+    filter: grayscale(70%);
+}

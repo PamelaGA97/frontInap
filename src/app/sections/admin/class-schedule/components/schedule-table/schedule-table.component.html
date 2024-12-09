@@ -1,4 +1,4 @@
-<div class="table-responsive">
+<div class="table-responsive" [ngClass]="{'preview' : isPreview}">
     <table class="table table-bordered text-center">
       <thead>
         <tr>
@@ -10,13 +10,13 @@
       </thead>
       <tbody>
         @for(hour of hours; track $index) {
-            <tr>
+          <tr>
             <td><strong>{{ hour }}</strong></td>
             @for(day of days; track $index) {
                 <td (click)="addOptionSelected(day, hour)" class="clickable-cell" [ngClass]="{'selected' : searchOptionSelected(day, hour)}">
                 </td>
             }
-            </tr>
+          </tr>
         }
       </tbody>
     </table>
