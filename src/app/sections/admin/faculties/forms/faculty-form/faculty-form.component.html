@@ -39,7 +39,7 @@
                     <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{career}}</p>
 
                     <select name="career-time" formControlName="courseTime" [ngClass]="{'hidden-component' : isPreview === true }">
-                        <option [ngValue]="" disable selected>Seleccione una modalidad de ingreso</option>
+                        <option [ngValue]="" [disabled]="true">Seleccione una modalidad de ingreso</option>
                         @for(courseTime of courseTimes; track $index) {
                             <option [ngValue]="courseTime">{{ courseTime }}</option>
                         }
