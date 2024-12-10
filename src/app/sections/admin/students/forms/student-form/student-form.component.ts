@@ -80,11 +80,11 @@ export class StudentFormComponent {
   }
 
   private async addStudentDataToForm(): Promise<void> {
+    await this.generateYears();
+    await this.loadFaculties();
+    this.addGraduationYearToForm();
     if(this.studentData){
-      await this.loadFaculties();
-      await this.generateYears();
       this.studentForm.patchValue(this.studentData);
-      this.addGraduationYearToForm();
       this.addFacultyToForm();
       this.addCareerToForm();
     }

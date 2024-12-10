@@ -13,8 +13,8 @@
           <tr>
             <td><strong>{{ hour }}</strong></td>
             @for(day of days; track $index) {
-                <td (click)="addOptionSelected(day, hour)" class="clickable-cell" [ngClass]="{'selected' : searchOptionSelected(day, hour)}">
-                </td>
+              <td (click)="addOptionSelected(day, hour)" class="clickable-cell" [ngClass]="{'selected' : searchOptionSelected(day, hour)}">
+              </td>
             }
           </tr>
         }

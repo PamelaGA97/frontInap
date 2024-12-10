@@ -22,7 +22,7 @@ export class EditSecretaryComponent {
   resourseId!: string;
   secretary?: Secretary;
   pageName: string = 'secretaries';
-  toastSuccessMessage: string = 'Secrecretaria Actualizada';
+  toastSuccessMessage: string = 'Secretaria Actualizada';
 
   constructor (
     private secretaryService: SecretaryService,
