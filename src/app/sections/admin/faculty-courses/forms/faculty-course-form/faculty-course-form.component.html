@@ -17,8 +17,8 @@
     </div>
     <div class="form-group mb-3">
         <label for="faculty" class="is-required">Facultad</label>
-        <select name="faculty" formControlName="faculty" (change)="loadCareers()">
-            <option value="" disable selected>Seleccione una facultad</option>
+        <select name="faculty" formControlName="faculty" (change)="loadCourses()">
+            <option value="" [disabled]="true" selected>Seleccione una facultad</option>
             @for(facultyOption of faculties; track $index) {
                 <option [ngValue]="facultyOption">{{ facultyOption.name }}</option>
             }
@@ -30,92 +30,40 @@
         }
     </div>
     <div class="form-group mb-3">
-        <label for="career" class="is-required">Carrera</label>
-        <select name="career" formControlName="career" (change)="loadProfessors()">
-            <option value="" disable selected>Seleccione una carrera</option>
-            @for(careerOption of careerList; track $index) {
-                <option [ngValue]="careerOption">{{ careerOption.name }}</option>
+        <label for="course" class="is-required">Materia</label>
+        <select name="course" (change)="loadProfessors($event)">
+            <option value="" [disabled]="true" selected>Seleccione una materia</option>
+            @for(courseOption of courseList; track $index) {
+                <option [ngValue]="courseOption">{{ courseOption.name }}</option>
             }
         </select>
-        @if(this.career !== undefined && this.career.touched && this.career.status === formStatusEnum.INVALID) {
-            <div class="error-content">
-                @if(this.career.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
-            </div>
-        }
     </div>
     <div class="form-group mb-3">
         <label for="professor" class="is-required">Docente</label>
-        <select name="professor" formControlName="professor">
-            <option value="" disable selected>Seleccione un Docente</option>
+        <select name="professor" (change)="setProfessor($event)">
+            <option value="" [disabled]="true" selected>Seleccione un Docente</option>
             @for(professors of professorsList; track $index) {
-                <option [ngValue]="professors">{{ professors.user.firstName }}</option>
+                <option [ngValue]="professors">{{professors.user.firstName}} {{professors.user.secondName}}</option>
             }
         </select>
-        <!--
-        @if(this.professor !== undefined && this.professor.touched && this.professor.status === formStatusEnum.INVALID) {
-            <div class="error-content">
-                @if(this.professor.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
-            </div>
-        }
-            -->
     </div>
     <div class="form-group mb-3">
         <label for="career" class="is-required">Horarios disponibles del profesor</label>
-        <app-schedule-table #classScheduleTable (submitClassSchedule)="addClassHourSelected($event)"></app-schedule-table>
+        <app-schedule-table
+            #professorScheduleTable
+            [isPreview]="true"
+            [classScheduleDataList]="professorSelected?.classSchedules"
+            (submitClassSchedule)="addClassHourSelected($event)"
+            (submitSchedule)="addProfessorScheduleSelected($event)"
+            ></app-schedule-table>
     </div>
 
     <div class="form-group mb-3">
         <label for="career" class="is-required">Horarios del curso</label>
-        <app-schedule-table #classScheduleTable (submitClassSchedule)="addClassHourSelected($event)"></app-schedule-table>
+        <app-schedule-table
+            #scheduleTable
+            [classScheduleDataList]="scheduleTableList"
+            (submitClassSchedule)="addClassHourSelected($event)"
+            ></app-schedule-table>
     </div>
-    <!--
-    <div formArrayName="courses" class="space">
-        <div class="title-section mb-3">
-            <h4>Estudiantes</h4>
-        </div>
-        @for (student of students.controls; track $index) {
-            <div [formGroupName]="$index">
-                <div class="trash-content">
-                    <p>Estudiante {{$index +1}}</p>
-                    <span class="icon-trash-2" (click)="removeStudent($index)"></span>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="course-name" class="is-required">Nombre Materia</label>
-                    <p class="ml-2">{{this.students.at($index)}}</p>
-                    <input type="text" name="course-name" formControlName="name">
-                </div>
-            </div>
-        }
-        <div class="footer-section" >
-            <button type="button" class="btn-triage btn__solid-success" (click)="addStudent()">Agregar Estudiante</button>
-        </div>
-    </div>
-    -->
-    <!--
-    <div formGroupName="user">
-        <div class="form-group mb-3">
-            <label for="name" class="is-required">Nombres</label>
-            <input type="text" name="name" formControlName="firstName">
-            @if(this.firstName !== undefined && this.firstName?.touched && this.firstName?.status === formStatusEnum.INVALID) {
-                <div class="error-content">
-                    @if(this.firstName?.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
-                </div>
-            }
-        </div>
-    </div>
-    <div class="form-group mb-3">
-        <label for="course" class="is-required">Materia</label>
-        <select name="course" formControlName="course">
-            <option value="" disable selected>Seleccione una materia</option>
-            @for(courseOption of courses; track $index) {
-                <option [ngValue]="courseOption">{{ courseOption.name }}</option>
-            }
-        </select>
-        @if(this.course !== undefined && this.course.touched && this.course.status === formStatusEnum.INVALID) {
-            <div class="error-content">
-                @if(this.course.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
-            </div>
-        }
-    </div>
-    -->
 </form>

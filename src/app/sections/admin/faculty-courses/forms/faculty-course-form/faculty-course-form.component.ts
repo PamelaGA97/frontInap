@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Faculty } from '../../../faculties/models/faculty.model';
 import { ValidatioErrorMessage } from '../../../../../core/validation-error-message';
 import { FormStatus } from '../../../../../shared/enums/form-status.enum';
@@ -9,28 +9,32 @@ import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 import { ToastService } from '../../../../../shared/services/toast.service';
 import { FacultyCourse } from '../../models/faculty-course.model';
 import { firstValueFrom } from 'rxjs';
-import { Career } from '../../../careers/models/career.model';
 import { Professor } from '../../../professors/models/professor.model';
 import { ScheduleTableComponent } from '../../../class-schedule/components/schedule-table/schedule-table.component';
 import { ClassSchedule } from '../../../class-schedule/models/class-schedule.model';
 import { ProfessorService } from '../../../professors/services/professors.service';
+import { Course } from '../../../courses/model/course.model';
 
 @Component({
   selector: 'app-faculty-course-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, ScheduleTableComponent],
+  imports: [ReactiveFormsModule, CommonModule, ScheduleTableComponent, FormsModule],
   templateUrl: './faculty-course-form.component.html',
   styleUrl: './faculty-course-form.component.scss'
 })
 export class FacultyCourseFormComponent {
-  @ViewChild('classScheduleTable') classScheduleTable!: ScheduleTableComponent;
+  @ViewChild('professorScheduleTable') classScheduleTable!: ScheduleTableComponent;
+  @ViewChild('scheduleTable') scheduleTable!: ScheduleTableComponent;
   @Output() submitFormEvent = new EventEmitter<FacultyCourse>();
   facultyCourseForm!: FormGroup;
   validationErrorMessage = ValidatioErrorMessage;
   formStatusEnum = FormStatus;
   faculties: Faculty[] = [];
-  careerList: Career[] = [];
+  courseList: Course[] = [];
   professorsList: Professor[] = [];
+  courseSelected: string = '';
+  professorSelected?: Professor;
+  scheduleTableList: ClassSchedule[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -55,8 +59,6 @@ export class FacultyCourseFormComponent {
       initDate: ['', Validators.required],
       finishDate: ['', Validators.required],
       faculty: ['', Validators.required],
-      career: ['', Validators.required],
-      professors: [],
       students: this.formBuilder.array([this.createStudentGroup()])
       
     });
@@ -72,8 +74,13 @@ export class FacultyCourseFormComponent {
       });
   }
 
-  async loadProfessors(): Promise<void> {
-    await firstValueFrom(this.professorService.getAll()).then(
+  async loadProfessors(event: any): Promise<void> {
+    const courseName = event.target.value;
+    const queryParams = {
+      faculty: this.faculty.value.name,
+      course: courseName
+    }
+    await firstValueFrom(this.professorService.getAll(queryParams)).then(
       (professors: Professor[]) => {
         this.professorsList = professors;
       })
@@ -82,14 +89,11 @@ export class FacultyCourseFormComponent {
       });
   }
 
-  async loadCareers(): Promise<void> {
-    const faculty = this.facultyCourseForm.value.faculty;
-    this.careerList = faculty.careers;
-    this.career.setValue('');
-  }
-
   async loadCourses(): Promise<void> {
-    
+    this.courseList = [];
+    const faculty = this.facultyCourseForm.value.faculty;
+    this.courseList = faculty.courses;
+    //this.career.setValue('');
   }
 
   submit(): void {
@@ -100,6 +104,15 @@ export class FacultyCourseFormComponent {
 
   addClassHourSelected(classSchedule: ClassSchedule[]): void {
     console.log(classSchedule)
+  }
+
+  setProfessor(event: any): void {
+    const professorFullName: string  = event.target.value;
+    const professorFounded = this.professorsList.find(
+      (professor: Professor) => `${professor.user.firstName} ${professor.user.secondName}` === professorFullName);
+    if (professorFounded) {
+      this.professorSelected = professorFounded;
+    }
   }
 
   removeStudent(index: number): void {
@@ -116,6 +129,26 @@ export class FacultyCourseFormComponent {
     this.students.push(this.createStudentGroup());
   }
 
+  addProfessorScheduleSelected(classSchedule: ClassSchedule): void {
+    this.scheduleTable.optionSelected(classSchedule.day, classSchedule.hour, this.professorSelected);
+  }
+
+/*
+  addProfessorScheduleSelected(classSchedule: ClassSchedule): void {
+    
+    //{
+      //professor'
+      //schedule,
+    //}
+    const classScheduleIndex = this.scheduleTableList?.findIndex((schedule: ClassSchedule) => (schedule.id === classSchedule.id));
+    if (classScheduleIndex > -1) {
+      this.scheduleTableList.splice(classScheduleIndex, 1);
+    } else {
+      this.scheduleTableList.push(classSchedule);
+    }
+    this.scheduleTable.reload();
+  }*/
+
   get faculty() {
     return this.facultyCourseForm.controls['faculty'];
   }
@@ -127,6 +160,4 @@ export class FacultyCourseFormComponent {
   get students(): FormArray {
     return this.facultyCourseForm.get('students') as FormArray;
   }
-
-
 }

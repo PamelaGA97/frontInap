@@ -84,6 +84,8 @@ export class FacultyFormComponent {
 
 
   submit(): void {
+    console.log(this.facultyForm.valid)
+    console.log(this.facultyForm.value)
     if(this.facultyForm.valid) {
       const data = { ...this.facultyData, ...this.facultyForm.value }
       this.submitFormEvent.emit(data);
