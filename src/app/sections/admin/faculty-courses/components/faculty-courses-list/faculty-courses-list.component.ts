@@ -8,6 +8,8 @@ import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 import { AlertType } from '../../../../../shared/services/alert.enum';
 import { FacultyCourseService } from '../../services/faculty-course.service';
 import { SwalAlertResponse } from '../../../../../core/services/swal-alert/swal-alert-response.enum';
+import { FacultyCoursesStorageService } from '../../services/faculty-courses-storage.service';
+import { LocalStorageService } from '../../../../../core/services/local-storage/local-storage.service';
 
 @Component({
   selector: 'app-faculty-courses-list',
@@ -25,7 +27,8 @@ export class FacultyCoursesListComponent {
     private router: Router,
     private toastService: ToastService,
     private swalService: SwalService,
-    private facultyCourseService: FacultyCourseService
+    private facultyCourseService: FacultyCourseService,
+    private facultyCoursesStorageService: FacultyCoursesStorageService
   ) {
     this.initialize();
   }
@@ -35,7 +38,9 @@ export class FacultyCoursesListComponent {
   }
 
   private getFacultyCourse(): void {
-    console.log('traer desde backend')
+    const storageDatas = this.facultyCoursesStorageService.getAll();
+    this.facultyCourses = storageDatas;
+    console.log(this.facultyCourses)
   }
 
   private deleteFacultyCourse(facultyCourseId: string): void {
@@ -60,7 +65,7 @@ export class FacultyCoursesListComponent {
   async openDeleteFacultyCourse(facultyCourse: FacultyCourse): Promise<void> {
     const confirmationResponse = await this.swalService.openConfirmationModal(`¿Estas seguro de eliminar el curso?.`, '');
 		if (confirmationResponse === SwalAlertResponse.CONFIRM) {
-      this.deleteFacultyCourse(facultyCourse.id);
+      this.deleteFacultyCourse(facultyCourse.id ?? '');
 		}
   }
 
