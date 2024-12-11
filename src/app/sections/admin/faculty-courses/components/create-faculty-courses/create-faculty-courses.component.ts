@@ -27,6 +27,7 @@ export class CreateFacultyCoursesComponent {
   ) {}
 
   createFacultyCourse(): void {
+    console.log(1)
     this.facultyCourseFormComponent.submit();
   }
 
@@ -34,7 +35,9 @@ export class CreateFacultyCoursesComponent {
     this.location.back();
   }
 
-  saveFacultyCourse(professor: FacultyCourse): void {
+  saveFacultyCourse(datas: any): void {
+    console.log(datas)
+    /*
     this.facultyCourseService.create(professor).subscribe(
       (response) => {
         this.toastService.showToast(`Curso creado.`, ``, AlertType.SUCCESS);
@@ -42,5 +45,6 @@ export class CreateFacultyCoursesComponent {
       }, (error: ErrorHandler) => {
         this.toastService.showHttpError(error);
       });
+      */
   }
 }

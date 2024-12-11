@@ -34,7 +34,6 @@ export class ScheduleTableComponent {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.addClassSchedule)
     this.setClassScheduleDataToMatriz();
   }
 
@@ -134,10 +133,5 @@ export class ScheduleTableComponent {
 
   submit(): void {
     this.submitClassSchedule.emit(this.classSchedulesSelected);
-  }
-
-  getMatrizDetail(day: string, hour: string): any {
-    const classScheduleFounded: ClassSchedule = this.matrix[day][hour];
-    return `${classScheduleFounded.professor?.user.firstName}\n${classScheduleFounded.professor?.course?.name}`
   }
 }
