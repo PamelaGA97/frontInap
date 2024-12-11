@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, Output, output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, output, SimpleChanges } from '@angular/core';
 import { ClassSchedule } from '../../models/class-schedule.model';
 import { ClassScheduleService } from '../../services/class-schedule.service';
 import { CommonModule } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
 import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 import { ToastService } from '../../../../../shared/services/toast.service';
+import { Professor } from '../../../professors/models/professor.model';
 
 @Component({
   selector: 'app-schedule-table',
@@ -15,8 +16,10 @@ import { ToastService } from '../../../../../shared/services/toast.service';
 })
 export class ScheduleTableComponent {
   @Input() classScheduleDataList?: ClassSchedule[];
+  @Input() addClassSchedule?: ClassSchedule;
   @Input() isPreview?: boolean = false;
   @Output() submitClassSchedule = new EventEmitter<ClassSchedule[]>;
+  @Output() submitSchedule = new EventEmitter<ClassSchedule>;
   classSchedules: ClassSchedule[] = [];
   days: string[] = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
   hours: string[] = ['07:30 - 09:00', '09:00 - 10:30', '10:30 - 12:00', '12:00 - 13:30', '14:00 - 15:30', '15:30 - 17:00', '17:00 - 18:30', '18:30 - 20:00']
@@ -30,6 +33,11 @@ export class ScheduleTableComponent {
     this.initialize();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.addClassSchedule)
+    this.setClassScheduleDataToMatriz();
+  }
+
   async ngOnInit(): Promise<void> {
     await this.loadClassSchedule();
     this.initializeMatriz();
@@ -38,6 +46,11 @@ export class ScheduleTableComponent {
   
   private initialize(): void {
     this.createMatrix();
+  }
+
+  reload(): void {
+    this.initializeMatriz();
+    this.setClassScheduleDataToMatriz();
   }
 
   private async loadClassSchedule(): Promise<void> {
@@ -60,7 +73,6 @@ export class ScheduleTableComponent {
         this.matrix[day][hour] = null;
       });
     });
-
   }
 
   private initializeMatriz(): void {
@@ -69,7 +81,7 @@ export class ScheduleTableComponent {
       this.matrix[day][hour] = classSchedule;
     });
   }
-
+  
   private setClassScheduleDataToMatriz(): void {
     if(this.classScheduleDataList) {
       this.classScheduleDataList?.map(
@@ -78,6 +90,21 @@ export class ScheduleTableComponent {
         }
       );
     }
+  }
+  
+  private addOptionSelected(day: string, hour: string, professor?: Professor): void {
+    const classScheduleIndex = this.classSchedulesSelected.findIndex(
+      (classSchedules) => (classSchedules.day === day && classSchedules.hour === hour)
+    );
+
+    if (classScheduleIndex === -1) {
+      const classScheduleSelected: ClassSchedule = this.matrix[day][hour];
+      classScheduleSelected.professor = professor;
+      this.classSchedulesSelected.push(classScheduleSelected);
+    } else {
+      this.classSchedulesSelected.splice(classScheduleIndex,1)
+    }
+    console.log(this.classSchedulesSelected)
   }
 
   searchOptionSelected(day: string, hour: string): boolean {
@@ -89,21 +116,28 @@ export class ScheduleTableComponent {
     return res;
   }
 
-  addOptionSelected(day: string, hour: string): void {
+  optionSelected(day: string, hour: string, professor?: Professor): void {
     if (!this.isPreview) {
-      const classScheduleIndex = this.classSchedulesSelected.findIndex(
-        (classSchedules) => (classSchedules.day === day && classSchedules.hour === hour)
-      );
-  
-      if (classScheduleIndex === -1) {
-        this.classSchedulesSelected.push(this.matrix[day][hour]);
-      } else {
-        this.classSchedulesSelected.splice(classScheduleIndex,1)
-      }
+      this.addOptionSelected(day, hour, professor);
+    } else {
+      this.emitOptionSelected(day, hour, professor);
     }
+  }
+  
+  private emitOptionSelected(day: string, hour: string, professor?: Professor): void {
+    const classScheduleFounded = this.classScheduleDataList?.find(
+      (classSchedule: ClassSchedule) => (classSchedule.day === day && classSchedule.hour === hour));
+      if (classScheduleFounded) {
+        this.submitSchedule.emit(classScheduleFounded);
+      }
   }
 
   submit(): void {
     this.submitClassSchedule.emit(this.classSchedulesSelected);
+  }
+
+  getMatrizDetail(day: string, hour: string): any {
+    const classScheduleFounded: ClassSchedule = this.matrix[day][hour];
+    return `${classScheduleFounded.professor?.user.firstName}\n${classScheduleFounded.professor?.course?.name}`
   }
 }

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
 import { Observable } from 'rxjs';
 import { Professor } from '../models/professor.model';
+import { ApiQueryParams } from '../../../../shared/models/api-query-params';
 @Injectable({
 	providedIn: 'root'
 })
@@ -10,6 +11,7 @@ import { Professor } from '../models/professor.model';
 export class ProfessorService {
 	apiUrl = environment.apiUrl;
 	resource: string = '/professors';
+	defaultQueryParams = {};
 
 	constructor(private http: HttpClient) {}
 
@@ -18,9 +20,9 @@ export class ProfessorService {
 		return this.http.post<Professor>(path, data);
 	}
 
-	getAll(term?: string): Observable<Professor[]> {
+	getAll(options: ApiQueryParams = {}): Observable<Professor[]> {
 		const path = `${this.apiUrl}${this.resource}`;
-		return this.http.get<Professor[]>(path);
+		return this.http.get<Professor[]>(path, {params: options});
 	}
 
 	get(id: string): Observable<Professor> {
@@ -36,5 +38,9 @@ export class ProfessorService {
 	patch(id: string, data: Professor): Observable<Professor> {
 		const path = `${this.apiUrl}${this.resource}/${id}`;
 		return this.http.put<Professor>(path, data);
+	}
+
+	private parseQueryParams(queryParams: ApiQueryParams): any {
+		return Object.assign({}, this.defaultQueryParams, queryParams || {});
 	}
 }
