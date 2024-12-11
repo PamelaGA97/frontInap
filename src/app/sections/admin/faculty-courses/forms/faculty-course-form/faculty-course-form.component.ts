@@ -59,8 +59,6 @@ export class FacultyCourseFormComponent {
       initDate: ['', Validators.required],
       finishDate: ['', Validators.required],
       faculty: ['', Validators.required],
-      students: this.formBuilder.array([this.createStudentGroup()])
-      
     });
   }
 
@@ -98,8 +96,15 @@ export class FacultyCourseFormComponent {
 
   submit(): void {
     if(this.facultyCourseForm.valid) {
-      this.submitFormEvent.emit(this.facultyCourseForm.value);
+      this.createPayload();
     }
+  }
+
+  private createPayload(): any {
+    const formData = this.facultyCourseForm.value;
+    const classSchedeule = this.scheduleTable.classSchedulesSelected;
+    const payload = {...formData, ... {professorSchedules: classSchedeule}};
+    this.submitFormEvent.emit(payload);
   }
 
   addClassHourSelected(classSchedule: ClassSchedule[]): void {
@@ -132,22 +137,6 @@ export class FacultyCourseFormComponent {
   addProfessorScheduleSelected(classSchedule: ClassSchedule): void {
     this.scheduleTable.optionSelected(classSchedule.day, classSchedule.hour, this.professorSelected);
   }
-
-/*
-  addProfessorScheduleSelected(classSchedule: ClassSchedule): void {
-    
-    //{
-      //professor'
-      //schedule,
-    //}
-    const classScheduleIndex = this.scheduleTableList?.findIndex((schedule: ClassSchedule) => (schedule.id === classSchedule.id));
-    if (classScheduleIndex > -1) {
-      this.scheduleTableList.splice(classScheduleIndex, 1);
-    } else {
-      this.scheduleTableList.push(classSchedule);
-    }
-    this.scheduleTable.reload();
-  }*/
 
   get faculty() {
     return this.facultyCourseForm.controls['faculty'];

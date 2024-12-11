@@ -7,6 +7,7 @@ import { Location } from '@angular/common';
 import { FacultyCourse } from '../../models/faculty-course.model';
 import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 import { AlertType } from '../../../../../shared/services/alert.enum';
+import { FacultyCoursesStorageService } from '../../services/faculty-courses-storage.service';
 
 @Component({
   selector: 'app-create-faculty-courses',
@@ -18,12 +19,14 @@ import { AlertType } from '../../../../../shared/services/alert.enum';
 export class CreateFacultyCoursesComponent {
   @ViewChild('facultyCourseForm') facultyCourseFormComponent!: FacultyCourseFormComponent;
   path: string = '/admin/faculty-courses';
+  toastSuccessMessage: string = 'Curso creado';
 
   constructor(
     private location: Location,
     private facultyCourseService: FacultyCourseService,
     private toastService: ToastService,
-    private router: Router
+    private router: Router,
+    private facultyCoursesStorageService: FacultyCoursesStorageService
   ) {}
 
   createFacultyCourse(): void {
@@ -34,7 +37,12 @@ export class CreateFacultyCoursesComponent {
     this.location.back();
   }
 
-  saveFacultyCourse(professor: FacultyCourse): void {
+  saveFacultyCourse(datas: any): void {
+    console.log(datas)
+    this.facultyCoursesStorageService.create(datas)
+    this.toastService.showToast(this.toastSuccessMessage, '', AlertType.SUCCESS);
+    this.router.navigate([this.path]);
+    /*
     this.facultyCourseService.create(professor).subscribe(
       (response) => {
         this.toastService.showToast(`Curso creado.`, ``, AlertType.SUCCESS);
@@ -42,5 +50,6 @@ export class CreateFacultyCoursesComponent {
       }, (error: ErrorHandler) => {
         this.toastService.showHttpError(error);
       });
+      */
   }
 }
