@@ -36,8 +36,17 @@ main {
 }
 
 footer {
-	background-color: red;
+	background-color: #3d5f95;
 	grid-area: footer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 700;
+
+	span {
+		text-align: center;
+		color: white;
+	}
 }
 
 @media (width > 720px) {
