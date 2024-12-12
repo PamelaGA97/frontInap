@@ -70,6 +70,7 @@ export class FacultyCoursesListComponent {
   }
 
   viewDetail(facultyCourseId: string): void {
-    
+    const detailPath = `${this.path}/detail`;
+    this.router.navigate([detailPath, facultyCourseId]);
   }
 }

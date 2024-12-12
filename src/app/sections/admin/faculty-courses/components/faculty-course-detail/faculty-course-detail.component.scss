@@ -1,0 +1,16 @@
+.line {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    label {
+        font-weight: 600;
+        min-width: 250px;
+    }
+}
+
+.row-aling {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
