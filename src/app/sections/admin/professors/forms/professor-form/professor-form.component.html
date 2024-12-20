@@ -73,6 +73,20 @@
     </div>
     <div class="form-group mb-3">
         <label for="course" class="is-required">Seleccione horario</label>
-        <app-schedule-table #classScheduleTable [isPreview]="isPreview" [classScheduleDataList]="this.professorData?.classSchedules" (submitClassSchedule)="addClassHourSelected($event)"></app-schedule-table>
+            <app-schedule-table
+                #classScheduleTable
+                [isPreview]="isPreview"
+                [classScheduleDataList]="this.professorData?.classSchedules"
+                (submitClassSchedule)="addClassHourSelected($event)"
+            ></app-schedule-table>
     </div>
+    <!-- <div class="form-group mb-3">
+        <label for="career" class="is-required">Horarios disponibles del profesor</label>
+        <app-schedule-table
+            #professorScheduleTable
+            [isPreview]="true"
+            [classScheduleDataList]="this.professorData?.classSchedules"
+            (submitClassSchedule)="addClassHourSelected($event)"
+            ></app-schedule-table>
+    </div> -->
 </form>

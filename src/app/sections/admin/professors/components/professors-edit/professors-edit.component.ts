@@ -31,26 +31,33 @@ export class ProfessorsEditComponent {
     private toastService: ToastService,
     private router: Router
   ) {
+    console.log(1)
     this.initialize();
   }
 
   async ngOnInit(): Promise<void> {
+    console.log(4)
     await this.loadProfessor();
   }
 
   private initialize(): void {
+    console.log(2)
     this.getProfessor();
   }
   
   private getProfessor(): void {
+    console.log(3)
     this.professorId = this.activatedRouter.snapshot.paramMap.get('id') || '';
   }
 
   private async loadProfessor(): Promise<void> {
+    console.log(5)
+    console.log(this.professorId)
     await firstValueFrom(this.professorService.get(this.professorId))
       .then(
         (professor: Professor) => {
           this.professor = professor;
+          console.log(this.professor)
         }
       ).catch(
         (error: ErrorHandler) => {

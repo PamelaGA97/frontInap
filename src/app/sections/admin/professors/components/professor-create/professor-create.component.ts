@@ -37,7 +37,7 @@ export class ProfessorCreateComponent {
   saveProfessor(professor: Professor): void {
     this.professorService.create(professor).subscribe(
       (response) => {
-        this.toastService.showToast(`Professor creado.`, ``, AlertType.SUCCESS);
+        this.toastService.showToast(`Profesor creado.`, ``, AlertType.SUCCESS);
         this.router.navigate([this.path]);
       }, (error: ErrorHandler) => {
         this.toastService.showHttpError(error);

@@ -9,7 +9,7 @@ import { FacultyCourse } from '../models/faculty-course.model';
 
 export class FacultyCourseService {
 	apiUrl = environment.apiUrl;
-	resource: string = '/faculties-courses';
+	resource: string = '/faculty-course';
 
 	constructor(private http: HttpClient) {}
 

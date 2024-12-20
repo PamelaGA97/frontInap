@@ -54,6 +54,7 @@ export class FacultyCourseFormComponent {
 
   private createForm(): void {
     this.facultyCourseForm = this.formBuilder.group({
+      name: ['', Validators.required],
       room: ['', Validators.required],
       amount: ['', Validators.required],
       initDate: ['', Validators.required],
@@ -109,6 +110,7 @@ export class FacultyCourseFormComponent {
 
   addClassHourSelected(classSchedule: ClassSchedule[]): void {
     console.log(classSchedule)
+    this.scheduleTable.reload()
   }
 
   setProfessor(event: any): void {

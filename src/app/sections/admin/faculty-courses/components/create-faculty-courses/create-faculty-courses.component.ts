@@ -37,19 +37,18 @@ export class CreateFacultyCoursesComponent {
     this.location.back();
   }
 
-  saveFacultyCourse(datas: any): void {
-    console.log(datas)
-    this.facultyCoursesStorageService.create(datas)
-    this.toastService.showToast(this.toastSuccessMessage, '', AlertType.SUCCESS);
-    this.router.navigate([this.path]);
-    /*
-    this.facultyCourseService.create(professor).subscribe(
+  saveFacultyCourse(facultyCourses: FacultyCourse): void {
+    // console.log(datas)
+    // this.facultyCoursesStorageService.create(datas)
+    // this.toastService.showToast(this.toastSuccessMessage, '', AlertType.SUCCESS);
+    // this.router.navigate([this.path]);
+
+    this.facultyCourseService.create(facultyCourses).subscribe(
       (response) => {
         this.toastService.showToast(`Curso creado.`, ``, AlertType.SUCCESS);
         this.router.navigate([this.path]);
       }, (error: ErrorHandler) => {
         this.toastService.showHttpError(error);
       });
-      */
   }
 }

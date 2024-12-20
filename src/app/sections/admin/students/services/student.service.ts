@@ -4,6 +4,7 @@ import { Student } from '../models/student.model';
 import { environment } from '../../../../../environments/environment';
 import { Observable } from 'rxjs';
 import { StudentFacultyCount } from '../../home/model/student-faculty-count.model';
+import { ApiQueryParams } from '../../../../shared/models/api-query-params';
 @Injectable({
 	providedIn: 'root'
 })
@@ -19,9 +20,9 @@ export class StudentService {
 		return this.http.post<Student>(path, data);
 	}
 
-	getAll(term?: string): Observable<Student[]> {
+	getAll(queryParams?: ApiQueryParams): Observable<Student[]> {
 		const path = `${this.apiUrl}${this.resource}`;
-		return this.http.get<Student[]>(path);
+		return this.http.get<Student[]>(path, {params: queryParams});
 	}
 
 	get(id: string): Observable<Student> {
