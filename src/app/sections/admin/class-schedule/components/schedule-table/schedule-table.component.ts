@@ -34,7 +34,9 @@ export class ScheduleTableComponent {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.setClassScheduleDataToMatriz();
+    if (changes['classScheduleDataList'].currentValue && changes['classScheduleDataList'].currentValue.length > 0) {
+      this.setClassScheduleDataToMatriz();
+    }
   }
 
   async ngOnInit(): Promise<void> {
@@ -82,10 +84,12 @@ export class ScheduleTableComponent {
   }
   
   private setClassScheduleDataToMatriz(): void {
-    if(this.classScheduleDataList) {
+    if(this.classScheduleDataList &&  this.classScheduleDataList?.length>0) {
       this.classScheduleDataList?.map(
         (classSchedule: ClassSchedule) => {
-          this.classSchedulesSelected.push(this.matrix[classSchedule.day][classSchedule.hour]);
+          if (this.matrix[classSchedule.day][classSchedule.hour]) {
+            this.classSchedulesSelected.push(this.matrix[classSchedule.day][classSchedule.hour]);
+          }
         }
       );
     }
@@ -103,14 +107,15 @@ export class ScheduleTableComponent {
     } else {
       this.classSchedulesSelected.splice(classScheduleIndex,1)
     }
-    console.log(this.classSchedulesSelected)
   }
 
   searchOptionSelected(day: string, hour: string): boolean {
     let res = false;
-    const classScheduleIndex = this.classSchedulesSelected.findIndex((schedule) => schedule.day === day && schedule.hour === hour);
-    if (classScheduleIndex > -1) {
-      res = true;
+    if(this.classSchedulesSelected) {
+      const classScheduleIndex = this.classSchedulesSelected.findIndex((schedule) => schedule.day === day && schedule.hour === hour);
+      if (classScheduleIndex > -1) {
+        res = true;
+      }
     }
     return res;
   }
@@ -133,5 +138,9 @@ export class ScheduleTableComponent {
 
   submit(): void {
     this.submitClassSchedule.emit(this.classSchedulesSelected);
+  }
+
+  setclassScheduleDataList(classSchedule: ClassSchedule[]) {
+    this.classScheduleDataList = classSchedule;
   }
 }

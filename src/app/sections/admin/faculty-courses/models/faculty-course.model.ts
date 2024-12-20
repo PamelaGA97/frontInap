@@ -5,18 +5,12 @@ import { Professor } from '../../professors/models/professor.model';
 import { Student } from '../../students/models/student.model';
 
 export interface FacultyCourse {
-    /*
-    id: string,
-    room?: string,
-    initDate?: Date,
-    finishDate?: Date
-    faculty?: Faculty,
-    */
     id?: string,
+    name?: string,
     room?: string,
     amount?: number,
     initDate?: Date,
     finishDate?: Date
     faculty?: Faculty,
-    professorSchedules?: ClassSchedule[]
+    //professorSchedules?: ClassSchedule[]
 }

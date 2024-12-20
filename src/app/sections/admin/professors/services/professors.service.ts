@@ -20,9 +20,9 @@ export class ProfessorService {
 		return this.http.post<Professor>(path, data);
 	}
 
-	getAll(options: ApiQueryParams = {}): Observable<Professor[]> {
+	getAll(queryParams: ApiQueryParams = {}): Observable<Professor[]> {
 		const path = `${this.apiUrl}${this.resource}`;
-		return this.http.get<Professor[]>(path, {params: options});
+		return this.http.get<Professor[]>(path, {params: queryParams});
 	}
 
 	get(id: string): Observable<Professor> {
