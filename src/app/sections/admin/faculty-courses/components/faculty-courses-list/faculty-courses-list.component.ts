@@ -10,6 +10,7 @@ import { FacultyCourseService } from '../../services/faculty-course.service';
 import { SwalAlertResponse } from '../../../../../core/services/swal-alert/swal-alert-response.enum';
 import { FacultyCoursesStorageService } from '../../services/faculty-courses-storage.service';
 import { LocalStorageService } from '../../../../../core/services/local-storage/local-storage.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-faculty-courses-list',
@@ -38,9 +39,17 @@ export class FacultyCoursesListComponent {
   }
 
   private getFacultyCourse(): void {
-    const storageDatas = this.facultyCoursesStorageService.getAll();
-    this.facultyCourses = storageDatas;
-    console.log(this.facultyCourses)
+    // const storageDatas = this.facultyCoursesStorageService.getAll();
+    // this.facultyCourses = storageDatas;
+    // console.log(this.facultyCourses)
+    firstValueFrom(this.facultyCourseService.getAll())
+      .then((facultyCourses: FacultyCourse[]) => {
+        this.facultyCourses = facultyCourses;
+        console.log(this.facultyCourses)
+      })
+      .catch((error: ErrorHandler) => {
+        this.toastService.showHttpError(error)
+      });
   }
 
   private deleteFacultyCourse(facultyCourseId: string): void {

@@ -1,0 +1,14 @@
+<form action="" class="form-triage" [formGroup]="studentForm">
+    <div class="form-group mb-3">
+        <label for="course" class="is-required">Estudiantes</label>
+        <select name="course">
+            <option value="" [disabled]="true" selected>Seleccione un estudiante</option>
+            @for(student of studentList; track $index) {
+                <option [ngValue]="student">{{ student.user.firstName }}  {{student.user.secondName}}</option>
+            }
+        </select>
+    </div>
+    <div class="form-group mb-3">
+        <button class="btn-triage btn__solid-primary" (click)="addStudent()">Agregar</button>
+    </div>
+</form>

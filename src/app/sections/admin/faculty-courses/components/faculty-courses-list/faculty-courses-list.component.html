@@ -27,8 +27,8 @@
                         <td>{{facultyCourse.faculty?.name}}</td>
                         <td>{{facultyCourse?.room}}</td>
                         <td>{{facultyCourse?.amount}}</td>
-                        <td>{{facultyCourse?.initDate}}</td>
-                        <td>{{facultyCourse?.finishDate}}</td>
+                        <td>{{facultyCourse?.initDate | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{facultyCourse?.finishDate | date: 'dd/MM/yyyy'}}</td>
                         <td class="position-right">
                             <button class="btn-triage btn__solid-success option" (click)="viewDetail(facultyCourse.id ?? '')">Ver detalle</button>
                             <button class="btn-triage btn__solid-primary option" (click)="openfacultyCourseEdit(facultyCourse.id ?? '')">Editar</button>

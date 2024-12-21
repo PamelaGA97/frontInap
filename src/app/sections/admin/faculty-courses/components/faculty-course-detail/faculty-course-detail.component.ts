@@ -1,4 +1,4 @@
-import { Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FacultyCoursesStorageService } from '../../services/faculty-courses-storage.service';
@@ -9,16 +9,19 @@ import { StudentService } from '../../../students/services/student.service';
 import { firstValueFrom } from 'rxjs';
 import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 import { ToastService } from '../../../../../shared/services/toast.service';
+import { FacultyCourseService } from '../../services/faculty-course.service';
+import { ModalService } from '../../../../../core/services/modal/modal.service';
+import { AddStudenToCourseFormComponent } from '../../forms/add-studen-to-course-form/add-studen-to-course-form.component';
 
 @Component({
   selector: 'app-faculty-course-detail',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './faculty-course-detail.component.html',
   styleUrl: './faculty-course-detail.component.scss'
 })
 export class FacultyCourseDetailComponent {
-  facultyCourseId?: string;
+  facultyCourseId: string = '';
   facultyCourse?: FacultyCourse;
   studentList?: Student[] = [];
   paymentStatus = PaymentStatus;
@@ -28,7 +31,9 @@ export class FacultyCourseDetailComponent {
     private activatedRoute: ActivatedRoute,
     private facultyCoursesStorageService: FacultyCoursesStorageService,
     private studentService: StudentService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private facultyCourseService: FacultyCourseService,
+    private modalService: ModalService
   ) {
     this.initialize();
   }
@@ -47,7 +52,15 @@ export class FacultyCourseDetailComponent {
   }
 
   private loadFacultyCourseDetail(): void {
-    this.facultyCourse = this.facultyCoursesStorageService.getItem(this.facultyCourseId  || '');
+    firstValueFrom(this.facultyCourseService.get(this.facultyCourseId))
+      .then((facultyCourse: FacultyCourse) => {
+        this.facultyCourse = facultyCourse;
+        console.log(this.facultyCourse)
+      })
+      .catch((error: ErrorHandler) => {
+        this.toastService.showHttpError(error);
+      });
+    
   }
 
   backToFacultyCourseList(): void {
@@ -66,7 +79,6 @@ export class FacultyCourseDetailComponent {
   }
 
   addStudents(): void {
-    // abrir modal
-    
+    this.modalService.openLargeModal(AddStudenToCourseFormComponent)
   }
 }
