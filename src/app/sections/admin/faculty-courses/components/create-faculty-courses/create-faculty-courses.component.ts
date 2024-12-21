@@ -38,7 +38,7 @@ export class CreateFacultyCoursesComponent {
   }
 
   saveFacultyCourse(facultyCourses: FacultyCourse): void {
-    // console.log(datas)
+    console.log(facultyCourses)
     // this.facultyCoursesStorageService.create(datas)
     // this.toastService.showToast(this.toastSuccessMessage, '', AlertType.SUCCESS);
     // this.router.navigate([this.path]);

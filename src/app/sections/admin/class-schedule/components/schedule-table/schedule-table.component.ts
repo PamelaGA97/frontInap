@@ -34,6 +34,7 @@ export class ScheduleTableComponent {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes)
     if (changes['classScheduleDataList'].currentValue && changes['classScheduleDataList'].currentValue.length > 0) {
       this.setClassScheduleDataToMatriz();
     }

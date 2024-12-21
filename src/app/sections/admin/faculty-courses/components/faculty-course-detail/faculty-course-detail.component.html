@@ -18,11 +18,11 @@
             </div>
             <div class="line">
                 <label for="">Inicio de clases</label>
-                <span>{{facultyCourse?.initDate}}</span>
+                <span>{{facultyCourse?.initDate | date: 'dd/MM/yyyy'}}</span>
             </div>
             <div class="line mb-3">
                 <label for="">Fin de clases</label>
-                <span>{{facultyCourse?.finishDate}}</span>
+                <span>{{facultyCourse?.finishDate | date: 'dd/MM/yyyy'}}</span>
             </div>
             <div>
                 <div class="row-aling">
