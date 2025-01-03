@@ -14,6 +14,7 @@ import { ScheduleTableComponent } from '../../../class-schedule/components/sched
 import { ClassSchedule } from '../../../class-schedule/models/class-schedule.model';
 import { ProfessorService } from '../../../professors/services/professors.service';
 import { Course } from '../../../courses/model/course.model';
+import { FacultyCourseStatus } from '../../enums/FacultyCourseStatus.enum';
 
 @Component({
   selector: 'app-faculty-course-form',
@@ -97,15 +98,17 @@ export class FacultyCourseFormComponent {
 
   submit(): void {
     if(this.facultyCourseForm.valid) {
-      this.createPayload();
+      const payload = this.createPayload();
+      this.submitFormEvent.emit(payload);
     }
   }
-
+  
   private createPayload(): any {
     const formData = this.facultyCourseForm.value;
     const classSchedeule = this.scheduleTable.classSchedulesSelected;
-    const payload = {...formData, ... {professorSchedules: classSchedeule}};
-    this.submitFormEvent.emit(payload);
+    const facultyForm = {...formData, ... {professorSchedules: classSchedeule}};
+    const payload = {...facultyForm, ...{status: FacultyCourseStatus.CREATED}};
+    return payload;
   }
 
   addClassHourSelected(classSchedule: ClassSchedule[]): void {

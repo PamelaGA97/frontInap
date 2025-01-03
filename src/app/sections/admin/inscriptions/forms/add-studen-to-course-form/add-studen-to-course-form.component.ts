@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 import { ToastService } from '../../../../../shared/services/toast.service';
+import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-add-studen-to-course-form',
@@ -22,7 +23,8 @@ export class AddStudenToCourseFormComponent {
   constructor(
     private studentService: StudentService,
     private formBuilder: FormBuilder,
-    private toastService: ToastService
+    private toastService: ToastService,
+    public activeModal: NgbActiveModal
   ) {
     this.initialize();
   }
@@ -53,5 +55,15 @@ export class AddStudenToCourseFormComponent {
 
   addStudent(): void {
     console.log('Admin')
+    this.activeModal?.dismiss({user: 'soy el usuario seleccionado'})
+  }
+
+  closeModal(): void {
+    console.log('cerrar modal')
+    this.activeModal?.dismiss()
+  }
+
+  setUser(data: any): void {
+    console.log(data)
   }
 }

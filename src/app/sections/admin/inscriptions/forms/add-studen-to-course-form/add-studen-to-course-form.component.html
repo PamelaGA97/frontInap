@@ -1,0 +1,39 @@
+<div class="form-container">
+    <div class="row">
+        <h4>Inscribir estudiante</h4>
+    </div>
+    <!-- <form action="" class="form-triage" [formGroup]="studentForm"> -->
+    <div class="form-triage">
+        <div class="form-group mb-3">
+            <label for="course" class="is-required">Estudiantes</label>
+            <select name="course" (change)="setUser($event)">
+                <option [ngValue]="" [disabled]="true" selected>Seleccione un estudiante</option>
+                @for(student of studentList; track $index) {
+                    <option [ngValue]="student">{{ student.user.firstName }}  {{student.user.secondName}}</option>
+                }
+            </select>
+        </div>
+    </div>
+        <!-- <div class="form-group mb-3">
+            <button class="btn-triage btn__solid-primary" (click)="addStudent()">Agregar</button>
+        </div> -->
+    <!-- </form> -->
+
+    <div class="row">
+        <label for="">Nombre del estudiante</label>
+        <p>Sergio Fernandez</p>
+    </div>
+    <div class="row">
+        <label for="">Colegio</label>
+        <p>Magdalena</p>
+    </div>
+    <div class="row">
+        <label for="">Año de egreso</label>
+        <p>2024</p>
+    </div>
+
+    <div class="button-sections">
+        <button class="btn-triage btn__solid-primary mr-3" (click)="addStudent()">Agregar</button>
+        <button class="btn-triage btn__solid-danger" (click)="closeModal()">Cancelar</button>
+    </div>
+</div>

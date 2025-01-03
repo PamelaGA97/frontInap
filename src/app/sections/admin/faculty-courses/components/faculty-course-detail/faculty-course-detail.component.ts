@@ -11,7 +11,7 @@ import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 import { ToastService } from '../../../../../shared/services/toast.service';
 import { FacultyCourseService } from '../../services/faculty-course.service';
 import { ModalService } from '../../../../../core/services/modal/modal.service';
-import { AddStudenToCourseFormComponent } from '../../forms/add-studen-to-course-form/add-studen-to-course-form.component';
+import { AddStudenToCourseFormComponent } from '../../../inscriptions/forms/add-studen-to-course-form/add-studen-to-course-form.component';
 
 @Component({
   selector: 'app-faculty-course-detail',
