@@ -8,6 +8,7 @@ import { SecretariesComponent } from './secretaries/secretaries.component';
 import { ProfessorsComponent } from './professors/professors.component';
 import { FacultiesComponent } from './faculties/faculties.component';
 import { FacultyCoursesComponent } from './faculty-courses/faculty-courses.component';
+import { InscriptionsComponent } from './inscriptions/inscriptions.component';
 
 export const ADMIN_ROUTES: Routes = [
 	{
@@ -47,6 +48,11 @@ export const ADMIN_ROUTES: Routes = [
 				path: 'faculty-courses',
 				component: FacultyCoursesComponent,
 				loadChildren: () => import('./faculty-courses/routes').then(mod => mod.FACULTY_COURSES_ROUTES)
+			},
+			{
+				path: 'inscriptions',
+				component: InscriptionsComponent,
+				loadChildren: () => import('./inscriptions/routes').then(mod => mod.INSCRIPTIONS_ROUTES)
 			}
 		]
 	},
