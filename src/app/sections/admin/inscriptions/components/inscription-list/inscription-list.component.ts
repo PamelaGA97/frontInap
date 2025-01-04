@@ -44,11 +44,19 @@ export class InscriptionListComponent {
         });
     }
 
-    addStudent(): void {
-      this.modalService.openLargeModal(AddStudenToCourseFormComponent)
-        .then((data: any) => {
-          console.log('cerre el modal')
-          console.log(data)
-        })
+    async addStudent(): Promise<void> {
+      try {
+        const modal = await this.modalService.open<any>(AddStudenToCourseFormComponent);
+        console.log(modal);
+        // agregar al estudiant
+        // crear crud de estudiante storage
+        // crear fake data base
+      } catch (data) {
+        console.log(data);
+      }
+    }
+
+    viewDetail(facultyCourseId: string): void {
+      console.log('Ver detalles de facultades')
     }
 }

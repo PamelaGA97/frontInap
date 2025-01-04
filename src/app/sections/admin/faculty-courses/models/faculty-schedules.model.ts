@@ -8,5 +8,5 @@ export interface FacultySchedules {
     initDate?: Date,
     finishDate?: Date
     faculty?: Faculty,
-    professorSchedules?: ClassSchedule[]
+    professorSchedules?: ClassSchedule[],
 }

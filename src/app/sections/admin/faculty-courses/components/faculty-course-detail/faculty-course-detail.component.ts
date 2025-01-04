@@ -79,6 +79,6 @@ export class FacultyCourseDetailComponent {
   }
 
   addStudents(): void {
-    this.modalService.openLargeModal(AddStudenToCourseFormComponent)
+    this.modalService.open<any>(AddStudenToCourseFormComponent)
   }
 }
