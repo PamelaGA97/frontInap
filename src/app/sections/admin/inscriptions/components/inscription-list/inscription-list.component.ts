@@ -7,6 +7,7 @@ import { ToastService } from '../../../../../shared/services/toast.service';
 import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 import { AddStudenToCourseFormComponent } from '../../forms/add-studen-to-course-form/add-studen-to-course-form.component';
 import { ModalService } from '../../../../../core/services/modal/modal.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inscription-list',
@@ -18,11 +19,14 @@ import { ModalService } from '../../../../../core/services/modal/modal.service';
 export class InscriptionListComponent {
   title: string = 'Inscripciones';
   facultyCourses: FacultyCourse[] = [];
+  path: string = '/admin/inscriptions';
+
 
   constructor(
     private facultyCourseService: FacultyCourseService,
     private toastService: ToastService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private router: Router
   ) {
     this.initialize();
   }
@@ -57,6 +61,20 @@ export class InscriptionListComponent {
     }
 
     viewDetail(facultyCourseId: string): void {
-      console.log('Ver detalles de facultades')
+      const detailPath = `${this.path}/detail`;
+      this.router.navigate([detailPath, facultyCourseId]);
     }
 }
+
+
+
+
+///// hacer el crear inscripcion con los pagos generados
+///// en cada pago se puede seleccionar que si el pago es habilitado o ba gratis
+///// identificar loe meces a pagar
+///// PAGOS
+///// en la vista pagos se puede seleccionar quien va a pagar
+///// se puede seleccionar si el pago es gratis
+/////  BAckend
+/////  servicion de inscripciones
+//// servicio de pagos 
