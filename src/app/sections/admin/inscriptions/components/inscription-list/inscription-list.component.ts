@@ -77,4 +77,4 @@ export class InscriptionListComponent {
 ///// se puede seleccionar si el pago es gratis
 /////  BAckend
 /////  servicion de inscripciones
-//// servicio de pagos 
+////   servicio de pagos 
