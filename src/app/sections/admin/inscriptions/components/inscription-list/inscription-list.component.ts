@@ -8,6 +8,8 @@ import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 import { AddStudenToCourseFormComponent } from '../../forms/add-studen-to-course-form/add-studen-to-course-form.component';
 import { ModalService } from '../../../../../core/services/modal/modal.service';
 import { Router } from '@angular/router';
+import { InscriptionService } from '../../services/incription.service';
+import { Inscription } from '../../model/inscription.model';
 
 @Component({
   selector: 'app-inscription-list',
@@ -18,12 +20,14 @@ import { Router } from '@angular/router';
 })
 export class InscriptionListComponent {
   title: string = 'Inscripciones';
-  facultyCourses: FacultyCourse[] = [];
   path: string = '/admin/inscriptions';
+  inscriptions: Inscription[] = [];
+  facultyCourses: FacultyCourse[] = [];
 
 
   constructor(
     private facultyCourseService: FacultyCourseService,
+    private inscriptionService: InscriptionService,
     private toastService: ToastService,
     private modalService: ModalService,
     private router: Router
@@ -32,40 +36,41 @@ export class InscriptionListComponent {
   }
 
   private initialize(): void {
-      this.getFacultyCourse()
-    }
-  
-    private getFacultyCourse(): void {
-      // const storageDatas = this.facultyCoursesStorageService.getAll();
-      // this.facultyCourses = storageDatas;
-      // console.log(this.facultyCourses)
-      firstValueFrom(this.facultyCourseService.getAll())
-        .then((facultyCourses: FacultyCourse[]) => {
-          this.facultyCourses = facultyCourses;
-        })
-        .catch((error: ErrorHandler) => {
-          this.toastService.showHttpError(error)
-        });
+      this.loadInscriptions();
     }
 
-    async addStudent(): Promise<void> {
-      try {
-        const modal = await this.modalService.open<any>(AddStudenToCourseFormComponent);
-        console.log(modal);
-        // agregar al estudiant
-        // crear crud de estudiante storage
-        // crear fake data base
-      } catch (data) {
-        console.log(data);
-      }
-    }
+  private loadInscriptions(): void {
+    firstValueFrom(this.inscriptionService.getAll())
+      .then((inscriptions: Inscription[]) => {
+        this.inscriptions = inscriptions;
+      })
+      .catch((error: ErrorHandler) => {
+        this.toastService.showHttpError(error)
+      });
+  }
 
-    viewDetail(facultyCourseId: string): void {
-      const detailPath = `${this.path}/detail`;
-      this.router.navigate([detailPath, facultyCourseId]);
+  async addStudent(): Promise<void> {
+    try {
+      const modal = await this.modalService.open<any>(AddStudenToCourseFormComponent);
+      console.log(modal);
+      // agregar al estudiant
+      // crear crud de estudiante storage
+      // crear fake data base
+    } catch (data) {
+      console.log(data);
     }
+  }
+
+  viewDetail(facultyCourseId: string): void {
+    const detailPath = `${this.path}/detail`;
+    this.router.navigate([detailPath, facultyCourseId]);
+  }
+
+  addInscription(): void {
+    const detailPath = `${this.path}/create`;
+    this.router.navigate([detailPath])
+  }
 }
-
 
 
 

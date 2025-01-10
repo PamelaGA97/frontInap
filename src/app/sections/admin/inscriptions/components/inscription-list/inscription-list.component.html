@@ -3,9 +3,9 @@
         <h2 class="title">
             {{title}}
         </h2>
-        <!-- <button class="btn-triage btn__solid-primary" (click)="addFacultyCourse()">
-            + Crear nuevo curso
-        </button> -->
+        <button class="btn-triage btn__solid-primary" (click)="addInscription()">
+            + Crear inscripcion
+        </button>
     </div>
     
     <div class="default-table-list__content">
@@ -13,30 +13,28 @@
             <thead>
                 <tr class="table-header">
                     <th>Nombre de curso</th>
-                    <th>Facultad</th>
-                    <th>Aula</th>
-                    <th>Monto por estudiante</th>
-                    <th>Inicio de curso</th>
-                    <th>Fin de curso</th>
+                    <th>Estado</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                @for (facultyCourse of facultyCourses; track $index) {
-                    
+                <tr class="table__body">
+                    <td>aslkfdjlkasdfln</td>
+                    <td>Creado</td>
+                    <td class="position-right">
+                        <button class="btn-triage btn__solid-primary option mr-2" (click)="addStudent()">Inscribir Estudiante</button>
+                    </td>
+                </tr>
+                <!-- @for (inscription of inscriptions; track $index) {
                     <tr class="table__body" [ngClass]="{'shadow-row': $index%2 === 0}">
-                        <td>{{facultyCourse?.name}}</td>
-                        <td>{{facultyCourse.faculty?.name}}</td>
-                        <td>{{facultyCourse?.room}}</td>
-                        <td>{{facultyCourse?.amount}}</td>
-                        <td>{{facultyCourse?.initDate | date: 'dd/MM/yyyy'}}</td>
-                        <td>{{facultyCourse?.finishDate | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{inscription.facultyCourse?.id}}</td>
+                        <td>{{inscription.facultyCourse?.state}}</td>
                         <td class="position-right">
                             <button class="btn-triage btn__solid-primary option mr-2" (click)="addStudent()">Inscribir Estudiante</button>
                             <button class="btn-triage btn__solid-success mr-2 option" (click)="viewDetail(facultyCourse.id ?? '')">Ver detalle de inscripcion</button>
                         </td>
-                    </tr>
-                }
+                    </tr> 
+                } -->
             </tbody>
         </table>
     </div>
