@@ -10,5 +10,4 @@ export interface FacultyCourse {
     finishDate?: Date,
     state?: FacultyCourseStatus,
     faculty?: Faculty,
-    //professorSchedules?: ClassSchedule[]
 }
