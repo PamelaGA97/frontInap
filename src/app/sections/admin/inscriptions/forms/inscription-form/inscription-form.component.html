@@ -1,10 +1,79 @@
 <form action="" class="form-triage">
-    <div class="form-group mb-3">
-        <label for="name" class="is-required">Nombre de curso</label>
-        <input type="text" name="name" formControlName="name">
+    <div class="form-group mb-4">
+        <label for="name" class="is-required">Curso</label>
+        <select>
+            <option>opcion 1</option>
+            <option>opcion 2</option>
+        </select>
     </div>
     <div class="form-group mb-3">
-        <label for="room" class="is-required">Aula</label>
-        <input type="text" name="room" formControlName="room">
+        <div class="date-section">
+            <div class="detail">
+                <p>Fecha inscripcion</p>
+                <span>01/01/2025</span>
+            </div>
+            <div class="detail">
+                <p>Fecha fin</p>
+                <span>02/03/2025</span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group mb-3">
+        <table class="advanced-table">
+            <thead>
+                <tr class="table-header">
+                    <th>Mes de inicio</th>
+                    <th>Mes final</th>
+                    <th>Estado</th>
+                    <th>Habilitado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="table__body">
+                    <td>Enero</td>
+                    <td>Febrero</td>
+                    <td>
+                        <input type="number" name="amount" style="width: 65px; height: 30px;">
+                    </td>
+                    <td class="position-right">
+                        <input type="checkbox" name="option" style="width: 25px; height: 25px;">
+                    </td>
+                </tr>
+                <!-- @for (inscription of inscriptions; track $index) {
+                    <tr class="table__body" [ngClass]="{'shadow-row': $index%2 === 0}">
+                        <td>{{inscription.facultyCourse?.id}}</td>
+                        <td>{{inscription.facultyCourse?.state}}</td>
+                        <td class="position-right">
+                            <button class="btn-triage btn__solid-primary option mr-2" (click)="addStudent()">Inscribir Estudiante</button>
+                            <button class="btn-triage btn__solid-success mr-2 option" (click)="viewDetail(facultyCourse.id ?? '')">Ver detalle de inscripcion</button>
+                        </td>
+                    </tr> 
+                } -->
+            </tbody>
+        </table>
+
+
+
+        <!-- <h5>Pagos generados</h5>
+        <div class="payment">
+            <div class="leaft-section">
+                <div>
+                    <p>Enero</p>
+                </div>
+                <div>
+                    <p>Febrero</p>
+                </div>
+            </div>
+        <div class="rigth-section">
+                <div class="input-option input-size">
+                    <label class="label-info" for="amount">Costo</label>
+                    <input type="number" name="amount" style="width: 65px; height: 30px;">
+                </div>
+                <div class="input-option">
+                    <label class="label-info" for="option">Habilitado</label>
+                    <input type="checkbox" name="option" style="width: 25px; height: 25px;">
+                </div>
+            </div>
+        </div> -->
     </div>
 </form>
