@@ -31,5 +31,9 @@ export const pages: ViewPage[] = [
     {
         name: 'Inscripciones',
         path: `${environment.baseUrl}${adminPath}/inscriptions`
+    },
+    {
+        name: 'Pagos',
+        path: `${environment.baseUrl}${adminPath}/payments`
     }
 ]

@@ -9,6 +9,7 @@ import { ProfessorsComponent } from './professors/professors.component';
 import { FacultiesComponent } from './faculties/faculties.component';
 import { FacultyCoursesComponent } from './faculty-courses/faculty-courses.component';
 import { InscriptionsComponent } from './inscriptions/inscriptions.component';
+import { PaymentsComponent } from './payments/payments.component';
 
 export const ADMIN_ROUTES: Routes = [
 	{
@@ -53,6 +54,9 @@ export const ADMIN_ROUTES: Routes = [
 				path: 'inscriptions',
 				component: InscriptionsComponent,
 				loadChildren: () => import('./inscriptions/routes').then(mod => mod.INSCRIPTIONS_ROUTES)
+			},{
+				path: 'payments',
+				component: PaymentsComponent
 			}
 		]
 	},
