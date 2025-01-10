@@ -1,0 +1,68 @@
+<div class="card">
+    <h3 class="title">Realizar pago</h3>
+    <div class="form-triage">
+        <div class="form-group mb-3">
+            <p>Para realizar el pago selecciona un estudiante o usa los filtros de ci o nombre.</p>
+        </div>
+        <div class="form-group mb-5">
+            <label for="code" class="is-required">Ci</label>
+            <input type="number" name="code" class="mb-2">
+            <button class="btn-triage btn__solid-primary" style="width: 150px;">Buscar</button>
+        </div>
+        <div class="form-group mb-3">
+            <label for="code" class="is-required">selecciona el estudiante</label>
+            <select>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </div>
+        <div class="form-group mb-4" style="text-align: center;">
+            <h5 class="title mb-4">Tipos de pago</h5>
+            <div class="pyment-section">
+                <div class="payment-option mr-5" [ngClass]="{'selected' : paymentType === 'cash'}" (click)="selectPayment('cash')">
+                    $
+                </div>
+                <div class="payment-option" [ngClass]="{'selected' : paymentType === 'qr'}" (click)="selectPayment('qr')">
+                    Qr
+                </div>
+            </div>
+        </div>
+        <div class="table-section mb-5">
+            <table class="advanced-table">
+                <thead>
+                    <tr class="table-header">
+                        <th>Mes de inicio</th>
+                        <th>Mes final</th>
+                        <th>Estado</th>
+                        <th>Habilitado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table__body">
+                        <td>Enero</td>
+                        <td>Febrero</td>
+                        <td>
+                            <input type="number" name="amount" style="width: 65px; height: 30px;">
+                        </td>
+                        <td class="position-right">
+                            <input type="checkbox" name="option" style="width: 25px; height: 25px;">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="form-group mb-3">
+            <div class="total-info">
+                <label for="code" class="total-label">Total:</label>
+                <p>180</p>
+            </div>
+        </div>
+    </div>
+    <div class="button-section">
+        <button class="btn-triage btn__solid-primary option mr-4">Completar pago</button>
+        <button class="btn-triage btn__solid-danger option mr-2">cancelar</button>
+
+    </div>
+</div>
