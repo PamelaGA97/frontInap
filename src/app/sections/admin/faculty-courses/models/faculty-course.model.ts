@@ -1,8 +1,5 @@
-import { ClassSchedule } from '../../class-schedule/models/class-schedule.model';
-import { Course } from '../../courses/model/course.model';
 import { Faculty } from '../../faculties/models/faculty.model';
-import { Professor } from '../../professors/models/professor.model';
-import { Student } from '../../students/models/student.model';
+import { FacultyCourseStatus } from '../enums/FacultyCourseStatus.enum';
 
 export interface FacultyCourse {
     id?: string,
@@ -10,7 +7,8 @@ export interface FacultyCourse {
     room?: string,
     amount?: number,
     initDate?: Date,
-    finishDate?: Date
+    finishDate?: Date,
+    state?: FacultyCourseStatus,
     faculty?: Faculty,
     //professorSchedules?: ClassSchedule[]
 }

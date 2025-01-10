@@ -17,6 +17,7 @@
                     <th>Monto por estudiante</th>
                     <th>Inicio de curso</th>
                     <th>Fin de curso</th>
+                    <th>Estado</th>
                     <th></th>
                 </tr>
             </thead>
@@ -29,6 +30,7 @@
                         <td>{{facultyCourse?.amount}}</td>
                         <td>{{facultyCourse?.initDate | date: 'dd/MM/yyyy'}}</td>
                         <td>{{facultyCourse?.finishDate | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{facultyCourse?.state}}</td>
                         <td class="position-right">
                             <button class="btn-triage btn__solid-success mr-2 option" (click)="viewDetail(facultyCourse.id ?? '')">Ver detalle</button>
                             <button class="btn-triage btn__solid-primary mr-2 option" (click)="openfacultyCourseEdit(facultyCourse.id ?? '')">Editar</button>
