@@ -12,6 +12,14 @@ import { FacultyCourse } from '../faculty-courses/models/faculty-course.model';
 import { StudentFacultyCount } from './model/student-faculty-count.model';
 import { Faculty } from '../faculties/models/faculty.model';
 import { FacultyService } from '../faculties/services/facuties.service';
+import { CardDetailEnum } from './components/card-detail/enum/card-detail.enum';
+
+interface Cake {
+  id: number;
+  name: string;
+  price: string;
+  image: string;
+}
 
 @Component({
   selector: 'app-home',
@@ -26,6 +34,7 @@ export class HomeComponent {
   facultyList: Faculty[] = [];
   facultyCourseList: FacultyCourse[] = [];
   studentForFacultyDetailList: StudentFacultyCount[] = [];
+  cardDetailEnum = CardDetailEnum;
 
   constructor(
     private professorService: ProfessorService,

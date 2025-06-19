@@ -1,11 +1,31 @@
-<div class="card-detail">
-    <div class="card-detail__header">
-        <h4>{{title}}</h4>
-    </div>
+<div
+    class="card-detail shadow"
+    [ngClass]="{
+        'card-detail__color--green': color === cardDetailEnum.GREEN,
+        'card-detail__color--blue': color === cardDetailEnum.BLUE,
+        'card-detail__color--yellow': color === cardDetailEnum.YELLOW,
+        'card-detail__color--red': color === cardDetailEnum.RED,
+        'card-detail__color--cyan': color === cardDetailEnum.CYAN,
+        'card-detail__color--purple': color === cardDetailEnum.PURPLE
+        }"
+    >
     <div class="card-detail__body">
-        <div class="image-section">
-            
+        <div class="detail-section">
+            <p
+                class="title"
+                [ngClass]="{
+                    'title__green': color === cardDetailEnum.GREEN,
+                    'title__blue': color === cardDetailEnum.BLUE,
+                    'title__yellow': color === cardDetailEnum.YELLOW,
+                    'title__red': color === cardDetailEnum.RED,
+                    'title__cyan': color === cardDetailEnum.CYAN,
+                    'title__purple': color === cardDetailEnum.PURPLE
+                }"
+            >{{title}}</p>
+            <p class="info">{{count}}</p>
         </div>
-        <div><span>{{count}}</span></div>
+        <div class="icon-section">
+            <span class="material-icons">{{materialIcon}}</span>
+        </div>
     </div>
 </div>

@@ -39,7 +39,8 @@
                 "input": "src/themes/variables.scss"
               },
               "src/global.scss",
-              "src/assets/fonts/style.scss"
+              "src/assets/fonts/style.scss",
+              "node_modules/material-icons/iconfont/material-icons.css"
             ],
             "scripts": []
           },

@@ -12,14 +12,14 @@
         <div class="form-group mb-3">
             <label for="code" class="is-required">selecciona el estudiante</label>
             <select>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
+                <option value="1">carlos</option>
+                <option value="2">jose</option>
+                <option value="3">anita</option>
+                <option value="4">Maria belen</option>
             </select>
         </div>
         <div class="form-group mb-4" style="text-align: center;">
-            <h5 class="title mb-4">Tipos de pago</h5>
+            <h5 class="title mb-4">Selecciona un tipo de pago</h5>
             <div class="pyment-section">
                 <div class="payment-option mr-5" [ngClass]="{'selected' : paymentType === 'cash'}" (click)="selectPayment('cash')">
                     $
@@ -44,7 +44,7 @@
                         <td>Enero</td>
                         <td>Febrero</td>
                         <td>
-                            <input type="number" name="amount" style="width: 65px; height: 30px;">
+                            <p style="margin: 0;">120</p>
                         </td>
                         <td class="position-right">
                             <input type="checkbox" name="option" style="width: 25px; height: 25px;">
@@ -56,13 +56,12 @@
         <div class="form-group mb-3">
             <div class="total-info">
                 <label for="code" class="total-label">Total:</label>
-                <p>180</p>
+                <p style="margin: 0;">180</p>
             </div>
         </div>
     </div>
     <div class="button-section">
         <button class="btn-triage btn__solid-primary option mr-4">Completar pago</button>
-        <button class="btn-triage btn__solid-danger option mr-2">cancelar</button>
-
+        <button class="btn-triage btn__solid-danger option mr-2">Cancelar</button>
     </div>
 </div>

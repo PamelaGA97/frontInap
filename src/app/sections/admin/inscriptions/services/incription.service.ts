@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 
 export class InscriptionService {
     apiUrl = environment.apiUrl;
-    resource: string = '/faculty-course';
+    resource: string = '/inscriptions';
 
     constructor(private http: HttpClient) {}
 

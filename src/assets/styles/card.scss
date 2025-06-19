@@ -1,6 +1,28 @@
 .card {
-    padding: 0.75em;
-    border-radius: 10px;
+    border-radius: 0.35em;
     border: 1px solid var(--input-form-color-border);
     background: var(--btn-color-primary-contrast);
+    
+    &__header {
+        padding: 0.75em;
+        border-radius: 0.35em 0.35em 0 0;
+        background-color: var(--header-background-color);
+        p {
+            color: var(--header-tietle-color);
+            font-size: 18px;
+            margin: 0;
+            font-weight: 700;
+        }
+    }
+
+    &__container {
+        padding: 0.75em;
+        border-radius: 0 0 0.35em 0.35em;
+        border-top: 1px solid var(--input-form-color-border);
+        background-color: var(--container-background-color);
+    }
+}
+
+.shadow {
+    box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .15)
 }

@@ -2,40 +2,68 @@
     <div class="home-view">
         <div class="home-view__row mb-5">
             <div class="home-view__item">
-                <app-card-detail [title]="'Docentes'" [count]="professorsList.length"></app-card-detail>
+                <app-card-detail
+                    [title]="'Docentes'"
+                    [count]="professorsList.length"
+                    [color]="cardDetailEnum.BLUE"
+                    [materialIcon]="'person'"
+                    >
+                </app-card-detail>
             </div>
             <div class="home-view__item">
-                <app-card-detail [title]="'Estudiantes'" [count]="studentList.length"></app-card-detail>
+                <app-card-detail
+                    [title]="'Estudiantes'"
+                    [count]="studentList.length"
+                    [color]="cardDetailEnum.CYAN"
+                    [materialIcon]="'school'"
+                    >
+                </app-card-detail>
             </div>
             <div class="home-view__item">
-                <app-card-detail [title]="'Cursos'" [count]="facultyCourseList.length"></app-card-detail>
+                <app-card-detail
+                    [title]="'Cursos'"
+                    [count]="facultyCourseList.length"
+                    [color]="cardDetailEnum.GREEN"
+                    [materialIcon]="'event'"
+                    >
+                </app-card-detail>
             </div>
             <div class="home-view__item">
-                <app-card-detail [title]="'Estudiantes con deuda'" [count]="12"></app-card-detail>
+                <app-card-detail
+                    [title]="'Estudiantes con deuda'"
+                    [count]="12"
+                    [color]="cardDetailEnum.PURPLE"
+                    [materialIcon]="'paid'"
+                    >
+                </app-card-detail>
             </div>
         </div>
         <div class="home-view__table-section">
             @if(facultyList.length > 0) {
-                <h3 class="table-title mb-4">Tabla de estudiantes por facultad</h3>
-                <div class="default-table-list__content">
-                    <table class="advanced-table">
-                        <thead>
-                            <tr class="table-header">
-                                @for(faculty of facultyList; track $index){
-                                    <th>{{faculty.name}}</th>
-                                }
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="table__body">
-                                @if(facultyList.length > 0) {
+                <div class="card">
+                    <div class="card__header">
+                        <p>Tabla de estudiantes por facultad</p>
+                    </div>
+                    <div class="card__container">
+                        <table class="advanced-table">
+                            <thead>
+                                <tr class="table__header">
                                     @for(faculty of facultyList; track $index){
-                                        <td>{{searchStudentForFaculty(faculty)}}</td>
+                                        <th>{{faculty.name}}</th>
                                     }
-                                }
-                            </tr>
-                        </tbody>
-                    </table>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table__body">
+                                    @if(facultyList.length > 0) {
+                                        @for(faculty of facultyList; track $index){
+                                            <td>{{searchStudentForFaculty(faculty)}}</td>
+                                        }
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             }
         </div>

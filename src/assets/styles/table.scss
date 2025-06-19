@@ -1,10 +1,10 @@
 .advanced-table {
     width: 100%;
     background-color: var(--table-bakcground-color);
-    padding: 1.5em;
     border-collapse: var(--table-border-type);
     font-size: var(--table-font-size);
-        
+    border: 1px solid #e3e6f0;
+
     .table__header {
         text-align: left;
         height: var(--table-row-height);
@@ -13,7 +13,7 @@
     .table__body {
         height: var(--table-row-height);
         overflow: auto;
-        &:hover {
+        &:hover {   
             background-color: var(--table-row-hover);
         }
     }
@@ -53,8 +53,5 @@
         display: flex;
         justify-content: center;
         align-items: baseline;
-    }
-
-    &__detail-option-selected {
     }
 }

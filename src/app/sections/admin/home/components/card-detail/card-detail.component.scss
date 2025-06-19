@@ -1,22 +1,88 @@
-.card-detail {
-    padding: 0.5em 1em;
+.card-detail-blur {
+    margin-top: 5em;
     border-radius: 5px;
+    min-width: 250px;
+}
+
+.card-detail {
     background-color: white;
-    border: solid 1px grey; min-width: 250px;
+    border-bottom: solid 1px #e3e6f0;
+    border-top: solid 1px #e3e6f0;
+    border-right: solid 1px #e3e6f0;
+    padding: 1em;
+    border-radius: 5px;
+    min-width: 375px;
+    min-height: 110px;
+    display: flex;
+    align-items: center;
 
-    &__header {
-        color: #727cf5;
-        font-weight: 600;
+    &__body {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
 
-        h4 {
-            font-weight: 600;
+        .detail-section {
+            .title {
+                margin-bottom: 0.25em;
+                text-transform: uppercase;
+                font-weight: 600;
+                font-size: 12px;
+                &__green {
+                    color: var(--color-green)
+                }
+                &__yellow {
+                    color: var(--color-yellow);
+                }
+                &__red {
+                    color: var(--color-red);
+                }
+                &__blue {
+                    color: var(--color-blue);
+                }
+                &__cyan {
+                    color: var(--color-cyan);
+                }
+                &__purple {
+                    color: var(--color-purple);
+                }
+            }
+
+            .info {
+                margin-bottom: 0.25em;
+                font-weight: 700;
+                font-size: 1.25rem;
+                color: var(--color-info-detail);
+            }
+        }
+
+        .material-icons {
+            color: var(--icon-color);
+            font-size: 45px;
         }
     }
 
-    &__body {
-        color: #0acf97;
-        font-size: 43px;
-        font-weight: 700;
-        text-align: center;
+    &__color--green {
+        border-left: solid .25em var(--color-green);
+    }
+
+    &__color--yellow {
+        border-left: solid .25em var(--color-yellow);
+    }
+    
+    &__color--red {
+        border-left: solid .25em var(--color-red);
+    }
+
+    &__color--blue {
+        border-left: solid .25em var(--color-blue);
+    }
+
+    &__color--cyan {
+        border-left: solid .25em var(--color-cyan);
+    }
+
+    &__color--purple {
+        border-left: solid .25em var(--color-purple);
     }
 }
