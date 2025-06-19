@@ -17,11 +17,10 @@ import { Course } from '../../../courses/model/course.model';
 import { FacultyCourseStatus } from '../../enums/FacultyCourseStatus.enum';
 
 @Component({
-  selector: 'app-faculty-course-form',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, ScheduleTableComponent, FormsModule],
-  templateUrl: './faculty-course-form.component.html',
-  styleUrl: './faculty-course-form.component.scss'
+    selector: 'app-faculty-course-form',
+    imports: [ReactiveFormsModule, CommonModule, ScheduleTableComponent, FormsModule],
+    templateUrl: './faculty-course-form.component.html',
+    styleUrl: './faculty-course-form.component.scss'
 })
 export class FacultyCourseFormComponent {
   @ViewChild('professorScheduleTable') classScheduleTable!: ScheduleTableComponent;

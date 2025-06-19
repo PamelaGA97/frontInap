@@ -9,11 +9,10 @@ import { Career } from '../../../careers/models/career.model';
 import { Course } from '../../../courses/model/course.model';
 
 @Component({
-  selector: 'app-faculty-form',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './faculty-form.component.html',
-  styleUrl: './faculty-form.component.scss'
+    selector: 'app-faculty-form',
+    imports: [ReactiveFormsModule, CommonModule],
+    templateUrl: './faculty-form.component.html',
+    styleUrl: './faculty-form.component.scss'
 })
 export class FacultyFormComponent {
   @Input() facultyData?: Faculty;

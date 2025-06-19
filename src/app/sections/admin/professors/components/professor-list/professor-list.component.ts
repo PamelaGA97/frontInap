@@ -11,11 +11,10 @@ import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 import { AlertType } from '../../../../../shared/services/alert.enum';
 
 @Component({
-  selector: 'app-professor-list',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './professor-list.component.html',
-  styleUrl: './professor-list.component.scss'
+    selector: 'app-professor-list',
+    imports: [CommonModule],
+    templateUrl: './professor-list.component.html',
+    styleUrl: './professor-list.component.scss'
 })
 export class ProfessorListComponent {
   title: string = 'Docentes';

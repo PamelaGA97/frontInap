@@ -9,11 +9,10 @@ import { firstValueFrom } from 'rxjs';
 import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 
 @Component({
-  selector: 'app-professors-detail',
-  standalone: true,
-  imports: [ProfessorFormComponent],
-  templateUrl: './professors-detail.component.html',
-  styleUrl: './professors-detail.component.scss'
+    selector: 'app-professors-detail',
+    imports: [ProfessorFormComponent],
+    templateUrl: './professors-detail.component.html',
+    styleUrl: './professors-detail.component.scss'
 })
 export class ProfessorsDetailComponent {
   @ViewChild('professorForm') professorFormComponent!: ProfessorFormComponent;

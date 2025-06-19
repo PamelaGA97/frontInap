@@ -4,11 +4,10 @@ import { Login } from './models/login.model';
 import { Router } from '@angular/router';
 
 @Component({
-	selector: 'app-admin-login',
-	standalone: true,
-	imports: [LoginFormComponent],
-	templateUrl: './admin-login.component.html',
-	styleUrl: './admin-login.component.scss'
+    selector: 'app-admin-login',
+    imports: [LoginFormComponent],
+    templateUrl: './admin-login.component.html',
+    styleUrl: './admin-login.component.scss'
 })
 export class AdminLoginComponent {
 	@ViewChild('loginFormComponent') loginFormComponent?: LoginFormComponent;

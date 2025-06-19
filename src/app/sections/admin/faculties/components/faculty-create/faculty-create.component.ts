@@ -10,14 +10,13 @@ import { ToastrModule } from 'ngx-toastr';
 import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 
 @Component({
-  selector: 'app-faculty-create',
-  standalone: true,
-  imports: [
-    FacultyFormComponent,
-    ToastrModule,
-  ],
-  templateUrl: './faculty-create.component.html',
-  styleUrl: './faculty-create.component.scss'
+    selector: 'app-faculty-create',
+    imports: [
+        FacultyFormComponent,
+        ToastrModule,
+    ],
+    templateUrl: './faculty-create.component.html',
+    styleUrl: './faculty-create.component.scss'
 })
 export class FacultyCreateComponent {
   @ViewChild('facultyForm') facultyFormComponent!: FacultyFormComponent;

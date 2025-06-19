@@ -13,11 +13,10 @@ import { SecretaryFormComponent } from '../../forms/secretary-form/secretary-for
 import { SecretaryDetailComponent } from '../secretary-detail/secretary-detail.component';
 
 @Component({
-  selector: 'app-secretary-list',
-  standalone: true,
-  imports: [CommonModule, SecretaryDetailComponent],
-  templateUrl: './secretary-list.component.html',
-  styleUrl: './secretary-list.component.scss'
+    selector: 'app-secretary-list',
+    imports: [CommonModule, SecretaryDetailComponent],
+    templateUrl: './secretary-list.component.html',
+    styleUrl: './secretary-list.component.scss'
 })
 export class SecretaryListComponent {
   @ViewChild('secretaryDetail') secretaryDetailComponent!: SecretaryDetailComponent

@@ -10,11 +10,10 @@ import { AlertType } from '../../../../../shared/services/alert.enum';
 import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 
 @Component({
-  selector: 'app-secretary-create',
-  standalone: true,
-  imports: [SecretaryFormComponent],
-  templateUrl: './secretary-create.component.html',
-  styleUrl: './secretary-create.component.scss'
+    selector: 'app-secretary-create',
+    imports: [SecretaryFormComponent],
+    templateUrl: './secretary-create.component.html',
+    styleUrl: './secretary-create.component.scss'
 })
 export class SecretaryCreateComponent {
   @ViewChild('secretaryForm') secretaryFormComponent!: SecretaryFormComponent

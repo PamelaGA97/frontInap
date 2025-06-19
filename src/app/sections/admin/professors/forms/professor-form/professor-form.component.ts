@@ -16,11 +16,10 @@ import { ClassSchedule } from '../../../class-schedule/models/class-schedule.mod
 import { firstValueFrom } from 'rxjs';
 
 @Component({
-  selector: 'app-professor-form',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, BlockInvalidNumberKeysDirective, ScheduleTableComponent],
-  templateUrl: './professor-form.component.html',
-  styleUrl: './professor-form.component.scss'
+    selector: 'app-professor-form',
+    imports: [ReactiveFormsModule, CommonModule, BlockInvalidNumberKeysDirective, ScheduleTableComponent],
+    templateUrl: './professor-form.component.html',
+    styleUrl: './professor-form.component.scss'
 })
 export class ProfessorFormComponent {
   @ViewChild('classScheduleTable') classScheduleTable!: ScheduleTableComponent;

@@ -9,11 +9,10 @@ import { ToastService } from '../../../../../shared/services/toast.service';
 import { FacultyFormComponent } from "../../forms/faculty-form/faculty-form.component";
 
 @Component({
-  selector: 'app-faculty-detail',
-  standalone: true,
-  imports: [FacultyFormComponent],
-  templateUrl: './faculty-detail.component.html',
-  styleUrl: './faculty-detail.component.scss'
+    selector: 'app-faculty-detail',
+    imports: [FacultyFormComponent],
+    templateUrl: './faculty-detail.component.html',
+    styleUrl: './faculty-detail.component.scss'
 })
 export class FacultyDetailComponent {
   facultyId!: string;

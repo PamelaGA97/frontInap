@@ -13,11 +13,10 @@ import { AlertType } from '../../../../../shared/services/alert.enum';
 import { adminPath } from '../../../../../core/admin-url-path';
 
 @Component({
-  selector: 'app-student-list',
-  standalone: true,
-  imports: [CommonModule, YearPipe],
-  templateUrl: './student-list.component.html',
-  styleUrl: './student-list.component.scss'
+    selector: 'app-student-list',
+    imports: [CommonModule, YearPipe],
+    templateUrl: './student-list.component.html',
+    styleUrl: './student-list.component.scss'
 })
 
 export class StudentListComponent {

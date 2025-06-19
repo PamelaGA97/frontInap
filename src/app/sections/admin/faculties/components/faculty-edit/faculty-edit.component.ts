@@ -11,11 +11,10 @@ import { AlertType } from '../../../../../shared/services/alert.enum';
 import { adminPath } from '../../../../../core/admin-url-path';
 
 @Component({
-  selector: 'app-faculty-edit',
-  standalone: true,
-  imports: [FacultyFormComponent],
-  templateUrl: './faculty-edit.component.html',
-  styleUrl: './faculty-edit.component.scss'
+    selector: 'app-faculty-edit',
+    imports: [FacultyFormComponent],
+    templateUrl: './faculty-edit.component.html',
+    styleUrl: './faculty-edit.component.scss'
 })
 export class FacultyEditComponent {
   @ViewChild('facultyForm') FacultyFormComponent!: FacultyFormComponent;

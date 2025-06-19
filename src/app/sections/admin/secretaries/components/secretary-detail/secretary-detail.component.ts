@@ -10,11 +10,10 @@ import { Location } from '@angular/common';
 
 
 @Component({
-  selector: 'app-secretary-detail',
-  standalone: true,
-  imports: [SecretaryFormComponent],
-  templateUrl: './secretary-detail.component.html',
-  styleUrl: './secretary-detail.component.scss'
+    selector: 'app-secretary-detail',
+    imports: [SecretaryFormComponent],
+    templateUrl: './secretary-detail.component.html',
+    styleUrl: './secretary-detail.component.scss'
 })
 export class SecretaryDetailComponent {
   resourseId!: string;

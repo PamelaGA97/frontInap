@@ -9,11 +9,10 @@ import { AlertType } from '../../../../../shared/services/alert.enum';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-professor-create',
-  standalone: true,
-  imports: [ProfessorFormComponent],
-  templateUrl: './professor-create.component.html',
-  styleUrl: './professor-create.component.scss'
+    selector: 'app-professor-create',
+    imports: [ProfessorFormComponent],
+    templateUrl: './professor-create.component.html',
+    styleUrl: './professor-create.component.scss'
 })
 export class ProfessorCreateComponent {
   @ViewChild('professorForm') professorFormComponent!: ProfessorFormComponent;

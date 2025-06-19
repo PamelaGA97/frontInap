@@ -5,11 +5,11 @@ import { ViewPage } from '../../models/view-page.model';
 import { pages } from '../../../core/admin-url-path';
 
 @Component({
-	selector: 'app-sidebar',
+    selector: 'app-sidebar',
 	standalone: true,
-	imports: [CommonModule],
-	templateUrl: './sidebar.component.html',
-	styleUrl: './sidebar.component.scss'
+    imports: [CommonModule],
+    templateUrl: './sidebar.component.html',
+    styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
 	@Input() viewPages: ViewPage[];

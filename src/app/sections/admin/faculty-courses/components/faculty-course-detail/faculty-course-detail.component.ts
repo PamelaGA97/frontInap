@@ -14,11 +14,10 @@ import { ModalService } from '../../../../../core/services/modal/modal.service';
 import { AddStudenToCourseFormComponent } from '../../../inscriptions/forms/add-studen-to-course-form/add-studen-to-course-form.component';
 
 @Component({
-  selector: 'app-faculty-course-detail',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './faculty-course-detail.component.html',
-  styleUrl: './faculty-course-detail.component.scss'
+    selector: 'app-faculty-course-detail',
+    imports: [CommonModule],
+    templateUrl: './faculty-course-detail.component.html',
+    styleUrl: './faculty-course-detail.component.scss'
 })
 export class FacultyCourseDetailComponent {
   facultyCourseId: string = '';

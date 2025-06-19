@@ -12,11 +12,10 @@ import { SwalAlertResponse } from '../../../../../core/services/swal-alert/swal-
 import { SwalService } from '../../../../../core/services/swal-alert/swal.service';
 
 @Component({
-  selector: 'app-add-studen-to-course-form',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
-  templateUrl: './add-studen-to-course-form.component.html',
-  styleUrl: './add-studen-to-course-form.component.scss'
+    selector: 'app-add-studen-to-course-form',
+    imports: [CommonModule, ReactiveFormsModule, FormsModule],
+    templateUrl: './add-studen-to-course-form.component.html',
+    styleUrl: './add-studen-to-course-form.component.scss'
 })
 export class AddStudenToCourseFormComponent {
   @Output() submitStudentDataForm = new EventEmitter<Student>();

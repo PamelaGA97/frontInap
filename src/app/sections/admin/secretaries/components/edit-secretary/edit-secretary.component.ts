@@ -11,11 +11,10 @@ import { ToastService } from '../../../../../shared/services/toast.service';
 import { AlertType } from '../../../../../shared/services/alert.enum';
 
 @Component({
-  selector: 'app-edit-secretary',
-  standalone: true,
-  imports: [SecretaryFormComponent, CommonModule],
-  templateUrl: './edit-secretary.component.html',
-  styleUrl: './edit-secretary.component.scss'
+    selector: 'app-edit-secretary',
+    imports: [SecretaryFormComponent, CommonModule],
+    templateUrl: './edit-secretary.component.html',
+    styleUrl: './edit-secretary.component.scss'
 })
 export class EditSecretaryComponent {
   @ViewChild('secretaryForm') secretaryFormComponent!: SecretaryFormComponent

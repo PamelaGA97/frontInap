@@ -7,11 +7,11 @@ import { HeaderComponent } from '../../shared/components/header/header.component
 import { urlImagesPath } from '../../core/img-path-url';
 
 @Component({
-	selector: 'app-admin',
-	standalone: true,
-	imports: [RouterOutlet, HomeComponent, SidebarComponent, HeaderComponent],
-	templateUrl: './admin.component.html',
-	styleUrl: './admin.component.scss'
+    selector: 'app-admin',
+    standalone: true,
+    imports: [RouterOutlet, HomeComponent, SidebarComponent, HeaderComponent],
+    templateUrl: './admin.component.html',
+    styleUrl: './admin.component.scss'
 })
 export class AdminComponent {
 	urlLogo: string = urlImagesPath.inap;

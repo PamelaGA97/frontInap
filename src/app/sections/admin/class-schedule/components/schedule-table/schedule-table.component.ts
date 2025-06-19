@@ -8,11 +8,11 @@ import { ToastService } from '../../../../../shared/services/toast.service';
 import { Professor } from '../../../professors/models/professor.model';
 
 @Component({
-  selector: 'app-schedule-table',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './schedule-table.component.html',
-  styleUrl: './schedule-table.component.scss'
+    selector: 'app-schedule-table',
+    standalone: true,
+    imports: [CommonModule],
+    templateUrl: './schedule-table.component.html',
+    styleUrl: './schedule-table.component.scss'
 })
 export class ScheduleTableComponent {
   @Input() classScheduleDataList?: ClassSchedule[];

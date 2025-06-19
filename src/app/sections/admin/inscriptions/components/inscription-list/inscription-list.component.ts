@@ -12,11 +12,10 @@ import { InscriptionService } from '../../services/incription.service';
 import { Inscription } from '../../model/inscription.model';
 
 @Component({
-  selector: 'app-inscription-list',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './inscription-list.component.html',
-  styleUrl: './inscription-list.component.scss'
+    selector: 'app-inscription-list',
+    imports: [CommonModule],
+    templateUrl: './inscription-list.component.html',
+    styleUrl: './inscription-list.component.scss'
 })
 export class InscriptionListComponent {
   title: string = 'Inscripciones';

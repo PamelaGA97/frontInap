@@ -22,11 +22,11 @@ interface Cake {
 }
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [CardDetailComponent],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+    selector: 'app-home',
+    standalone: true,
+    imports: [CardDetailComponent],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.scss'
 })
 export class HomeComponent {
   professorsList: Professor[] = [];

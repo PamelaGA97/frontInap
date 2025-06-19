@@ -13,11 +13,10 @@ import { LocalStorageService } from '../../../../../core/services/local-storage/
 import { firstValueFrom } from 'rxjs';
 
 @Component({
-  selector: 'app-faculty-courses-list',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './faculty-courses-list.component.html',
-  styleUrl: './faculty-courses-list.component.scss'
+    selector: 'app-faculty-courses-list',
+    imports: [CommonModule],
+    templateUrl: './faculty-courses-list.component.html',
+    styleUrl: './faculty-courses-list.component.scss'
 })
 export class FacultyCoursesListComponent {
   title: string = 'Cursos';

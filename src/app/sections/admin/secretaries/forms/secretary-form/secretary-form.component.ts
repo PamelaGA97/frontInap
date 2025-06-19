@@ -10,11 +10,10 @@ import { BlockInvalidNumberKeysDirective } from '../../../../../core/directives/
 import { Secretary } from '../../models/secretary.model';
 
 @Component({
-  selector: 'app-secretary-form',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, BlockInvalidNumberKeysDirective],
-  templateUrl: './secretary-form.component.html',
-  styleUrl: './secretary-form.component.scss'
+    selector: 'app-secretary-form',
+    imports: [ReactiveFormsModule, CommonModule, BlockInvalidNumberKeysDirective],
+    templateUrl: './secretary-form.component.html',
+    styleUrl: './secretary-form.component.scss'
 })
 export class SecretaryFormComponent {
   @Input() secretaryData?: Secretary;

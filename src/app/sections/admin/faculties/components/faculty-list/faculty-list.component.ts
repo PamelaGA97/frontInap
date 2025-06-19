@@ -10,11 +10,10 @@ import { AlertType } from '../../../../../shared/services/alert.enum';
 import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 
 @Component({
-  selector: 'app-faculty-list',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './faculty-list.component.html',
-  styleUrl: './faculty-list.component.scss'
+    selector: 'app-faculty-list',
+    imports: [CommonModule],
+    templateUrl: './faculty-list.component.html',
+    styleUrl: './faculty-list.component.scss'
 })
 export class FacultyListComponent {
   title: string = 'Facultad';

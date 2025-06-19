@@ -10,11 +10,10 @@ import { AlertType } from '../../../../../shared/services/alert.enum';
 import { FacultyCoursesStorageService } from '../../services/faculty-courses-storage.service';
 
 @Component({
-  selector: 'app-create-faculty-courses',
-  standalone: true,
-  imports: [FacultyCourseFormComponent],
-  templateUrl: './create-faculty-courses.component.html',
-  styleUrl: './create-faculty-courses.component.scss'
+    selector: 'app-create-faculty-courses',
+    imports: [FacultyCourseFormComponent],
+    templateUrl: './create-faculty-courses.component.html',
+    styleUrl: './create-faculty-courses.component.scss'
 })
 export class CreateFacultyCoursesComponent {
   @ViewChild('facultyCourseForm') facultyCourseFormComponent!: FacultyCourseFormComponent;

@@ -10,11 +10,10 @@ import { SwalAlertResponse } from '../../../../../core/services/swal-alert/swal-
 import { SwalService } from '../../../../../core/services/swal-alert/swal.service';
 
 @Component({
-	selector: 'app-user-form',
-	standalone: true,
-	imports: [ReactiveFormsModule],
-	templateUrl: './user-form.component.html',
-	styleUrl: './user-form.component.scss'
+    selector: 'app-user-form',
+    imports: [ReactiveFormsModule],
+    templateUrl: './user-form.component.html',
+    styleUrl: './user-form.component.scss'
 })
 export class UserFormComponent {
 	@Output() submitFormEvent = new EventEmitter<any>();

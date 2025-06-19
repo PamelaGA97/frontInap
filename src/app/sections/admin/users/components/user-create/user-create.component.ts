@@ -6,11 +6,10 @@ import { Router } from '@angular/router';
 import { adminPath } from '../../../../../core/admin-url-path';
 
 @Component({
-	selector: 'app-user-create',
-	standalone: true,
-	imports: [UserFormComponent, CommonModule],
-	templateUrl: './user-create.component.html',
-	styleUrl: './user-create.component.scss'
+    selector: 'app-user-create',
+    imports: [UserFormComponent, CommonModule],
+    templateUrl: './user-create.component.html',
+    styleUrl: './user-create.component.scss'
 })
 export class UserCreateComponent {
 	@ViewChild('userForm') userFormComponent!: UserFormComponent;

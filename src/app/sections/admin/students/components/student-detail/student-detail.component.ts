@@ -9,11 +9,10 @@ import { ToastService } from '../../../../../shared/services/toast.service';
 import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 
 @Component({
-  selector: 'app-student-detail',
-  standalone: true,
-  imports: [StudentFormComponent],
-  templateUrl: './student-detail.component.html',
-  styleUrl: './student-detail.component.scss'
+    selector: 'app-student-detail',
+    imports: [StudentFormComponent],
+    templateUrl: './student-detail.component.html',
+    styleUrl: './student-detail.component.scss'
 })
 export class StudentDetailComponent {
   studentId!: string;

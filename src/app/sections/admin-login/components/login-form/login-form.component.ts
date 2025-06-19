@@ -5,11 +5,10 @@ import { FormStatus } from '../../../../shared/enums/form-status.enum';
 import { AlertComponent } from '../../../../shared/components/alert/alert.component';
 
 @Component({
-	selector: 'app-login-form',
-	standalone: true,
-	imports: [ReactiveFormsModule, AlertComponent],
-	templateUrl: './login-form.component.html',
-	styleUrl: './login-form.component.scss'
+    selector: 'app-login-form',
+    imports: [ReactiveFormsModule, AlertComponent],
+    templateUrl: './login-form.component.html',
+    styleUrl: './login-form.component.scss'
 })
 export class LoginFormComponent {
 	@Output() submitFormEvent = new EventEmitter<Login>();

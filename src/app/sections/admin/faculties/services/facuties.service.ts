@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Faculty } from '../models/faculty.model';
-import { BaseCrudService } from '../../../../core/services/base-crud/base-crud.service';
-import { Api } from '../../../../core/services/base-crud/decorators/api.decorator';
 import { environment } from '../../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';

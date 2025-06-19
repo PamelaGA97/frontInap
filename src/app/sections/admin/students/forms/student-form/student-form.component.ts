@@ -12,11 +12,10 @@ import { CommonModule } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
-  selector: 'app-student-form',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, BlockInvalidNumberKeysDirective],
-  templateUrl: './student-form.component.html',
-  styleUrl: './student-form.component.scss'
+    selector: 'app-student-form',
+    imports: [CommonModule, ReactiveFormsModule, BlockInvalidNumberKeysDirective],
+    templateUrl: './student-form.component.html',
+    styleUrl: './student-form.component.scss'
 })
 export class StudentFormComponent {
   @Input() studentData?: Student;
