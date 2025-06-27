@@ -6,11 +6,11 @@ import { firstValueFrom } from 'rxjs';
 import { FacultyService } from '../../services/facuties.service';
 import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 import { ToastService } from '../../../../../shared/services/toast.service';
-import { FacultyFormComponent } from "../../forms/faculty-form/faculty-form.component";
 
 @Component({
     selector: 'app-faculty-detail',
-    imports: [FacultyFormComponent],
+    standalone: true,
+    imports: [],
     templateUrl: './faculty-detail.component.html',
     styleUrl: './faculty-detail.component.scss'
 })

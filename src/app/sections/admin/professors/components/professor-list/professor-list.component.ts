@@ -12,6 +12,7 @@ import { AlertType } from '../../../../../shared/services/alert.enum';
 
 @Component({
     selector: 'app-professor-list',
+    standalone: true,
     imports: [CommonModule],
     templateUrl: './professor-list.component.html',
     styleUrl: './professor-list.component.scss'

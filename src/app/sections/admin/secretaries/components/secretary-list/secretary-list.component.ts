@@ -14,7 +14,8 @@ import { SecretaryDetailComponent } from '../secretary-detail/secretary-detail.c
 
 @Component({
     selector: 'app-secretary-list',
-    imports: [CommonModule, SecretaryDetailComponent],
+    standalone: true,
+    imports: [CommonModule],
     templateUrl: './secretary-list.component.html',
     styleUrl: './secretary-list.component.scss'
 })

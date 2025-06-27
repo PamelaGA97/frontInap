@@ -11,6 +11,7 @@ import { Secretary } from '../../models/secretary.model';
 
 @Component({
     selector: 'app-secretary-form',
+    standalone: true,
     imports: [ReactiveFormsModule, CommonModule, BlockInvalidNumberKeysDirective],
     templateUrl: './secretary-form.component.html',
     styleUrl: './secretary-form.component.scss'

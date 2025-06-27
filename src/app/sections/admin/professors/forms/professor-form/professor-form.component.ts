@@ -17,6 +17,7 @@ import { firstValueFrom } from 'rxjs';
 
 @Component({
     selector: 'app-professor-form',
+    standalone: true,
     imports: [ReactiveFormsModule, CommonModule, BlockInvalidNumberKeysDirective, ScheduleTableComponent],
     templateUrl: './professor-form.component.html',
     styleUrl: './professor-form.component.scss'

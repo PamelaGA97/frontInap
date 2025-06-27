@@ -1,6 +1,7 @@
 /* Importing Bootstrap SCSS file. */
 //@import 'bootstrap/scss/bootstrap';
-@import "../../node_modules/bootstrap/scss/bootstrap";
+@use "../../node_modules/bootstrap/scss/bootstrap";
+@use 'bootstrap/scss/bootstrap' as *;
 
 :root {
     --font-family-default: 'Roboto', sans-serif;
@@ -88,7 +89,4 @@
 }
 //#dddfeb
 /* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
 
-/* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';

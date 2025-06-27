@@ -10,6 +10,7 @@ import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 
 @Component({
     selector: 'app-professors-detail',
+    standalone: true,
     imports: [ProfessorFormComponent],
     templateUrl: './professors-detail.component.html',
     styleUrl: './professors-detail.component.scss'

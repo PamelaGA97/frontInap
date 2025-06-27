@@ -10,6 +10,7 @@ import { Course } from '../../../courses/model/course.model';
 
 @Component({
     selector: 'app-faculty-form',
+    standalone: true,
     imports: [ReactiveFormsModule, CommonModule],
     templateUrl: './faculty-form.component.html',
     styleUrl: './faculty-form.component.scss'

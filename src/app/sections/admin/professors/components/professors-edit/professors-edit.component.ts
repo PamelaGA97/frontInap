@@ -12,6 +12,7 @@ import { adminPath } from '../../../../../core/admin-url-path';
 
 @Component({
     selector: 'app-professors-edit',
+    standalone: true,
     imports: [ProfessorFormComponent],
     templateUrl: './professors-edit.component.html',
     styleUrl: './professors-edit.component.scss'
