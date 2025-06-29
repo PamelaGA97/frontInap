@@ -9,11 +9,11 @@ import { AlertType } from '../../../../../shared/services/alert.enum';
 import { FacultyCourseService } from '../../services/faculty-course.service';
 import { SwalAlertResponse } from '../../../../../core/services/swal-alert/swal-alert-response.enum';
 import { FacultyCoursesStorageService } from '../../services/faculty-courses-storage.service';
-import { LocalStorageService } from '../../../../../core/services/local-storage/local-storage.service';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
     selector: 'app-faculty-courses-list',
+    standalone: true,
     imports: [CommonModule],
     templateUrl: './faculty-courses-list.component.html',
     styleUrl: './faculty-courses-list.component.scss'

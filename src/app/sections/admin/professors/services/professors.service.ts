@@ -4,6 +4,7 @@ import { environment } from '../../../../../environments/environment';
 import { Observable } from 'rxjs';
 import { Professor } from '../models/professor.model';
 import { ApiQueryParams } from '../../../../shared/models/api-query-params';
+import { PaginationResponse } from '../../../../shared/models/pagination-response.model';
 @Injectable({
 	providedIn: 'root'
 })
@@ -20,9 +21,9 @@ export class ProfessorService {
 		return this.http.post<Professor>(path, data);
 	}
 
-	getAll(queryParams: ApiQueryParams = {}): Observable<Professor[]> {
+	getAll(queryParams: ApiQueryParams = {}): Observable<PaginationResponse<Professor>> {
 		const path = `${this.apiUrl}${this.resource}`;
-		return this.http.get<Professor[]>(path, {params: queryParams});
+		return this.http.get<PaginationResponse<Professor>>(path, {params: queryParams});
 	}
 
 	get(id: string): Observable<Professor> {

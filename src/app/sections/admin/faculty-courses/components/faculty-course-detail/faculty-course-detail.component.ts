@@ -15,6 +15,7 @@ import { AddStudenToCourseFormComponent } from '../../../inscriptions/forms/add-
 
 @Component({
     selector: 'app-faculty-course-detail',
+    standalone: true,
     imports: [CommonModule],
     templateUrl: './faculty-course-detail.component.html',
     styleUrl: './faculty-course-detail.component.scss'

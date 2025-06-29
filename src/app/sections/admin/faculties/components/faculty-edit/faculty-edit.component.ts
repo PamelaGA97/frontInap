@@ -12,6 +12,7 @@ import { adminPath } from '../../../../../core/admin-url-path';
 
 @Component({
     selector: 'app-faculty-edit',
+    standalone: true,
     imports: [FacultyFormComponent],
     templateUrl: './faculty-edit.component.html',
     styleUrl: './faculty-edit.component.scss'

@@ -9,6 +9,8 @@ import { ToastService } from '../../../../../shared/services/toast.service';
 import { ProfessorService } from '../../services/professors.service';
 import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 import { AlertType } from '../../../../../shared/services/alert.enum';
+import { firstValueFrom } from 'rxjs';
+import { PaginationResponse } from '../../../../../shared/models/pagination-response.model';
 
 @Component({
     selector: 'app-professor-list',
@@ -37,13 +39,22 @@ export class ProfessorListComponent {
   }
 
   private getAllProfessors(): void {
-    this.professorService.getAll().subscribe(
-      (professors: Professor[]) => {
-        this.professors = professors;
-      }, (error: ErrorHandler) => {
+    firstValueFrom(this.professorService.getAll())
+      .then((response: PaginationResponse<Professor>) => {
+        this.professors = response.data;
+        console.log(response)
+      }).catch((error: ErrorHandler) => {
         this.toastService.showHttpError(error);
-      }
-    );
+      });
+
+
+    // this.professorService.getAll().subscribe(
+    //   (professors: Professor[]) => {
+    //     this.professors = professors;
+    //   }, (error: ErrorHandler) => {
+    //     this.toastService.showHttpError(error);
+    //   }
+    // );
   }
 
   private deleteProfessor(professorId: string): void {

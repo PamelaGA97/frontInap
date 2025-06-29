@@ -13,6 +13,7 @@ import { StudentFacultyCount } from './model/student-faculty-count.model';
 import { Faculty } from '../faculties/models/faculty.model';
 import { FacultyService } from '../faculties/services/facuties.service';
 import { CardDetailEnum } from './components/card-detail/enum/card-detail.enum';
+import { PaginationResponse } from '../../../shared/models/pagination-response.model';
 
 interface Cake {
   id: number;
@@ -56,8 +57,8 @@ export class HomeComponent {
 
   private async loadProfessors(): Promise<void> {
     firstValueFrom(this.professorService.getAll()).then(
-      (professors: Professor[]) => {
-        this.professorsList = professors;
+      (response: PaginationResponse<Professor>) => {
+        this.professorsList = response.data;
       }
     ).catch(
       (error: ErrorHandler) => {

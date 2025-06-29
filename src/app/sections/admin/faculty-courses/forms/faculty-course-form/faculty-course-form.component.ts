@@ -15,9 +15,11 @@ import { ClassSchedule } from '../../../class-schedule/models/class-schedule.mod
 import { ProfessorService } from '../../../professors/services/professors.service';
 import { Course } from '../../../courses/model/course.model';
 import { FacultyCourseStatus } from '../../enums/FacultyCourseStatus.enum';
+import { PaginationResponse } from '../../../../../shared/models/pagination-response.model';
 
 @Component({
     selector: 'app-faculty-course-form',
+    standalone: true,
     imports: [ReactiveFormsModule, CommonModule, ScheduleTableComponent, FormsModule],
     templateUrl: './faculty-course-form.component.html',
     styleUrl: './faculty-course-form.component.scss'
@@ -80,8 +82,8 @@ export class FacultyCourseFormComponent {
       course: courseName
     }
     await firstValueFrom(this.professorService.getAll(queryParams)).then(
-      (professors: Professor[]) => {
-        this.professorsList = professors;
+      (response: PaginationResponse<Professor>) => {
+        this.professorsList = response.data;
       })
       .catch((error: ErrorHandler) => {
         this.toastService.showHttpError(error);

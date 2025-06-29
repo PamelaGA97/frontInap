@@ -11,6 +11,7 @@ import { FacultyCoursesStorageService } from '../../services/faculty-courses-sto
 
 @Component({
     selector: 'app-create-faculty-courses',
+    standalone: true,
     imports: [FacultyCourseFormComponent],
     templateUrl: './create-faculty-courses.component.html',
     styleUrl: './create-faculty-courses.component.scss'
