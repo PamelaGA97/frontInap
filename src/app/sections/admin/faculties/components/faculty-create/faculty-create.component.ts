@@ -11,6 +11,7 @@ import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 
 @Component({
     selector: 'app-faculty-create',
+    standalone: true,
     imports: [
         FacultyFormComponent,
         ToastrModule,

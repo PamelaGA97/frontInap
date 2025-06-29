@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-user-list',
+	standalone: true,
     imports: [CommonModule],
     templateUrl: './user-list.component.html',
     styleUrl: './user-list.component.scss'

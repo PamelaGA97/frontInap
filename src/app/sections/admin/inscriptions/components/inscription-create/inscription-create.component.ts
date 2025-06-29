@@ -4,6 +4,7 @@ import { InscriptionFormComponent } from "../../forms/inscription-form/inscripti
 
 @Component({
     selector: 'app-inscription-create',
+    standalone: true,
     imports: [InscriptionFormComponent],
     templateUrl: './inscription-create.component.html',
     styleUrl: './inscription-create.component.scss'

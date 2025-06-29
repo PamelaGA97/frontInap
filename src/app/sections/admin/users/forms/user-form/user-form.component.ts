@@ -11,6 +11,7 @@ import { SwalService } from '../../../../../core/services/swal-alert/swal.servic
 
 @Component({
     selector: 'app-user-form',
+	standalone: true,
     imports: [ReactiveFormsModule],
     templateUrl: './user-form.component.html',
     styleUrl: './user-form.component.scss'

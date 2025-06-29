@@ -13,6 +13,7 @@ import { SwalService } from '../../../../../core/services/swal-alert/swal.servic
 
 @Component({
     selector: 'app-add-studen-to-course-form',
+    standalone: true,
     imports: [CommonModule, ReactiveFormsModule, FormsModule],
     templateUrl: './add-studen-to-course-form.component.html',
     styleUrl: './add-studen-to-course-form.component.scss'

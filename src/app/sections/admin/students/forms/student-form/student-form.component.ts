@@ -13,6 +13,7 @@ import { firstValueFrom } from 'rxjs';
 
 @Component({
     selector: 'app-student-form',
+    standalone: true,
     imports: [CommonModule, ReactiveFormsModule, BlockInvalidNumberKeysDirective],
     templateUrl: './student-form.component.html',
     styleUrl: './student-form.component.scss'

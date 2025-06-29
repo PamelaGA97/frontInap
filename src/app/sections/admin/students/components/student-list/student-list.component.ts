@@ -14,6 +14,7 @@ import { adminPath } from '../../../../../core/admin-url-path';
 
 @Component({
     selector: 'app-student-list',
+    standalone: true,
     imports: [CommonModule, YearPipe],
     templateUrl: './student-list.component.html',
     styleUrl: './student-list.component.scss'

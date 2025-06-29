@@ -7,6 +7,7 @@ import { adminPath } from '../../../../../core/admin-url-path';
 
 @Component({
     selector: 'app-user-create',
+	standalone: true,
     imports: [UserFormComponent, CommonModule],
     templateUrl: './user-create.component.html',
     styleUrl: './user-create.component.scss'

@@ -12,6 +12,7 @@ import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 
 @Component({
     selector: 'app-student-create',
+    standalone: true,
     imports: [StudentFormComponent],
     templateUrl: './student-create.component.html',
     styleUrl: './student-create.component.scss'

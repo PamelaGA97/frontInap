@@ -13,6 +13,7 @@ import { Inscription } from '../../model/inscription.model';
 
 @Component({
     selector: 'app-inscription-list',
+    standalone: true,
     imports: [CommonModule],
     templateUrl: './inscription-list.component.html',
     styleUrl: './inscription-list.component.scss'

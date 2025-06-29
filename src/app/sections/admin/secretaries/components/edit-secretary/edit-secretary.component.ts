@@ -12,6 +12,7 @@ import { AlertType } from '../../../../../shared/services/alert.enum';
 
 @Component({
     selector: 'app-edit-secretary',
+    standalone: true,
     imports: [SecretaryFormComponent, CommonModule],
     templateUrl: './edit-secretary.component.html',
     styleUrl: './edit-secretary.component.scss'

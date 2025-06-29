@@ -11,6 +11,7 @@ import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 
 @Component({
     selector: 'app-secretary-create',
+    standalone: true,
     imports: [SecretaryFormComponent],
     templateUrl: './secretary-create.component.html',
     styleUrl: './secretary-create.component.scss'

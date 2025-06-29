@@ -11,6 +11,7 @@ import { adminPath } from '../../../../../core/admin-url-path';
 
 @Component({
     selector: 'app-secretary-edit',
+    standalone: true,
     imports: [StudentFormComponent],
     templateUrl: './student-edit.component.html',
     styleUrl: './student-edit.component.scss'

@@ -11,6 +11,7 @@ import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 
 @Component({
     selector: 'app-faculty-list',
+    standalone: true,
     imports: [CommonModule],
     templateUrl: './faculty-list.component.html',
     styleUrl: './faculty-list.component.scss'
