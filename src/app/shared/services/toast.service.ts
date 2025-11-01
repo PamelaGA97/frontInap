@@ -12,28 +12,31 @@ export class ToastService {
   };
 
   constructor(
-    private toastr: ToastrService
+    private toast: ToastrService
   ) { }
 
   showToast(title?: string, message?: string, alertType?: AlertType) {
     if (alertType === AlertType.SUCCESS) {
-      this.toastr.success(message, title, this.config);
+      this.toast.success(message, title, this.config);
       return;
     }
     if (alertType === AlertType.ERROR) {
-      this.toastr.error(message, title, this.config);
+      this.toast.error(message, title, this.config);
       return;      
     }
     if (alertType === AlertType.WARNING) {
-      this.toastr.warning(message, title, this.config);
+      this.toast.warning(message, title, this.config);
       return;
     }
     if (alertType === AlertType.INFO) {
-      this.toastr.info(message, title, this.config);
+      this.toast.info(message, title, this.config);
     }
   }
 
   showHttpError(httpError: ErrorHandler) {
-    this.toastr.error(`${httpError.error} ${httpError.statusCode}`, `${httpError.message[0]}`, this.config);
+    this.toast.error(
+      `${httpError.error} ${httpError.statusCode}`,
+      `${httpError.message}`,
+      this.config);
   }
 }

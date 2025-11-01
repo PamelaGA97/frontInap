@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { ProfessorFormComponent } from '../../forms/professor-form/professor-form.component';
 import { Professor } from '../../models/professor.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ProfessorService } from '../../services/professors.service';
 import { ToastService } from '../../../../../shared/services/toast.service';
 import { Location } from '@angular/common';
@@ -28,7 +28,6 @@ export class ProfessorsDetailComponent {
     private professorService: ProfessorService,
     private location: Location,
     private toastService: ToastService,
-    private router: Router
   ) {
     this.initialize();
   }

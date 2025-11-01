@@ -4,7 +4,8 @@ export interface PaginationResponse<T> {
 }
 
 export interface PaginationMeta {
-    totalItems: number;
     currentPage: number;
     itemsForPage: number;
+    totalItems: number;
+    hasMore: boolean;
 }

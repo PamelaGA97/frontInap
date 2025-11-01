@@ -35,6 +35,7 @@ export class SecretaryCreateComponent {
   }
 
   saveSecretary(secretary: Secretary): void {
+    console.log(secretary)
     this.secretaryService.create(secretary).subscribe(
       (response) => {
         this.toastService.showToast('Secretaria creada', '', AlertType.SUCCESS);

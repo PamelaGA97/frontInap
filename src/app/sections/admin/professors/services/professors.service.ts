@@ -40,8 +40,4 @@ export class ProfessorService {
 		const path = `${this.apiUrl}${this.resource}/${id}`;
 		return this.http.put<Professor>(path, data);
 	}
-
-	private parseQueryParams(queryParams: ApiQueryParams): any {
-		return Object.assign({}, this.defaultQueryParams, queryParams || {});
-	}
 }

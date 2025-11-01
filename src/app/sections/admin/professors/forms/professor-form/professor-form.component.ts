@@ -58,9 +58,9 @@ export class ProfessorFormComponent {
       user: this.formBuilder.group({
         firstName: ['', [Validators.required]],
         secondName: ['', [Validators.required]],
-        rol: [UserRolEnum.TEACHER, [Validators.required]],
+        rol: [UserRolEnum.PROFESSOR, [Validators.required]],
         ci: ['', [Validators.required]],
-        cellphone: ['', [Validators.required]],
+        phone: ['', [Validators.required]],
       }),
     });
   }
@@ -127,8 +127,8 @@ export class ProfessorFormComponent {
 		return this.professorForm?.controls['user'].get('ci');
 	}
 
-  get cellphone() {
-		return this.professorForm?.controls['user'].get('cellphone');
+  get phone() {
+		return this.professorForm?.controls['user'].get('phone');
 	}
 
   get career() {

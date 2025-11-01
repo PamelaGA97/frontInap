@@ -9,5 +9,4 @@ import { RouterOutlet } from '@angular/router';
     styleUrl: './professors.component.scss'
 })
 export class ProfessorsComponent {
-  
 }

@@ -3,7 +3,10 @@
     background-color: var(--table-bakcground-color);
     border-collapse: var(--table-border-type);
     font-size: var(--table-font-size);
-    border: 1px solid #e3e6f0;
+
+    &__header {
+        
+    }
 
     .table__header {
         text-align: left;
@@ -19,6 +22,13 @@
     }
 
     tr {
+
+        &.shadow-row {
+            background-color: #f2f2f2;
+            border-top: 1px solid #dee2e6;
+            border-bottom: 1px solid #dee2e6;
+        }
+
         button {
             visibility: hidden;
         }
@@ -37,6 +47,12 @@
         &.position-right {
             text-align: right;
         }
+
+        img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50px;
+        }
     }
 }
 
@@ -49,9 +65,7 @@
     }
     &__content {
         width: 100%;
+        max-height: 630px;
         overflow: auto;
-        display: flex;
-        justify-content: center;
-        align-items: baseline;
     }
 }

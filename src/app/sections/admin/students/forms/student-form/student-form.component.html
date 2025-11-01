@@ -31,12 +31,12 @@
             }
         </div>
         <div class="form-group mb-3">
-            <label for="cellphone" class="is-required">Telefono</label>
-            <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.studentData?.user?.cellphone}}</p>
-            <input type="number" name="cellphone" appBlockInvalidNumberKeys formControlName="cellphone" [ngClass]="{'hidden-component' : isPreview === true }">
-            @if(this.cellphone !== undefined && this.cellphone?.touched && this.cellphone?.status === formStatusEnum.INVALID) {
+            <label for="phone" class="is-required">Telefono</label>
+            <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.studentData?.user?.phone}}</p>
+            <input type="number" name="phone" appBlockInvalidNumberKeys formControlName="phone" [ngClass]="{'hidden-component' : isPreview === true }">
+            @if(this.phone !== undefined && this.phone?.touched && this.phone?.status === formStatusEnum.INVALID) {
                 <div class="error-content">
-                    @if(this.cellphone?.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+                    @if(this.phone?.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
                 </div>
             }
         </div>

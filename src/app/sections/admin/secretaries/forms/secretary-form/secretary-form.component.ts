@@ -8,6 +8,7 @@ import { TurnsJob } from '../../../../../shared/enums/turns-job.enum';
 import { Branch } from '../../../../../shared/enums/branch.enum';
 import { BlockInvalidNumberKeysDirective } from '../../../../../core/directives/block-invalid-number-keys.directive';
 import { Secretary } from '../../models/secretary.model';
+import { matchValidator } from '../../../../../shared/validations/validation-password';
 
 @Component({
     selector: 'app-secretary-form',
@@ -42,16 +43,19 @@ export class SecretaryFormComponent {
 
   private initializeForm(): void {
     this.secretaryForm = this._formBuilder.group({
-      turn: ['', Validators.required],
-      branch: ['', Validators.required],
-      user: this._formBuilder.group({
-        firstName: ['', [Validators.required]],
-        secondName: ['', [Validators.required]],
-        rol: [UserRolEnum.SECRETARY, [Validators.required]],
-        ci: ['', [Validators.required]],
-        cellphone: ['', [Validators.required]],
-      })
-    });
+      firstName: ['', [Validators.required]],
+      secondName: ['', [Validators.required]],
+      ci: ['', [Validators.required]],
+      phone: ['', [Validators.required]],
+      rol: [UserRolEnum.SECRETARY, [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]],
+      salary: ['', [Validators.required]],
+      turn: ['', [Validators.required]],
+      // branch: ['', Validators.required],
+    },
+    { validators: matchValidator('password', 'confirmPassword') });
   }
   
   private addSecretaryDataToForm(): void {
@@ -78,19 +82,19 @@ export class SecretaryFormComponent {
   }
 
   get firstName() {
-    return this.secretaryForm?.controls['user'].get('firstName');
+    return this.secretaryForm?.controls['firstName'];
   }
 
 	get secondName() {
-		return this.secretaryForm?.controls['user'].get('secondName');
+		return this.secretaryForm?.controls['secondName'];
 	}
 
   get ci() {
-		return this.secretaryForm?.controls['user'].get('ci');
+		return this.secretaryForm?.controls['ci'];
 	}
 
-  get cellphone() {
-		return this.secretaryForm?.controls['user'].get('cellphone');
+  get phone() {
+		return this.secretaryForm?.controls['phone'];
 	}
 
   get turn() {
@@ -99,5 +103,21 @@ export class SecretaryFormComponent {
 
   get branch() {
     return this.secretaryForm?.controls['branch'];
+  }
+
+  get salary() {
+    return this.secretaryForm?.controls['salary']
+  }
+
+  get email() {
+    return this.secretaryForm?.controls['email']
+  }
+
+  get password() {
+    return this.secretaryForm?.controls['password']
+  }
+
+  get confirmPassword() {
+    return this.secretaryForm.controls['confirmPassword']
   }
 }

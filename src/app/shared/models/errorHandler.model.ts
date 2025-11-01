@@ -1,5 +1,8 @@
 export interface ErrorHandler {
-    message: string[],
-    error: string,
-    statusCode: number
+    error: string;
+    message: string;
+    path: string;
+    statusCode: number;
+    success: boolean;
+    timestamp: string;
 }

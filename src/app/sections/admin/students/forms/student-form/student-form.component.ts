@@ -56,7 +56,7 @@ export class StudentFormComponent {
         secondName: ['', [Validators.required]],
         rol: [UserRolEnum.STUDENT, [Validators.required]],
         ci: ['', [Validators.required]],
-        cellphone: ['', [Validators.required]],
+        phone: ['', [Validators.required]],
       })
     })
   }
@@ -140,8 +140,8 @@ export class StudentFormComponent {
 		return this.studentForm?.controls['user'].get('ci');
 	}
 
-  get cellphone() {
-		return this.studentForm?.controls['user'].get('cellphone');
+  get phone() {
+		return this.studentForm?.controls['user'].get('phone');
 	}
 
   get highschool() {

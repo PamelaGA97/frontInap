@@ -48,7 +48,7 @@ export class SecretaryListComponent {
   }
 
   async openModalDelete(secretary: Secretary): Promise<void> {
-    const confirmationResponse = await this.swalService.openConfirmationModal(`¿Estas seguro de eliminar la secretaria ${secretary.user.firstName} ${secretary.user.secondName}?`, '');
+    const confirmationResponse = await this.swalService.openConfirmationModal(`¿Estas seguro de eliminar la secretaria ${secretary.firstName} ${secretary.secondName}?`, '');
 		if (confirmationResponse === SwalAlertResponse.CONFIRM) {
       this.deleteSecretary(secretary.id);
 		}
