@@ -8,6 +8,10 @@ import { SecretaryService } from '../../services/secretary.service';
 import { ToastService } from '../../../../../shared/services/toast.service';
 import { AlertType } from '../../../../../shared/services/alert.enum';
 import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
+import { UserService } from '../../../../../shared/services/user/user.service';
+import { firstValueFrom } from 'rxjs';
+import { PaginationResponse } from '../../../../../shared/models/pagination-response.model';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-secretary-create',
@@ -22,7 +26,7 @@ export class SecretaryCreateComponent {
   constructor(
     private location: Location,
     private router: Router,
-    private secretaryService: SecretaryService,
+    private userService: UserService<Secretary>,
     private toastService: ToastService
   ) {}
 
@@ -34,15 +38,14 @@ export class SecretaryCreateComponent {
     this.secretaryFormComponent.submit();
   }
 
-  saveSecretary(secretary: Secretary): void {
-    console.log(secretary)
-    this.secretaryService.create(secretary).subscribe(
-      (response) => {
-        this.toastService.showToast('Secretaria creada', '', AlertType.SUCCESS);
-        this.router.navigate([adminPath, 'secretaries'])
-      }, (error: ErrorHandler) => {
-        this.toastService.showToast(`${error.error} ${error.statusCode}`, `${error.message[0]}`, AlertType.ERROR);
-     }
-    );
+  async saveSecretary(secretary: Secretary): Promise<void> {
+    await firstValueFrom(this.userService.create(secretary))
+    .then((response: any) => {
+      this.toastService.showToast('Secretaria creada', '', AlertType.SUCCESS);
+      this.router.navigate([adminPath, 'secretaries']);      
+    }).catch((error: HttpErrorResponse) => {
+      console.log(error)
+      this.toastService.showHttpError(error.error);
+    });
   }
 }
