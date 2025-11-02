@@ -9,6 +9,7 @@ import { Branch } from '../../../../../shared/enums/branch.enum';
 import { BlockInvalidNumberKeysDirective } from '../../../../../core/directives/block-invalid-number-keys.directive';
 import { Secretary } from '../../models/secretary.model';
 import { matchValidator } from '../../../../../shared/validations/validation-password';
+import { phoneNumberValidator } from '../../../../../shared/validations/phone-validation';
 
 @Component({
     selector: 'app-secretary-form',
@@ -46,14 +47,14 @@ export class SecretaryFormComponent {
       firstName: ['', [Validators.required]],
       secondName: ['', [Validators.required]],
       ci: ['', [Validators.required]],
-      phone: ['', [Validators.required]],
+      phone: ['', [Validators.required, phoneNumberValidator()]],
       rol: [UserRolEnum.SECRETARY, [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
       salary: ['', [Validators.required]],
+      isAvaible: [true, [Validators.required]],
       turn: ['', [Validators.required]],
-      // branch: ['', Validators.required],
     },
     { validators: matchValidator('password', 'confirmPassword') });
   }
@@ -75,6 +76,7 @@ export class SecretaryFormComponent {
   }
 
   submit(): void {
+    this.secretaryForm.markAllAsTouched();
     if (this.secretaryForm.valid) {
       const secretaryDatas = { ...this.secretaryData, ...this.secretaryForm.value };
       this.submitFormEvent.emit(secretaryDatas);
