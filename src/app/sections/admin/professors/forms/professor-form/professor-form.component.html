@@ -1,6 +1,6 @@
 <form action="" class="form-triage" [formGroup]="professorForm">
     <div formGroupName="user">
-        <div class="form-group mb-3">
+        <div class="form-group mb-2">
             <label for="name" class="is-required">Nombres</label>
             <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{ this.professorData?.user?.firstName}}</p>
             <input type="text" name="name" formControlName="firstName" [ngClass]="{'hidden-component' : isPreview === true }">
@@ -10,7 +10,7 @@
                 </div>
             }
         </div>
-        <div class="form-group mb-3">
+        <div class="form-group mb-2">
             <label for="second-name" class="is-required">Apellidos</label>
             <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{ this.professorData?.user?.secondName}}</p>
             <input type="text" name="second-name" formControlName="secondName" [ngClass]="{'hidden-component' : isPreview === true }">
@@ -20,7 +20,7 @@
                 </div>
             }
         </div>
-        <div class="form-group mb-3">
+        <div class="form-group mb-2">
             <label for="ci" class="is-required">Ci</label>
             <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{ this.professorData?.user?.ci}}</p>
             <input type="text" name="ci" formControlName="ci" [ngClass]="{'hidden-component' : isPreview === true }">
@@ -30,7 +30,7 @@
                 </div>
             }
         </div>
-        <div class="form-group mb-3">
+        <div class="form-group mb-2">
             <label for="phone" class="is-required">Telefono</label>
             <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{ this.professorData?.user?.phone}}</p>
             <input type="number" name="phone" appBlockInvalidNumberKeys formControlName="phone" [ngClass]="{'hidden-component' : isPreview === true }">
@@ -41,7 +41,7 @@
             }
         </div>
     </div>
-    <div class="form-group mb-3">
+    <div class="form-group mb-2">
         <label for="faculty" class="is-required">Facultad</label>
         <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{ this.professorData?.faculty?.name}}</p>
         <select name="faculty" formControlName="faculty" (change)="loadCourses()" [ngClass]="{'hidden-component' : isPreview === true }">
@@ -56,7 +56,7 @@
             </div>
         }
     </div>
-    <div class="form-group mb-3">
+    <div class="form-group mb-2">
         <label for="course" class="is-required">Materia</label>
         <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{ this.professorData?.course?.name}}</p>
         <select name="course" formControlName="course" [ngClass]="{'hidden-component' : isPreview === true }">
@@ -71,7 +71,7 @@
             </div>
         }
     </div>
-    <div class="form-group mb-3">
+    <div class="form-group mb-2">
         <label for="course" class="is-required">Seleccione horario</label>
             <app-schedule-table
                 #classScheduleTable
@@ -80,7 +80,7 @@
                 (submitClassSchedule)="addClassHourSelected($event)"
             ></app-schedule-table>
     </div>
-    <!-- <div class="form-group mb-3">
+    <!-- <div class="form-group mb-2">
         <label for="career" class="is-required">Horarios disponibles del profesor</label>
         <app-schedule-table
             #professorScheduleTable

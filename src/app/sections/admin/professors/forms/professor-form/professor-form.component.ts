@@ -101,6 +101,7 @@ export class ProfessorFormComponent {
   }
 
   submit(): void {
+    this.professorForm.markAllAsTouched();
     if (this.professorForm.valid) {
       this.classScheduleTable.submit();
       const data = { 
