@@ -11,11 +11,18 @@ import { AlertType } from '../../../../../shared/services/alert.enum';
 import { ModalService } from '../../../../../core/services/modal/modal.service';
 import { SecretaryFormComponent } from '../../forms/secretary-form/secretary-form.component';
 import { SecretaryDetailComponent } from '../secretary-detail/secretary-detail.component';
+import { UserService } from '../../../../../shared/services/user/user.service';
+import { firstValueFrom } from 'rxjs';
+import { GenericStore } from '../../../../../shared/store/generic-crud.store';
+import { UserRolEnum } from '../../../users/enums/user-rol.enum';
+import { PaginationResponse } from '../../../../../shared/models/pagination-response.model';
+import { HttpErrorResponse } from '@angular/common/http';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
     selector: 'app-secretary-list',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, InfiniteScrollModule],
     templateUrl: './secretary-list.component.html',
     styleUrl: './secretary-list.component.scss'
 })
@@ -25,23 +32,56 @@ export class SecretaryListComponent {
   path: string = '/admin/secretaries';
   preview = true
   secretaryDetail!: Secretary;
-
   secretaries: Secretary[] = [];
+
+  isLoanding: boolean = false;
 
   constructor(
     private router: Router,
     private swalService: SwalService,
-    private secretaryService: SecretaryService,
+    //private secretaryService: SecretaryService,
+    private userService: UserService<Secretary>,
     private toastService: ToastService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    public store: GenericStore<Secretary>
   ) {
-    this.initialize();
   }
 
+  ngOnInit() {
+    this.store.clear()
+    this.initialize()
+  }
+
+  private initialize(): void {
+    this.loadNextPage();
+  }
+
+  loadNextPage(): void {
+    if (this.isLoanding) return;
+    const paginationMeta = this.store.pagination();
+    if (!paginationMeta.hasMore) return;
+    firstValueFrom(this.userService.getAll(
+      {
+        rol: UserRolEnum.SECRETARY,
+        page: paginationMeta.currentPage,
+        limit: paginationMeta.itemsForPage
+      }
+    )).then((response: PaginationResponse<Secretary>) => {
+      response.meta.currentPage = response.meta.currentPage + 1;
+      this.store.addEntities(response.data, response.meta);
+      this.store.addPaginationDetail(response.meta);
+      this.isLoanding = false;
+    })
+    .catch((error: Partial<HttpErrorResponse>) => {
+      this.toastService.showHttpError(error.error);
+      this.isLoanding = false;
+    });
+  }
+  
   addSecretary(): void {
     this.router.navigate([this.path, 'create'])
   }
-
+  
   openSecretaryEdit(secretaryId: string): void {
     const editpath = `${this.path}/edit`;
     this.router.navigate([editpath, secretaryId]);
@@ -61,26 +101,24 @@ export class SecretaryListComponent {
     //this.secretaryDetail = secretary
   }
 
-  private async initialize(): Promise<void> {
-    await this.getAllSecretaries();
-  }
   
+
   private async getAllSecretaries(): Promise<void> {
-    this.secretaryService.getAll().subscribe(
-      (response) => {
-        this.secretaries = response;
-      }, (error: ErrorHandler) => {
+    await firstValueFrom(this.userService.getAll())
+      .then((response: any) => {
+        console.log(response)
+        this.secretaries = response.data;
+      }).catch((error: ErrorHandler) => {
         this.toastService.showToast(`${error.error} ${error.statusCode}`,`${error.message[0]}`, AlertType.ERROR);
-      }
-    );
+      });
   }
 
-  private deleteSecretary(secretaryId: string): void {
-    this.secretaryService.delete(secretaryId).subscribe(
-      (response) => {
+  private async deleteSecretary(secretaryId: string): Promise<void> {
+    await firstValueFrom(this.userService.getAll())
+      .then((response) => {
         this.toastService.showToast(`Usuario Eliminado`, ``, AlertType.SUCCESS);
         this.getAllSecretaries();
-      }, (error) => {
+      }).catch((error: any) => {
         this.toastService.showToast(`${error.error} ${error.statusCode}`,`${error.message[0]}`, AlertType.ERROR);
       });
   }
