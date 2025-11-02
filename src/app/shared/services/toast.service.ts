@@ -35,8 +35,8 @@ export class ToastService {
 
   showHttpError(httpError: ErrorHandler) {
     this.toast.error(
-      `${httpError.error} ${httpError.statusCode}`,
       `${httpError.message}`,
+      ``,
       this.config);
   }
 }
