@@ -1,8 +1,8 @@
 export interface ErrorHandler {
-    error: string;
-    message: string;
-    path: string;
-    statusCode: number;
     success: boolean;
+    statusCode: number;
+    message: string;
+    error: string;
     timestamp: string;
+    path: string;
 }
