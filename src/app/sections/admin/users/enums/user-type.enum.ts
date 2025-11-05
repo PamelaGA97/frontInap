@@ -1,6 +1,6 @@
 export enum UserEnum {
-    STUDENT = 'Estudiante',
-    PROFESSOR = 'Docente',
-    SECRETARY = 'Secretaria',
-    ADMIN = 'Administrativo'
+    STUDENT = 'ESTUDIANTE',
+    PROFESSOR = 'DOCENTE',
+    SECRETARY = 'SECRETARIA',
+    ADMIN = 'ADMINISTRATIVO'
 }
