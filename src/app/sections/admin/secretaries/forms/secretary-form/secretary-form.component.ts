@@ -77,7 +77,7 @@ export class SecretaryFormComponent {
 
   submit(): void {
     this.secretaryForm.markAllAsTouched();
-    if (this.secretaryForm.valid) {
+    if (this.secretaryForm.valid || this.secretaryData) {
       const secretaryDatas = { ...this.secretaryData, ...this.secretaryForm.value };
       this.submitFormEvent.emit(secretaryDatas);
     }
