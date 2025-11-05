@@ -63,8 +63,7 @@ export class EditSecretaryComponent {
 	}
 
 	async saveSecretary(secretary: Secretary): Promise<void> {
-		console.log(secretary);
-		await firstValueFrom(this.userService.patch(secretary.id, secretary))
+		await firstValueFrom(this.userService.patch(this.resourseId, secretary))
 		.then(() => {
 			this.toastService.showToast(this.toastSuccessMessage, '', AlertType.SUCCESS);
 			this.router.navigate([adminPath, this.pageName]);

@@ -31,18 +31,25 @@ export class SecretaryFormComponent {
   constructor(
     private _formBuilder: FormBuilder,
   ) {
-    this.initialize()
   }
   
   ngOnInit(): void {
+    this.initialize()
     this.addSecretaryDataToForm();
   }
   
   private initialize(): void {
     this.initializeForm();
   }
+  
+  private addSecretaryDataToForm(): void {
+    if (this.secretaryData) {
+      this.secretaryForm.patchValue(this.secretaryData);
+    }
+  }
 
   private initializeForm(): void {
+    const isEditMode = !!this.secretaryData;
     this.secretaryForm = this._formBuilder.group({
       firstName: ['', [Validators.required]],
       secondName: ['', [Validators.required]],
@@ -50,19 +57,13 @@ export class SecretaryFormComponent {
       phone: ['', [Validators.required, phoneNumberValidator()]],
       rol: [UserRolEnum.SECRETARY, [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
-      confirmPassword: ['', [Validators.required]],
+      password: ['', isEditMode ? [] : [Validators.required]],
+      confirmPassword: ['', isEditMode ? [] : [Validators.required]],
       salary: ['', [Validators.required]],
       isAvaible: [true, [Validators.required]],
       turn: ['', [Validators.required]],
     },
     { validators: matchValidator('password', 'confirmPassword') });
-  }
-  
-  private addSecretaryDataToForm(): void {
-    if (this.secretaryData) {
-      this.secretaryForm.patchValue(this.secretaryData);
-    }
   }
 
   onTurnChange(turn: any): void {
@@ -77,9 +78,14 @@ export class SecretaryFormComponent {
 
   submit(): void {
     this.secretaryForm.markAllAsTouched();
-    if (this.secretaryForm.valid || this.secretaryData) {
-      const secretaryDatas = { ...this.secretaryData, ...this.secretaryForm.value };
-      this.submitFormEvent.emit(secretaryDatas);
+    if (this.secretaryForm.valid) {
+      if (this.secretaryData) {
+        const payload = { ...this.secretaryData, ...this.secretaryForm.value };
+        const {id, ...secretaryDatas} = payload;
+        this.submitFormEvent.emit(secretaryDatas);
+      } else {
+        this.submitFormEvent.emit(this.secretaryForm.value);
+      }
     }
   }
 

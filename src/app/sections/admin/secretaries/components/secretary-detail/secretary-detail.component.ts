@@ -4,9 +4,10 @@ import { SecretaryService } from '../../services/secretary.service';
 import { Secretary } from '../../models/secretary.model';
 import { firstValueFrom } from 'rxjs';
 import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastService } from '../../../../../shared/services/toast.service';
 import { Location } from '@angular/common';
+import { UserService } from '../../../../../shared/services/user/user.service';
 
 
 @Component({
@@ -20,12 +21,14 @@ export class SecretaryDetailComponent {
   resourseId!: string;
   secretary?: Secretary;
   preview: boolean = true;
+  path: string = '/admin/secretaries';
 
   constructor (
-    private secretaryService: SecretaryService,
+    private secretaryService: UserService<Secretary>,
     private location: Location,
     private route: ActivatedRoute,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private router: Router,
   ) {
     this.initialize();
   }
@@ -40,8 +43,8 @@ export class SecretaryDetailComponent {
   }
 
   private async getSecretaryData(): Promise<void> {
-    await firstValueFrom(this.secretaryService.get(this.resourseId))
-      .then((response: Secretary) => {this.secretary = response;})
+    await firstValueFrom(this.secretaryService.getOne(this.resourseId))
+      .then((response: Secretary) => {this.secretary = response})
       .catch((error: ErrorHandler) => {
         this.toastService.showHttpError(error);
       });
@@ -50,4 +53,9 @@ export class SecretaryDetailComponent {
   backToSecretaryList(): void {
     this.location.back();
   }
+
+  editSecretary(): void {
+		const editpath = `${this.path}/edit`;
+		this.router.navigate([editpath, this.secretary?.id]);
+	}
 }
