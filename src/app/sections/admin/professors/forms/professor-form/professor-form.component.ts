@@ -5,7 +5,6 @@ import { BlockInvalidNumberKeysDirective } from '../../../../../core/directives/
 import { UserRolEnum } from '../../../users/enums/user-rol.enum';
 import { ValidatioErrorMessage } from '../../../../../core/validation-error-message';
 import { FormStatus } from '../../../../../shared/enums/form-status.enum';
-import { Professor } from '../../models/professor.model';
 import { FacultyService } from '../../../faculties/services/facuties.service';
 import { Faculty } from '../../../faculties/models/faculty.model';
 import { ToastService } from '../../../../../shared/services/toast.service';
@@ -15,6 +14,7 @@ import { ClassSchedule } from '../../../class-schedule/models/class-schedule.mod
 import { firstValueFrom } from 'rxjs';
 import { phoneNumberValidator } from '../../../../../shared/validations/phone-validation';
 import { matchValidator } from '../../../../../shared/validations/validation-password';
+import { User } from '../../../users/model/user.model';
 
 @Component({
     selector: 'app-professor-form',
@@ -25,9 +25,9 @@ import { matchValidator } from '../../../../../shared/validations/validation-pas
 })
 export class ProfessorFormComponent {
   @ViewChild('classScheduleTable') classScheduleTable!: ScheduleTableComponent;
-  @Input() professorData?: Professor;
+  @Input() professorData?: User;
   @Input() isPreview: boolean = false;
-  @Output() submitFormEvent = new EventEmitter<Professor>();
+  @Output() submitFormEvent = new EventEmitter<User>();
   professorForm!: FormGroup;
   validationErrorMessage = ValidatioErrorMessage;
   formStatusEnum = FormStatus;
@@ -42,10 +42,10 @@ export class ProfessorFormComponent {
   ) {
   }
   
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     this.initialize();
     // await this.loadFaculties();
-    // await this.addProfessorDataToForm();
+    this.addProfessorDataToForm();
   }
   
   private async initialize(): Promise<void> {
