@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { SecretaryFormComponent } from '../../forms/secretary-form/secretary-form.component';
-import { SecretaryService } from '../../services/secretary.service';
 import { Secretary } from '../../models/secretary.model';
 import { firstValueFrom } from 'rxjs';
 import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
