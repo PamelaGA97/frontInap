@@ -1,12 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { ProfessorFormComponent } from '../../forms/professor-form/professor-form.component';
-import { Professor } from '../../models/professor.model';
-import { ActivatedRoute } from '@angular/router';
-import { ProfessorService } from '../../services/professors.service';
-import { ToastService } from '../../../../../shared/services/toast.service';
 import { Location } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
-import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
+import { ProfessorFormComponent } from '../../forms/professor-form/professor-form.component';
+import { ToastService } from '../../../../../shared/services/toast.service';
+import { User } from '../../../users/model/user.model';
+import { UserService } from '../../../../../shared/services/user/user.service';
 
 @Component({
     selector: 'app-professors-detail',
@@ -19,13 +19,13 @@ export class ProfessorsDetailComponent {
   @ViewChild('professorForm') professorFormComponent!: ProfessorFormComponent;
   preview: boolean = true;
   professorId!: string;
-  professor!: Professor;
+  professor!: User;
   editMessageSuccess: string = 'Docente actualizado';
   pageView: string = 'professors';
 
   constructor(
     private activatedRouter: ActivatedRoute,
-    private professorService: ProfessorService,
+    private userService: UserService<User>,
     private location: Location,
     private toastService: ToastService,
   ) {
@@ -45,14 +45,12 @@ export class ProfessorsDetailComponent {
   }
 
   private async loadProfessor(): Promise<void> {
-    await firstValueFrom(this.professorService.get(this.professorId))
-      .then(
-        (professor: Professor) => {
+    await firstValueFrom(this.userService.getOne(this.professorId))
+      .then((professor: User) => {
           this.professor = professor;
-        }
-      ).catch(
-        (error: ErrorHandler) => {
-          this.toastService.showHttpError(error);
+      })
+      .catch((error: Partial<HttpErrorResponse>) => {
+          this.toastService.showHttpError(error.error);
         }
       );
   }
