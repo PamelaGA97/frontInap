@@ -1,15 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { ProfessorFormComponent } from '../../forms/professor-form/professor-form.component';
-import { Professor } from '../../models/professor.model';
 import { Location } from '@angular/common';
-import { ProfessorService } from '../../services/professors.service';
-import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 import { ToastService } from '../../../../../shared/services/toast.service';
 import { AlertType } from '../../../../../shared/services/alert.enum';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserService } from '../../../../../shared/services/user/user.service';
+import { User } from '../../../users/model/user.model';
 
 @Component({
     selector: 'app-professor-create',
@@ -24,7 +22,7 @@ export class ProfessorCreateComponent {
 
   constructor(
     private location: Location,
-    private professorService: UserService<Professor>,
+    private professorService: UserService<User>,
     private toastService: ToastService,
     private router: Router
   ) {}
@@ -37,7 +35,7 @@ export class ProfessorCreateComponent {
     this.location.back();
   }
 
-  async saveProfessor(professor: Professor): Promise<void> {
+  async saveProfessor(professor: User): Promise<void> {
     await firstValueFrom(this.professorService.create(professor))
       .then(() => {
         this.toastService.showToast('Docente creado', '', AlertType.SUCCESS);
