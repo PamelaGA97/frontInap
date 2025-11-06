@@ -71,43 +71,34 @@ export class ProfessorListComponent {
       });
   }
 
-  // private getAllProfessors(): void {
-  //   firstValueFrom(this.userService.getAll())
-  //     .then((response: PaginationResponse<User>) => {
-  //       this.professors = response.data;
-  //     }).catch((error: ErrorHandler) => {
-  //       this.toastService.showHttpError(error);
-  //     });
-  // }
+  private async deleteProfessor(professorId: string): Promise<void> {
+    await firstValueFrom(this.userService.delete(professorId))
+    .then(() => {
+      this.toastService.showToast(`Docente eliminado`, ``, AlertType.SUCCESS);
+      this.ngOnInit();
+    }).catch((error: ErrorHandler) => {
+      this.toastService.showHttpError(error);
+    }); 
+  }
 
-    private async deleteProfessor(professorId: string): Promise<void> {
-      await firstValueFrom(this.userService.delete(professorId))
-      .then(() => {
-        this.toastService.showToast(`Docente eliminado`, ``, AlertType.SUCCESS);
-        this.ngOnInit();
-      }).catch((error: ErrorHandler) => {
-        this.toastService.showHttpError(error);
-      }); 
+  addProfessor(): void {
+    this.router.navigate([this.path, 'create'])
+  }
+
+  openProfessorEdit(professorId: string) {
+    const editPath: string = `${this.path}/edit`;
+    this.router.navigate([editPath, professorId]);
+  }
+
+  viewDetail(professorId: string): void {
+    const editPath: string = `${this.path}/detail`;
+    this.router.navigate([editPath, professorId]);
+  }
+
+  async openDeleteModal(professor: User): Promise<void> {
+    const confirmationResponse = await this.swalService.openConfirmationModal(`¿Estas seguro de eliminar el docente ${professor.firstName} ${professor.secondName}?`, '');
+    if (confirmationResponse === SwalAlertResponse.CONFIRM) {
+      this.deleteProfessor(professor.id);
     }
-
-    addProfessor(): void {
-      this.router.navigate([this.path, 'create'])
-    }
-
-    openProfessorEdit(professorId: string) {
-      const editPath: string = `${this.path}/edit`;
-      this.router.navigate([editPath, professorId]);
-    }
-
-    // viewDetail(professorId: string): void {
-    //   const editPath: string = `${this.path}/detail`;
-    //   this.router.navigate([editPath, professorId]);
-    // }
-
-    async openDeleteModal(professor: User): Promise<void> {
-    	const confirmationResponse = await this.swalService.openConfirmationModal(`¿Estas seguro de eliminar el docente ${professor.firstName} ${professor.secondName}?`, '');
-    	if (confirmationResponse === SwalAlertResponse.CONFIRM) {
-        this.deleteProfessor(professor.id);
-    	}
-    }
+  }
 }
