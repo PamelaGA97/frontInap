@@ -4,12 +4,15 @@
             <h3>Detalle de Docente</h3>
         </div>
         <div class="base-crud__content">
+            <div class="icon-section">
+                <span class="material-icons" (click)="editProfessor()">edit</span>
+            </div>
             @if (professor) {
                 <app-professor-form #professorForm [isPreview]="preview" [professorData]="professor"></app-professor-form>
             }
         </div>
         <div class="base-crud__footer">
-            <button class="btn-triage btn__solid-tertiary option" (click)="backToProfessorList()">Cancelar</button>
+            <button class="btn-triage medium btn__solid-tertiary option" (click)="backToProfessorList()">Cancelar</button>
         </div>
     </div>
 </div>

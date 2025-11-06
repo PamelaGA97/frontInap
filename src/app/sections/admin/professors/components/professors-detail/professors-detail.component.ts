@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { ProfessorFormComponent } from '../../forms/professor-form/professor-form.component';
 import { ToastService } from '../../../../../shared/services/toast.service';
@@ -22,12 +22,14 @@ export class ProfessorsDetailComponent {
   professor!: User;
   editMessageSuccess: string = 'Docente actualizado';
   pageView: string = 'professors';
+  path: string = '/admin/professors'
 
   constructor(
-    private activatedRouter: ActivatedRoute,
     private userService: UserService<User>,
+    private activatedRouter: ActivatedRoute,
     private location: Location,
     private toastService: ToastService,
+    private router: Router
   ) {
     this.initialize();
   }
@@ -58,4 +60,9 @@ export class ProfessorsDetailComponent {
   backToProfessorList(): void {
     this.location.back();
   }
+
+  editProfessor(): void {
+		const editpath = `${this.path}/edit`;
+		this.router.navigate([editpath, this.professor?.id]);
+	}
 }
