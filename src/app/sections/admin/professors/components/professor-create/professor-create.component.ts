@@ -7,6 +7,9 @@ import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 import { ToastService } from '../../../../../shared/services/toast.service';
 import { AlertType } from '../../../../../shared/services/alert.enum';
 import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { UserService } from '../../../../../shared/services/user/user.service';
 
 @Component({
     selector: 'app-professor-create',
@@ -21,7 +24,7 @@ export class ProfessorCreateComponent {
 
   constructor(
     private location: Location,
-    private professorService: ProfessorService,
+    private professorService: UserService<Professor>,
     private toastService: ToastService,
     private router: Router
   ) {}
@@ -34,13 +37,14 @@ export class ProfessorCreateComponent {
     this.location.back();
   }
 
-  saveProfessor(professor: Professor): void {
-    this.professorService.create(professor).subscribe(
-      (response) => {
-        this.toastService.showToast(`Profesor creado.`, ``, AlertType.SUCCESS);
+  async saveProfessor(professor: Professor): Promise<void> {
+    await firstValueFrom(this.professorService.create(professor))
+      .then(() => {
+        this.toastService.showToast('Docente creado', '', AlertType.SUCCESS);
         this.router.navigate([this.path]);
-      }, (error: ErrorHandler) => {
-        this.toastService.showHttpError(error);
+      })
+      .catch((error: Partial<HttpErrorResponse>) => {
+        this.toastService.showHttpError(error.error);
       });
   }
 }
