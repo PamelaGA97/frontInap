@@ -2,7 +2,7 @@ import { UserRolEnum } from "../enums/user-rol.enum";
 import { UserEnum } from "../enums/user-type.enum";
 
 export interface User {
-    id?: string,
+    id: string,
     firstName?: string,
     secondName?: string,
     phone?: number,
