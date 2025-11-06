@@ -8,12 +8,12 @@ import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 import { AlertType } from '../../../../../shared/services/alert.enum';
 import { firstValueFrom } from 'rxjs';
 import { PaginationResponse } from '../../../../../shared/models/pagination-response.model';
-import { UserService } from '../../../users/services/user.service';
 import { User } from '../../../users/model/user.model';
 import { GenericStore } from '../../../../../shared/store/generic-crud.store';
 import { InfiniteScrollDirective, InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserEnum } from '../../../users/enums/user-type.enum';
+import { UserService } from '../../../../../shared/services/user/user.service';
 
 
 @Component({
@@ -35,7 +35,7 @@ export class ProfessorListComponent {
     private router: Router,
     private swalService: SwalService,
     private toastService: ToastService,
-    private userService: UserService,
+    private userService: UserService<User>,
     public store: GenericStore<User>
   ) { }
 
@@ -80,15 +80,15 @@ export class ProfessorListComponent {
   //     });
   // }
 
-    // private deleteProfessor(professorId: string): void {
-    //   firstValueFrom(this.professorService.delete(professorId))
-    //   .then((response: any) => {
-    //     this.toastService.showToast(`Docente eliminado`, ``, AlertType.SUCCESS);
-    //     this.getAllProfessors();  
-    //   }).catch((error: ErrorHandler) => {
-    //     this.toastService.showHttpError(error);
-    //   }); 
-    // }
+    private async deleteProfessor(professorId: string): Promise<void> {
+      await firstValueFrom(this.userService.delete(professorId))
+      .then(() => {
+        this.toastService.showToast(`Docente eliminado`, ``, AlertType.SUCCESS);
+        this.ngOnInit();
+      }).catch((error: ErrorHandler) => {
+        this.toastService.showHttpError(error);
+      }); 
+    }
 
     addProfessor(): void {
       this.router.navigate([this.path, 'create'])
@@ -104,10 +104,10 @@ export class ProfessorListComponent {
     //   this.router.navigate([editPath, professorId]);
     // }
 
-    // async openDeleteModal(professor: Professor): Promise<void> {
-    // 	const confirmationResponse = await this.swalService.openConfirmationModal(`¿Estas seguro de eliminar el docente ${professor.user.firstName} ${professor.user.secondName}?`, '');
-    // 	if (confirmationResponse === SwalAlertResponse.CONFIRM) {
-    //     this.deleteProfessor(professor.id);
-    // 	}
-    // }
+    async openDeleteModal(professor: User): Promise<void> {
+    	const confirmationResponse = await this.swalService.openConfirmationModal(`¿Estas seguro de eliminar el docente ${professor.firstName} ${professor.secondName}?`, '');
+    	if (confirmationResponse === SwalAlertResponse.CONFIRM) {
+        this.deleteProfessor(professor.id);
+    	}
+    }
 }
