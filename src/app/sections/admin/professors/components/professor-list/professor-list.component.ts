@@ -44,6 +44,7 @@ export class ProfessorListComponent {
   }
 
   private initialize(): void {
+    this.store.clear();
     this.loadNextPage();
   }
 
@@ -54,7 +55,7 @@ export class ProfessorListComponent {
 
     firstValueFrom(this.userService.getAll(
       {
-        user_type: UserEnum.PROFESSOR,
+        rol: UserEnum.PROFESSOR,
         page: paginationMeta.currentPage,
         limit: paginationMeta.itemsForPage
       }
