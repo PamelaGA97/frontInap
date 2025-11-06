@@ -128,4 +128,8 @@ export class SecretaryFormComponent {
   get confirmPassword() {
     return this.secretaryForm.controls['confirmPassword']
   }
+
+  get isAvaible() {
+    return this.secretaryForm.controls['isAvaible']
+  }
 }
