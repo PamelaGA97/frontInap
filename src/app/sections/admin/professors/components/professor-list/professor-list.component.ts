@@ -94,10 +94,10 @@ export class ProfessorListComponent {
       this.router.navigate([this.path, 'create'])
     }
 
-    // openProfessorEdit(professorId: string) {
-    //   const editPath: string = `${this.path}/edit`;
-    //   this.router.navigate([editPath, professorId]);
-    // }
+    openProfessorEdit(professorId: string) {
+      const editPath: string = `${this.path}/edit`;
+      this.router.navigate([editPath, professorId]);
+    }
 
     // viewDetail(professorId: string): void {
     //   const editPath: string = `${this.path}/detail`;
