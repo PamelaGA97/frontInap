@@ -7,7 +7,52 @@
             + Crear Estudiante
         </button>
     </div>
-    <div class="student-list__content">
+    <div class="card">
+        <div class="card-body">
+            <div class="default-table-list__content"
+                #scrollContainer
+                infiniteScroll
+                [infiniteScrollDistance]="1"
+                [infiniteScrollThrottle]="150"
+                [infiniteScrollContainer]="scrollContainer"
+                (scrolled)="loadNextPage()"
+            >
+                <table class="advanced-table">
+                    <thead>
+                        <tr class="table-header">
+                            <th>#</th>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Ci</th>
+                            <th>Telefono</th>
+                            <!-- <th>Facultad</th>
+                            <th>Materia</th>
+                            <th></th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (professor of store.entities(); track $index) {
+                            <tr class="table__body" [ngClass]="{'shadow-row': $index%2 === 0}">
+                                <td><img src="assets/image/avatar-user.jpg" alt=""></td>
+                                <td>{{professor.firstName}}</td>
+                                <td>{{professor.secondName}}</td>
+                                <td>{{professor.ci}}</td>
+                                <td>{{professor.phone}}</td>
+                                <!-- <td>{{professor.faculty?.name}}</td>
+                                <td>{{professor.course?.name}}</td> -->
+                                <td class="position-right">
+                                    <!-- <button class="btn-triage mr-1 btn__solid-success option" (click)="viewDetail(professor.id)">Ver detalle</button>
+                                    <button class="btn-triage mr-1 btn__solid-primary option" (click)="openProfessorEdit(professor.id)">Editar</button>
+                                    <button class="btn-triage btn__solid-danger option" (click)="openDeleteModal(professor)">eliminar</button> -->
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="student-list__content">
         <table class="advanced-table">
             <thead>
                 <tr class="table-header">
@@ -24,10 +69,10 @@
             <tbody>
                 @for (student of students; track $index) {
                     <tr class="table__body" [ngClass]="{'shadow-row': $index%2 === 0}">
-                        <td>{{student.user!.firstName}}</td>
-                        <td>{{student.user!.secondName}}</td>
-                        <td>{{student.user!.ci}}</td>
-                        <td>{{student.user!.phone}}</td>
+                        <td>{{student.firstName}}</td>
+                        <td>{{student.secondName}}</td>
+                        <td>{{student.ci}}</td>
+                        <td>{{student.phone}}</td>
                         <td>{{student.highschool}}</td>
                         <td>{{student.graduationYear ? (student.graduationYear | year) : ''}}</td>
                         <td>{{student.faculty?.name}}</td>
@@ -41,5 +86,5 @@
                 }
             </tbody>
         </table>
-    </div>
+    </div> -->
 </div>

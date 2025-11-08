@@ -1,21 +1,24 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserRolEnum } from '../../../users/enums/user-rol.enum';
-import { Student } from '../../models/student.model';
 import { CommonModule } from '@angular/common';
 import { SwalAlertResponse } from '../../../../../core/services/swal-alert/swal-alert-response.enum';
 import { SwalService } from '../../../../../core/services/swal-alert/swal.service';
-import { StudentService } from '../../services/student.service';
-import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
 import { ToastService } from '../../../../../shared/services/toast.service';
 import { YearPipe } from '../../../../../core/pipes/year.pipe';
 import { AlertType } from '../../../../../shared/services/alert.enum';
-import { adminPath } from '../../../../../core/admin-url-path';
+import { UserService } from '../../../../../shared/services/user/user.service';
+import { User } from '../../../users/model/user.model';
+import { GenericStore } from '../../../../../shared/store/generic-crud.store';
+import { HttpErrorResponse } from '@angular/common/http';
+import { PaginationResponse } from '../../../../../shared/models/pagination-response.model';
+import { firstValueFrom } from 'rxjs';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
     selector: 'app-student-list',
     standalone: true,
-    imports: [CommonModule, YearPipe],
+    imports: [CommonModule, YearPipe, InfiniteScrollModule],
     templateUrl: './student-list.component.html',
     styleUrl: './student-list.component.scss'
 })
@@ -23,29 +26,57 @@ import { adminPath } from '../../../../../core/admin-url-path';
 export class StudentListComponent {
   title: string = 'Estudiantes';
   path: string = '/admin/students';
-  students: Student[] = [];
+  students: User[] = [];
+  isLoanding: boolean = false;
 
   constructor(
-    private studentService: StudentService,
     private router: Router,
     private swalService: SwalService,
-    private toastService: ToastService
-  ) {
+    private toastService: ToastService,
+    private userService: UserService<User>,
+    public store: GenericStore<User>
+  ) {}
+  
+  ngOnInit(): void {
+    this.store.clear();
     this.initialize();
   }
-
+  
   private initialize(): void {
-    this.loadStudents();
+    this.loadNextPage();
   }
 
-  private loadStudents(): void {
-    this.studentService.getAll().subscribe(
-      (response) => {
-        this.students = response;
-      }, (error: ErrorHandler) => {
-        this.toastService.showHttpError(error);
-      }
-    );
+  loadNextPage(): void {
+    if (this.isLoanding) return;
+		const paginationMeta = this.store.pagination();
+		if (!paginationMeta.hasMore) return;
+
+    firstValueFrom(this.userService.getAll(
+			{
+				rol: UserRolEnum.STUDENT,
+				page: paginationMeta.currentPage,
+				limit: paginationMeta.itemsForPage
+			}
+		)).then((response: PaginationResponse<User>) => {
+			response.meta.currentPage = response.meta.currentPage + 1;
+			this.store.addEntities(response.data, response.meta);
+			this.store.addPaginationDetail(response.meta);
+			this.isLoanding = false;
+		})
+		.catch((error: Partial<HttpErrorResponse>) => {
+			this.toastService.showHttpError(error.error);
+			this.isLoanding = false;
+		});
+  }
+
+  private async deleteStudent(studentId: string): Promise<void> {
+    await firstValueFrom(this.userService.delete(studentId))
+    .then(() => {
+      this.toastService.showToast(`Estudiante eliminado`, ``, AlertType.SUCCESS)
+      this.ngOnInit();
+    }).catch((error: Partial<HttpErrorResponse>) => {
+      this.toastService.showHttpError(error.error);
+    });
   }
 
   addStudent(): void {
@@ -62,21 +93,10 @@ export class StudentListComponent {
     this.router.navigate([detailPath, studentId]);
   }
   
-  async openDeleteModal(student: Student): Promise<void> {
-		const confirmationResponse = await this.swalService.openConfirmationModal(`¿Estas seguro de eliminar el estudiante ${student.user.firstName} ${student.user.secondName}?`, '');
+  async openDeleteModal(student: User): Promise<void> {
+		const confirmationResponse = await this.swalService.openConfirmationModal(`¿Estas seguro de eliminar el estudiante ${student.firstName} ${student.secondName}?`, '');
 		if (confirmationResponse === SwalAlertResponse.CONFIRM) {
       this.deleteStudent(student.id);
 		}
 	}
-
-  private deleteStudent(studentId: string): void {
-    this.studentService.delete(studentId).subscribe(
-      (response) => {
-        this.toastService.showToast(`Estudiante eliminado`, ``, AlertType.SUCCESS);
-        this.loadStudents();
-      }, (error: ErrorHandler) => {
-        this.toastService.showHttpError(error)
-      }
-    );
-  }
 }
