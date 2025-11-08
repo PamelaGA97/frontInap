@@ -8,7 +8,6 @@ export interface User {
     phone?: number,
     ci?: string,
     email: string;
-    // type?: UserEnum;
     rol?: UserRolEnum,
     isAvaible?: boolean;
     password?: string;
@@ -16,4 +15,7 @@ export interface User {
     initialDate?: Date;
     finishDate?: Date;
     turn?: string;
+
+    highschool: string;
+    graduationYear: string;
 }
