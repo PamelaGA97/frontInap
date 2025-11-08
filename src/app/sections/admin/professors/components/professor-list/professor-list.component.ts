@@ -10,7 +10,7 @@ import { firstValueFrom } from 'rxjs';
 import { PaginationResponse } from '../../../../../shared/models/pagination-response.model';
 import { User } from '../../../users/model/user.model';
 import { GenericStore } from '../../../../../shared/store/generic-crud.store';
-import { InfiniteScrollDirective, InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserEnum } from '../../../users/enums/user-type.enum';
 import { UserService } from '../../../../../shared/services/user/user.service';
@@ -27,9 +27,7 @@ export class ProfessorListComponent {
   title: string = 'Docentes';
   path: string = '/admin/professors';
   professors: User[] = [];
-  //hasMore: boolean = true;
   isLoanding: boolean = false;
-  currentPage: number = 1;
 
   constructor(
     private router: Router,
@@ -40,11 +38,11 @@ export class ProfessorListComponent {
   ) { }
 
   ngOnInit() {
+    this.store.clear();
     this.initialize();
   }
-
+  
   private initialize(): void {
-    this.store.clear();
     this.loadNextPage();
   }
 
