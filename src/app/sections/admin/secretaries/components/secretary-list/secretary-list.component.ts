@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -8,7 +8,6 @@ import { Secretary } from '../../models/secretary.model';
 import { SwalService } from '../../../../../core/services/swal-alert/swal.service';
 import { ToastService } from '../../../../../shared/services/toast.service';
 import { AlertType } from '../../../../../shared/services/alert.enum';
-import { SecretaryDetailComponent } from '../secretary-detail/secretary-detail.component';
 import { UserService } from '../../../../../shared/services/user/user.service';
 import { GenericStore } from '../../../../../shared/store/generic-crud.store';
 import { UserRolEnum } from '../../../users/enums/user-rol.enum';
@@ -23,11 +22,9 @@ import { SwalAlertResponse } from '../../../../../core/services/swal-alert/swal-
     styleUrl: './secretary-list.component.scss'
 })
 export class SecretaryListComponent {
-	@ViewChild('secretaryDetail') secretaryDetailComponent!: SecretaryDetailComponent
 	title: string ='Secretarias';
 	path: string = '/admin/secretaries';
-	preview = true
-	secretaryDetail!: Secretary;
+	preview = true;
 	secretaries: Secretary[] = [];
 	isLoanding: boolean = false;
 
