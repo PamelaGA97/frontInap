@@ -31,60 +31,30 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @for (professor of store.entities(); track $index) {
+                        @for (student of store.entities(); track $index) {
                             <tr class="table__body" [ngClass]="{'shadow-row': $index%2 === 0}">
                                 <td><img src="assets/image/avatar-user.jpg" alt=""></td>
-                                <td>{{professor.firstName}}</td>
-                                <td>{{professor.secondName}}</td>
-                                <td>{{professor.ci}}</td>
-                                <td>{{professor.phone}}</td>
-                                <!-- <td>{{professor.faculty?.name}}</td>
-                                <td>{{professor.course?.name}}</td> -->
+                                <td>{{student.firstName}}</td>
+                                <td>{{student.secondName}}</td>
+                                <td>{{student.ci}}</td>
+                                <td>{{student.phone}}</td>
+                                <!-- <td>{{student.faculty?.name}}</td>
+                                <td>{{student.course?.name}}</td> -->
                                 <td class="position-right">
-                                    <!-- <button class="btn-triage mr-1 btn__solid-success option" (click)="viewDetail(professor.id)">Ver detalle</button>
-                                    <button class="btn-triage mr-1 btn__solid-primary option" (click)="openProfessorEdit(professor.id)">Editar</button>
-                                    <button class="btn-triage btn__solid-danger option" (click)="openDeleteModal(professor)">eliminar</button> -->
+                                    <button class="btn-triage mr-1 btn__solid-success option" (click)="redirectViewDetail(student.id)">Ver detalle</button>
+                                    <button class="btn-triage mr-1 btn__solid-primary option" (click)="redirectEditStudent(student.id)">Editar</button>
+                                    <button class="btn-triage btn__solid-danger option" (click)="openDeleteModal(student)">eliminar</button>
                                 </td>
                             </tr>
                         }
                     </tbody>
                 </table>
             </div>
+            @if (students.length === 0) {
+                <div class="center-text">
+                    <span>No existe ningun estudiante agregado</span>
+                </div>
+            }
         </div>
     </div>
-    <!-- <div class="student-list__content">
-        <table class="advanced-table">
-            <thead>
-                <tr class="table-header">
-                    <th>Nombres</th>
-                    <th>Apellidos</th>
-                    <th>Ci</th>
-                    <th>Telefono</th>
-                    <th>Colegio</th>
-                    <th>Graduacion</th>
-                    <th>Facultad</th>
-                    <th>Carrera</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (student of students; track $index) {
-                    <tr class="table__body" [ngClass]="{'shadow-row': $index%2 === 0}">
-                        <td>{{student.firstName}}</td>
-                        <td>{{student.secondName}}</td>
-                        <td>{{student.ci}}</td>
-                        <td>{{student.phone}}</td>
-                        <td>{{student.highschool}}</td>
-                        <td>{{student.graduationYear ? (student.graduationYear | year) : ''}}</td>
-                        <td>{{student.faculty?.name}}</td>
-                        <td>{{student.career?.name}}</td>
-                        <td class="position-right">
-                            <button class="btn-triage btn__solid-success option" (click)="viewDetail(student.id)">Ver detalle</button>
-                            <button class="btn-triage btn__solid-primary option" (click)="editStudent(student.id)">Editar</button>
-                            <button class="btn-triage btn__solid-danger option" (click)="openDeleteModal(student)">eliminar</button>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div> -->
 </div>

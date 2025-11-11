@@ -83,12 +83,12 @@ export class StudentListComponent {
     this.router.navigate([this.path, 'create']);
   }
 
-  editStudent(studentId: string): void {
+  redirectEditStudent(studentId: string): void {
     const editPath = `${this.path}/edit`;
     this.router.navigate([editPath, studentId]);
   }
 
-  viewDetail(studentId: string): void {
+  redirectViewDetail(studentId: string): void {
     const detailPath = `${this.path}/detail`;
     this.router.navigate([detailPath, studentId]);
   }
