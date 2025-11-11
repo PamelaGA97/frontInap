@@ -38,7 +38,7 @@ export class SecretaryFormComponent {
     this.addSecretaryDataToForm();
   }
   
-  private async initialize(): Promise<void> {
+  private initialize(): void {
     this.initializeForm();
   }
   
