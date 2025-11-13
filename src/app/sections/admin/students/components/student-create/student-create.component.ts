@@ -9,6 +9,10 @@ import { ToastService } from '../../../../../shared/services/toast.service';
 import { ToastrModule } from 'ngx-toastr';
 import { AlertType } from '../../../../../shared/services/alert.enum';
 import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
+import { User } from '../../../users/model/user.model';
+import { UserService } from '../../../../../shared/services/user/user.service';
+import { firstValueFrom } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-student-create',
@@ -24,7 +28,7 @@ export class StudentCreateComponent {
   constructor(
     private location: Location,
     private router: Router,
-    private studentService: StudentService,
+    private userService: UserService<User>,
     private toastService: ToastService
   ) {}
 
@@ -36,13 +40,14 @@ export class StudentCreateComponent {
     this.location.back()
   }
 
-  saveStudent(student: Student): void {
-    this.studentService.create(student).subscribe(
-      (response) => {
+  async saveStudent(student: User): Promise<void> {
+    await firstValueFrom(this.userService.create(student))
+      .then(() => {
         this.toastService.showToast('El Estudiante fue creado', '', AlertType.SUCCESS);
         this.router.navigate([this.path])
-      }, (error: ErrorHandler) => {
-        this.toastService.showHttpError(error);
-      })
+      }).catch((error: Partial<HttpErrorResponse>) => {
+            this.toastService.showHttpError(error.error);
+
+      });
   }
 }
