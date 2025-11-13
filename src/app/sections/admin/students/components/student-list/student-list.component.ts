@@ -46,16 +46,16 @@ export class StudentListComponent {
     this.loadNextPage();
   }
 
-  loadNextPage(): void {
+  async loadNextPage(): Promise<void> {
     if (this.isLoanding) return;
 		const paginationMeta = this.store.pagination();
 		if (!paginationMeta.hasMore) return;
 
-    firstValueFrom(this.userService.getAll(
+    await firstValueFrom(this.userService.getAll(
 			{
 				rol: UserRolEnum.STUDENT,
 				page: paginationMeta.currentPage,
-				limit: paginationMeta.itemsForPage
+				limit: paginationMeta.itemsForPage 
 			}
 		)).then((response: PaginationResponse<User>) => {
 			response.meta.currentPage = response.meta.currentPage + 1;
