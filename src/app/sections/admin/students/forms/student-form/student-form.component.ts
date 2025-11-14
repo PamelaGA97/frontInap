@@ -1,4 +1,4 @@
-import { Component, ErrorHandler, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserRolEnum } from '../../../users/enums/user-rol.enum';
 import { BlockInvalidNumberKeysDirective } from '../../../../../core/directives/block-invalid-number-keys.directive';
@@ -41,11 +41,17 @@ export class StudentFormComponent {
   
   ngOnInit(): void {
     this.initialize();
+    this.loadFormValues();
     this.addStudentDataToForm();
   }
   
   private initialize(): void {
     this.initializeForm();
+  }
+
+  private async loadFormValues(): Promise<void> {
+    this.years = generateYearList(this.initialYear);
+    // await this.loadFaculties();
   }
 
   private initializeForm(): void {
@@ -87,18 +93,16 @@ export class StudentFormComponent {
   // }
 
   private async addStudentDataToForm(): Promise<void> {
-    this.years = await generateYearList(this.initialYear);
-    // await this.loadFaculties();
-    this.addGraduationYearToForm();
     if(this.studentData){
       this.studentForm.patchValue(this.studentData);
+      await this.addGraduationYearToForm();
       // this.addFacultyToForm();
       // this.addCareerToForm();
     }
   }
 
-  private addGraduationYearToForm(): void {
-    const generateYears = parseDateYearToNumber(this.studentData?.graduationYear);
+  private async addGraduationYearToForm(): Promise<void> {
+    const generateYears = await parseDateYearToNumber(this.studentData?.graduationYear);
     this.studentForm.controls['graduationYear'].setValue(generateYears);
   }
 
@@ -125,7 +129,6 @@ export class StudentFormComponent {
 
   submit(): void {
     this.studentForm.markAllAsTouched();
-    console.log(this.studentForm.value)
     if (this.studentForm.valid) {
       this.setGraduationDateFormat()
       this.submitFormEvent.emit(this.studentForm.value);

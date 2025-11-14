@@ -1,13 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { StudentService } from '../../services/student.service';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
-import { ErrorHandler } from '../../../../../shared/models/errorHandler.model';
-import { Student } from '../../models/student.model';
 import { ToastService } from '../../../../../shared/services/toast.service';
 import { StudentFormComponent } from '../../forms/student-form/student-form.component';
 import { adminPath } from '../../../../../core/admin-url-path';
+import { UserService } from '../../../../../shared/services/user/user.service';
+import { User } from '../../../users/model/user.model';
+import { HttpErrorResponse } from '@angular/common/http';
+import { AlertType } from '../../../../../shared/services/alert.enum';
 
 @Component({
     selector: 'app-secretary-edit',
@@ -18,37 +19,39 @@ import { adminPath } from '../../../../../core/admin-url-path';
 })
 export class StudentEditComponent {
   @ViewChild('studentForm') studentFormComponent!: StudentFormComponent
-  student!: Student;
+  student?: User;
   studentId!: string;
   successToastMessage: string = 'Estudiante Actualizado';
   pageView: string = 'students';
 
   constructor(
-    private studentService: StudentService,
+    private studentService: UserService<User>,
     private location: Location,
     private router: Router,
     private activateRouter: ActivatedRoute,
     private toastService: ToastService
-  ) {
+  ) {}
+  
+  ngOnInit(): void {
     this.initialize();
   }
 
   private async initialize(): Promise<void> {
     this.getSecretaryId();
-    await this.loadSecretary();
+    await this.loadStudent();
   }
 
   private getSecretaryId(): void {
     this.studentId = this.activateRouter.snapshot.paramMap.get('id') || '';
   }
 
-  private async loadSecretary(): Promise<void> {
-    await firstValueFrom(this.studentService.get(this.studentId))
-      .then((student: Student) => {
+  private async loadStudent(): Promise<void> {
+    await firstValueFrom(this.studentService.getOne(this.studentId))
+      .then((student: User) => {
         this.student = student;
       })
-      .catch((error: ErrorHandler) => {
-        this.toastService.showHttpError(error);
+      .catch((error: Partial<HttpErrorResponse>) => {
+        this.toastService.showHttpError(error.error);
       });
   }
 
@@ -60,11 +63,10 @@ export class StudentEditComponent {
     this.studentFormComponent.submit();
   }
 
-  async saveStudent(student: Student): Promise<void> {
-    console.log(student)
-    firstValueFrom(this.studentService.patch(this.studentId, student))
-      .then((student: Student) => {
-        this.toastService.showToast()
+  async saveStudent(student: User): Promise<void> {
+    await firstValueFrom(this.studentService.patch(this.studentId, student))
+      .then(() => {
+        this.toastService.showToast(this.successToastMessage, '', AlertType.SUCCESS);
         this.router.navigate([adminPath, this.pageView])
       })
       .catch((error)=> {
