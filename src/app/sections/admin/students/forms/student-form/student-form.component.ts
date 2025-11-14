@@ -106,6 +106,11 @@ export class StudentFormComponent {
     this.studentForm.controls['graduationYear'].setValue(generateYears);
   }
 
+  parceDateToYear(date?: string): number {
+    const year = parseDateYearToNumber(date);
+    return year ? year : 0 ;
+  }
+
   // private addFacultyToForm(): void {
   //   const facultyFounded = this.faculties.find((faculty)=>(faculty.id === this.studentData?.faculty?.id));
   //   this.studentForm.controls['faculty'].setValue(facultyFounded);

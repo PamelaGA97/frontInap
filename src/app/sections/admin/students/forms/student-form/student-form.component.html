@@ -58,7 +58,7 @@
             </div>
             <div class="form-group col-md-6">
 				<label for="graduationYear" class="is-required">Año de graduacion</label>
-				<p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.studentData?.graduationYear}}</p>
+				<p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{parceDateToYear(this.studentData?.graduationYear)}}</p>
 				<select id="year" formControlName="graduationYear" class="year-select" [ngClass]="{'hidden-component' : isPreview === true }">
 					<!-- <option [ngValue]=""disable selected>Seleccione un año</option> -->
 					@for(year of years; track $index) {
@@ -75,7 +75,7 @@
 		<div class="row mb-2">
             <div class="form-group col-md-6">
                 <label for="isAvaible" class="is-required">Habilitado</label>
-                <p class="ml-1" [ngClass]="{'hidden-component' : isPreview === false }">{{this.studentData?.isAvaible}}</p>
+                <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.studentData?.isAvaible}}</p>
                 <select name="isAvaible" formControlName="isAvaible" [ngClass]="{'hidden-component' : isPreview === true }">
                     <option [ngValue]="true">{{ 'Habilitado' }}</option>
                     <option [ngValue]="false">{{ 'No habilitado' }}</option>

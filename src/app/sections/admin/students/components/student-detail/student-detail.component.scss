@@ -1,0 +1,12 @@
+.icon-section {
+	display: flex;
+	align-items: center;
+	justify-content: end;
+
+	.material-icons {
+		font-size: 30px;
+		padding: 0.5rem;
+		cursor: pointer;
+		color: grey;
+	}
+}

@@ -4,7 +4,10 @@
             <h3>Detalle del estudiante</h3>
         </div>
         <div class="base-crud__content">
-            <!-- <app-student-form #studentForm [studentData]="student" [isPreview]="preview"></app-student-form> -->
+            <div class="icon-section">
+                <span class="material-icons" (click)="editStudent()">edit</span>
+            </div>
+            <app-student-form #studentForm [studentData]="student" [isPreview]="preview"></app-student-form>
         </div>
         <div class="base-crud__footer">
             <button class="btn-triage btn__solid-tertiary option" (click)="backToStudentList()">Cancelar</button>
