@@ -120,7 +120,7 @@ export class FacultyCourseFormComponent {
   setProfessor(event: any): void {
     const professorFullName: string  = event.target.value;
     const professorFounded = this.professorsList.find(
-      (professor: Professor) => `${professor.user.firstName} ${professor.user.secondName}` === professorFullName);
+      (professor: Professor) => `${professor.firstName} ${professor.secondName}` === professorFullName);
     if (professorFounded) {
       this.professorSelected = professorFounded;
     }

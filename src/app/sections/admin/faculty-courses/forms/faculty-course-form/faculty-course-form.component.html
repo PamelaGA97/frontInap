@@ -47,11 +47,11 @@
         <select name="professor" (change)="setProfessor($event)">
             <option value="" [disabled]="true" selected>Seleccione un Docente</option>
             @for(professors of professorsList; track $index) {
-                <option [ngValue]="professors">{{professors.user.firstName}} {{professors.user.secondName}}</option>
+                <option [ngValue]="professors">{{professors.firstName}} {{professors.secondName}}</option>
             }
         </select>
     </div>
-    <div class="form-group mb-3">
+    <!-- <div class="form-group mb-3">
         <label for="career" class="is-required">Horarios disponibles del profesor</label>
         <app-schedule-table
             #professorScheduleTable
@@ -60,7 +60,7 @@
             (submitClassSchedule)="addClassHourSelected($event)"
             (submitSchedule)="addProfessorScheduleSelected($event)"
             ></app-schedule-table>
-    </div>
+    </div> -->
 
     <div class="form-group mb-3">
         <label for="career" class="is-required">Horarios del curso</label>
