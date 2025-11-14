@@ -6,9 +6,9 @@
  * @returns list of years.
  */
 
-export function generateYearList(initYear: number): any[] {
+export function generateYearList(startYear: number): any[] {
 	const currentYear = new Date().getFullYear();
-	const initialYear = initYear ? initYear : 2000;
+	const initialYear = startYear ? startYear : 2000;
 	const years = Array.from(
 		{ length: currentYear - initialYear + 1 },
 		(_, i) => new Date(`${currentYear - i}-01-01T03:00:00.000Z`).getFullYear()
@@ -22,6 +22,6 @@ export function generateYearList(initYear: number): any[] {
  * @returns fecha cambiada a number.
  */
 
-export function parseDateYearToNumber(date: Date | string | undefined): number {
-    return date ? new Date(date).getFullYear() : 1;
+export function parseDateYearToNumber(date: Date | string | undefined): number | null {
+    return date ? new Date(date).getFullYear() : null;
 }
