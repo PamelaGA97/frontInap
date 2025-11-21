@@ -1,4 +1,67 @@
-<div class="default-table-list">
+<div class="table-list">
+    <div class="table-list__header">
+        <h2 class="title">
+            {{title}}
+        </h2>
+        <button class="btn-triage btn__solid-primary" (click)="addFaculty()">
+            + Crear Facultad
+        </button>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="default-table-list__content"
+                #scrollContainer
+                infiniteScroll
+                [infiniteScrollDistance]="1"
+                [infiniteScrollThrottle]="150"
+                [infiniteScrollContainer]="scrollContainer"
+                (scrolled)="loadNextPage()"
+            >
+                <table class="advanced-table">
+                    <thead>
+                        <tr class="table-header">
+                            <th>Facultad</th>
+                            <th>Codigo</th>
+                            <th>Carreras</th>
+                            <th>Materias</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (faculty of store.entities(); track $index) {
+                            <tr class="table__body" [ngClass]="{'shadow-row': $index%2 === 0}">
+                                <td>{{faculty.name}}</td>
+                                <td>{{faculty.code}}</td>
+                                <td>
+                                    @for (career of faculty.careers; track $index) {
+                                        <p>{{$index+1}}: {{career.name}}</p>
+                                    }
+                                </td>
+                                <td>
+                                    @for (course of faculty.courses; track $index) {
+                                        <p>{{$index+1}}: {{course.name}}</p>
+                                    }
+                                </td>
+                                <td class="position-right">
+                                    <button class="btn-triage mr-1 btn__solid-success option" (click)="viewDetail(faculty.id)">Ver detalle</button>
+                                    <button class="btn-triage mr-1 btn__solid-primary option" (click)="openFacultyEdit(faculty.id)">Editar</button>
+                                    <button class="btn-triage btn__solid-danger option" (click)="openDeleteFaculty(faculty)">eliminar</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            @if (store.entities().length === 0) {
+                <div class="center-text">
+                    <span>No existe ningun estudiante agregado</span>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- <div class="default-table-list">
     <div class="default-table-list__header">
         <h2 class="title">
             {{title}}
@@ -7,43 +70,58 @@
             + Crear Facultad
         </button>
     </div>
-    
-    <div class="default-table-list__content">
-        <table class="advanced-table">
 
-            <thead>
-                <tr class="table-header">
-                    <th>Facultad</th>
-                    <th>Codigo</th>
-                    <th>Carreras</th>
-                    <th>Materias</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (faculty of faculties; track $index) {
-                    <tr class="table__body" [ngClass]="{'shadow-row': $index%2 === 0}">
-                        <td>{{faculty.name}}</td>
-                        <td>{{faculty.code}}</td>
-                        <td>
-                            @for (career of faculty.careers; track $index) {
-                                <p>{{$index+1}}: {{career.name}}</p>
-                            }
-                        </td>
-                        <td>
-                            @for (course of faculty.courses; track $index) {
-                                <p>{{$index+1}}: {{course.name}}</p>
-                            }
-                        </td>
-                        <td class="position-right">
-                            <button class="btn-triage btn__solid-success option" (click)="viewDetail(faculty.id)">Ver detalle</button>
-                            <button class="btn-triage btn__solid-primary option" (click)="openFacultyEdit(faculty.id)">Editar</button>
-                            <button class="btn-triage btn__solid-danger option" (click)="openDeleteFaculty(faculty)">eliminar</button>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+    <div class="card">
+        <div class="card-body">
+            <div class="default-table-list__content"
+                #scrollContainer
+                infiniteScroll
+                [infiniteScrollDistance]="1"
+                [infiniteScrollThrottle]="150"
+                [infiniteScrollContainer]="scrollContainer"
+                (scrolled)="loadNextPage()"
+            >
+                <table class="advance-table">
+                    <thead>
+                        <tr class="table-header">
+                            <th>Facultad</th>
+                            <th>Codigo</th>
+                            <th>Carreras</th>
+                            <th>Materias</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (faculty of store.entities(); track $index) {
+                            <tr class="table__body" [ngClass]="{'shadow-row': $index%2 === 0}">
+                                <td>{{faculty.name}}</td>
+                                <td>{{faculty.code}}</td>
+                                <td>
+                                    @for (career of faculty.careers; track $index) {
+                                        <p>{{$index+1}}: {{career.name}}</p>
+                                    }
+                                </td>
+                                <td>
+                                    @for (course of faculty.courses; track $index) {
+                                        <p>{{$index+1}}: {{course.name}}</p>
+                                    }
+                                </td>
+                                <td class="position-right">
+                                    <button class="btn-triage mr-1 btn__solid-success option" (click)="viewDetail(faculty.id)">Ver detalle</button>
+                                    <button class="btn-triage mr-1 btn__solid-primary option" (click)="openFacultyEdit(faculty.id)">Editar</button>
+                                    <button class="btn-triage btn__solid-danger option" (click)="openDeleteFaculty(faculty)">eliminar</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            @if (store.entities().length === 0) {
+                <div class="center-text">
+                    <span>No existe ninguna facultad agregada</span>
+                </div>
+            }
+        </div>
     </div>
-</div>
+</div> -->
 

@@ -55,7 +55,7 @@ export class ProfessorListComponent {
       {
         rol: UserEnum.PROFESSOR,
         page: paginationMeta.currentPage,
-        limit: paginationMeta.itemsForPage
+        limit: paginationMeta.itemsForPage,
       }
     )).then((response: PaginationResponse<User>) => {
         response.meta.currentPage = response.meta.currentPage + 1;

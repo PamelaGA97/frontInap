@@ -67,7 +67,7 @@ export class FacultyCourseFormComponent {
 
   private async loadFaculties(): Promise<void> {
     await firstValueFrom(this.facultyService.getAll()).then(
-      (facultyList: Faculty[]) => {
+      (facultyList: any) => {
         this.faculties = facultyList;
       })
       .catch((error: ErrorHandler) => {

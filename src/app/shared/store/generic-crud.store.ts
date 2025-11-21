@@ -25,6 +25,6 @@ export class GenericStore<T> {
 
     clear(): void {
         this.entitiesSig.set([]);
-        this.paginationSig.set({currentPage: 1, itemsForPage: 10, totalItems: 0, hasMore: true});
+        this.paginationSig.set({currentPage: 1, itemsForPage: 15, totalItems: 0, hasMore: true});
     }
 }

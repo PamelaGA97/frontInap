@@ -12,73 +12,73 @@ import { FacultyCoursesStorageService } from '../../services/faculty-courses-sto
 import { firstValueFrom } from 'rxjs';
 
 @Component({
-    selector: 'app-faculty-courses-list',
-    standalone: true,
-    imports: [CommonModule],
-    templateUrl: './faculty-courses-list.component.html',
-    styleUrl: './faculty-courses-list.component.scss'
+	selector: 'app-faculty-courses-list',
+	standalone: true,
+	imports: [CommonModule],
+	templateUrl: './faculty-courses-list.component.html',
+	styleUrl: './faculty-courses-list.component.scss'
 })
 export class FacultyCoursesListComponent {
-  title: string = 'Cursos';
-  facultyCourses: FacultyCourse[] = [];
-  path: string =  '/admin/faculty-courses';
+	title: string = 'Cursos';
+	facultyCourses: FacultyCourse[] = [];
+	path: string =  '/admin/faculty-courses';
 
-  constructor(
-    private router: Router,
-    private toastService: ToastService,
-    private swalService: SwalService,
-    private facultyCourseService: FacultyCourseService,
-    private facultyCoursesStorageService: FacultyCoursesStorageService
-  ) {
-    this.initialize();
-  }
+	constructor(
+		private router: Router,
+		private toastService: ToastService,
+		private swalService: SwalService,
+		private facultyCourseService: FacultyCourseService,
+		private facultyCoursesStorageService: FacultyCoursesStorageService
+	) {
+		this.initialize();
+	}
 
-  private initialize(): void {
-    this.getFacultyCourse()
-  }
+	private initialize(): void {
+		this.getFacultyCourse()
+	}
 
-  private getFacultyCourse(): void {
-    // const storageDatas = this.facultyCoursesStorageService.getAll();
-    // this.facultyCourses = storageDatas;
-    // console.log(this.facultyCourses)
-    firstValueFrom(this.facultyCourseService.getAll())
-      .then((facultyCourses: FacultyCourse[]) => {
-        this.facultyCourses = facultyCourses;
-        console.log(this.facultyCourses)
-      })
-      .catch((error: ErrorHandler) => {
-        this.toastService.showHttpError(error)
-      });
-  }
+	private getFacultyCourse(): void {
+		// const storageDatas = this.facultyCoursesStorageService.getAll();
+		// this.facultyCourses = storageDatas;
+		// console.log(this.facultyCourses)
+		firstValueFrom(this.facultyCourseService.getAll())
+		.then((facultyCourses: FacultyCourse[]) => {
+			this.facultyCourses = facultyCourses;
+			console.log(this.facultyCourses)
+		})
+		.catch((error: ErrorHandler) => {
+			this.toastService.showHttpError(error)
+		});
+	}
 
-  private deleteFacultyCourse(facultyCourseId: string): void {
-    this.facultyCourseService.delete(facultyCourseId).subscribe(
-      (response) => {
-        this.toastService.showToast(`La facultad fue eliminada.`, '', AlertType.SUCCESS);
-        this.getFacultyCourse();
-      }, (error: ErrorHandler) => {
-        this.toastService.showHttpError(error);
-      }
-    );
-  }
-
-  addFacultyCourse(): void {
-    this.router.navigate([this.path, 'create'])
-  }
-
-  openfacultyCourseEdit(facultyCourseId: string): void {
-    console.log('para editar')
-  }
-
-  async openDeleteFacultyCourse(facultyCourse: FacultyCourse): Promise<void> {
-    const confirmationResponse = await this.swalService.openConfirmationModal(`¿Estas seguro de eliminar el curso?.`, '');
-		if (confirmationResponse === SwalAlertResponse.CONFIRM) {
-      this.deleteFacultyCourse(facultyCourse.id ?? '');
+	private deleteFacultyCourse(facultyCourseId: string): void {
+		this.facultyCourseService.delete(facultyCourseId).subscribe(
+		(response) => {
+			this.toastService.showToast(`La facultad fue eliminada.`, '', AlertType.SUCCESS);
+			this.getFacultyCourse();
+		}, (error: ErrorHandler) => {
+			this.toastService.showHttpError(error);
 		}
-  }
+		);
+	}
 
-  viewDetail(facultyCourseId: string): void {
-    const detailPath = `${this.path}/detail`;
-    this.router.navigate([detailPath, facultyCourseId]);
-  }
+	addFacultyCourse(): void {
+		this.router.navigate([this.path, 'create'])
+	}
+
+	openfacultyCourseEdit(facultyCourseId: string): void {
+		console.log('para editar')
+	}
+
+	async openDeleteFacultyCourse(facultyCourse: FacultyCourse): Promise<void> {
+		const confirmationResponse = await this.swalService.openConfirmationModal(`¿Estas seguro de eliminar el curso?.`, '');
+			if (confirmationResponse === SwalAlertResponse.CONFIRM) {
+		this.deleteFacultyCourse(facultyCourse.id ?? '');
+			}
+	}
+
+	viewDetail(facultyCourseId: string): void {
+		const detailPath = `${this.path}/detail`;
+		this.router.navigate([detailPath, facultyCourseId]);
+	}
 }

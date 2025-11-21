@@ -80,15 +80,15 @@ export class HomeComponent {
   }
 
   private async loadFaculties(): Promise<void> {
-    await firstValueFrom(this.facultyService.getAll()).then(
-      (faculties: Faculty[]) => {
-        this.facultyList = faculties;
-      }
-    ).catch(
-      (error: ErrorHandler) => {
-        this.toastService.showHttpError(error);
-      }
-    )
+    // await firstValueFrom(this.facultyService.getAll()).then(
+    //   (faculties: Faculty[]) => {
+    //     this.facultyList = faculties;
+    //   }
+    // ).catch(
+    //   (error: ErrorHandler) => {
+    //     this.toastService.showHttpError(error);
+    //   }
+    // )
   }
 
   private async loadfacultyCourses(): Promise<void> {

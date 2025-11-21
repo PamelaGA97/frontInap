@@ -51,7 +51,7 @@ export class StudentFormComponent {
 
   private async loadFormValues(): Promise<void> {
     this.years = generateYearList(this.initialYear);
-    // await this.loadFaculties();
+    await this.loadFaculties();
   }
 
   private initializeForm(): void {
@@ -74,14 +74,14 @@ export class StudentFormComponent {
     },{ validators: matchValidator('password', 'confirmPassword') });
   }
 
-  // private async loadFaculties(): Promise<void> {
-  //   await firstValueFrom(this.facultyService.getAll())
-  //     .then((response) => {
-  //       this.faculties = response;
-  //     }).catch((error) => {
-  //       console.error(error);
-  //     });
-  // }
+  private async loadFaculties(): Promise<void> {
+    await firstValueFrom(this.facultyService.getAll())
+      .then((response) => {
+        this.faculties = response;
+      }).catch((error) => {
+        console.error(error);
+      });
+  }
 
   // private generateYears(): void {
   //   const currentYear = new Date().getFullYear();
