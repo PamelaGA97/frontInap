@@ -40,7 +40,8 @@
               },
               "src/global.scss",
               "src/assets/fonts/style.scss",
-              "node_modules/material-icons/iconfont/material-icons.css"
+              "node_modules/material-icons/iconfont/material-icons.css",
+              "node_modules/@ng-select/ng-select/themes/default.theme.css"
             ],
             "scripts": []
           },

@@ -8,7 +8,6 @@
 @use "assets/styles/triage-card.scss" as *;
 @use "assets/styles/base-crud.scss" as *;
 @use "ngx-toastr/toastr" as *;
-@use "@ng-select/ng-select/themes/default.theme.css";
 
 * {
     font-family: var(--font-family-default);
