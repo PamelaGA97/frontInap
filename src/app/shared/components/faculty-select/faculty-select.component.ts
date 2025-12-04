@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, forwardRef } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Output } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { Faculty } from '../../../sections/admin/faculties/models/faculty.model';
+import { HttpErrorResponse } from '@angular/common/http';
 import { debounceTime, distinctUntilChanged, Subject, switchMap, takeUntil } from 'rxjs';
+import { Faculty } from '../../../sections/admin/faculties/models/faculty.model';
 import { FacultyService } from '../../../sections/admin/faculties/services/facuties.service';
 import { ToastService } from '../../services/toast.service';
 import { PaginationResponse } from '../../models/pagination-response.model';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-faculty-select',
@@ -28,6 +28,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   ]
 })
 export class FacultySelectComponent {
+  @Output() valueChange = new EventEmitter<any>();
   faculties: Faculty[] = [];
   loading: boolean = false;
   isDisabled: boolean = false;
@@ -84,6 +85,7 @@ export class FacultySelectComponent {
   handleSelect(val: any) {
     this.value = val;
     this.onChange(val);
+    this.valueChange.emit(this.value);
   }
 
   writeValue(value: any): void {
