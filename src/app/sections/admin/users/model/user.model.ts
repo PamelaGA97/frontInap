@@ -1,3 +1,5 @@
+import { Degree } from "../../degrees/models/degree.model";
+import { Faculty } from "../../faculties/models/faculty.model";
 import { UserRolEnum } from "../enums/user-rol.enum";
 import { UserEnum } from "../enums/user-type.enum";
 
@@ -18,4 +20,7 @@ export interface User {
 
     highschool: string;
     graduationYear: string;
+
+    faculty?: Faculty;
+    degree?: Degree;
 }
