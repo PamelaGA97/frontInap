@@ -19,26 +19,25 @@
             </div>
         }
     </div>
-    <div formArrayName="careers" class="space">
+    <div formArrayName="degrees" class="space">
         <div class="title-section mb-3">
             <h4>Carreras</h4>
         </div>
-        @for (career of careers.controls; track $index) {
+        @for (degree of degrees.controls; track $index) {
             <div [formGroupName]="$index">
                 <div class="trash-content">
                     <p>Carrera {{$index +1}}</p>
-                    <span class="icon-trash-2" (click)="removeCareer($index)" [ngClass]="{'hidden-component' : isPreview === true }"></span>
+                    <span class="icon-trash-2" (click)="removeDegree($index)" [ngClass]="{'hidden-component' : isPreview === true }"></span>
                 </div>
                 <div class="form-group mb-3">
-                    <label for="career-name" class="is-required">Nombre</label>
-                    <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.facultyData?.careers?.at($index)?.name}}</p>
-                    <input type="text" name="career-name" formControlName="name" [ngClass]="{'hidden-component' : isPreview === true }">
+                    <label for="degree-name" class="is-required">Nombre</label>
+                    <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.facultyData?.degrees?.at($index)?.name}}</p>
+                    <input type="text" name="degree-name" formControlName="name" [ngClass]="{'hidden-component' : isPreview === true }">
                 </div>
                 <div class="form-group mb-3">
-                    <label for="career-time" class="is-required">Modalidad de ingreso</label>
-                    <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{career}}</p>
-
-                    <select name="career-time" formControlName="courseTime" [ngClass]="{'hidden-component' : isPreview === true }">
+                    <label for="degree-time" class="is-required">Modalidad de ingreso</label>
+                    <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{degree}}</p>
+                    <select name="degree-time" formControlName="courseTime" [ngClass]="{'hidden-component' : isPreview === true }">
                         <option [ngValue]="" [disabled]="true">Seleccione una modalidad de ingreso</option>
                         @for(courseTime of courseTimes; track $index) {
                             <option [ngValue]="courseTime">{{ courseTime }}</option>
@@ -68,7 +67,7 @@
                 </div>
                 <div class="form-group mb-3">
                     <label for="course-name" class="is-required">Nombre Materia</label>
-                    <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.careers.at($index)}}</p>
+                    <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.degrees.at($index)}}</p>
                     <input type="text" name="course-name" formControlName="name" [ngClass]="{'hidden-component' : isPreview === true }">
                 </div>
             </div>

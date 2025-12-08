@@ -1,0 +1,17 @@
+<ng-select
+    class="my-select"
+    [items]="degrees"
+    bindLabel="name"
+    bindValue="id"
+
+    [ngModel]="value"
+    (ngModelChange)="handleSelect($event)"
+
+    (search)="onSearch($event.term)"
+
+    (blur)="onTouched()"
+    placeholder="Seleccione facultad..."
+    [loading]="loading"
+    appendTo="body"
+>
+</ng-select>

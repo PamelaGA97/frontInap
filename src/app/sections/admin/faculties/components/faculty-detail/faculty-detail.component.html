@@ -14,7 +14,7 @@
             </div>
             <div>
                 <h3>Carreras</h3>
-                @for (career of faculty?.careers; track $index) {
+                @for (career of faculty?.degrees; track $index) {
                     <div class="careers-content card mb-2">
                         <h5>Carrera {{$index+1}}</h5>
                         <div>
@@ -23,7 +23,7 @@
                         </div>
                         <div>
                             <label class="label-title" for="">Modalidad de ingreso</label>
-                            <p class="ml-5">{{career?.courseTime}}</p>
+                            <!-- <p class="ml-5">{{career?.courseTime}}</p> -->
                         </div>
                     </div>
                 }

@@ -42,7 +42,7 @@ export class FacultyFormComponent {
     this.facultyForm = this._formBuilder.group({
       name: ['', Validators.required],
       code: ['', Validators.required],
-      careers: this._formBuilder.array([this.createCareerGroup()]),
+      degrees: this._formBuilder.array([this.createCareerGroup()]),
       courses: this._formBuilder.array([this.createCourseGroup()])
     });
   }
@@ -62,16 +62,16 @@ export class FacultyFormComponent {
 
   private addSecretaryDataToForm(): void {
     if (this.facultyData) {
-      this.addCareersToForm();
+      this.addDegreesToForm();
       this.addCoursesToForm();
       this.facultyForm.patchValue(this.facultyData);
     }
   }
 
-  private addCareersToForm(): void {
-    this.careers.clear();
-    this.facultyData?.careers?.map((career: Career) => {
-      this.careers.push(this.createCareerGroup());
+  private addDegreesToForm(): void {
+    this.degrees.clear();
+    this.facultyData?.degrees?.map((career: Career) => {
+      this.degrees.push(this.createCareerGroup());
     });
   }
 
@@ -84,24 +84,25 @@ export class FacultyFormComponent {
 
 
   submit(): void {
-    console.log(this.facultyForm.valid)
-    console.log(this.facultyForm.value)
     if(this.facultyForm.valid) {
       const data = { ...this.facultyData, ...this.facultyForm.value }
       this.submitFormEvent.emit(data);
+    } else {
+      console.log(this.facultyForm.valid)
+      console.log(this.facultyForm.value)
     }
   }
 
   addCareer(): void {
-    this.careers.push(this.createCareerGroup());
+    this.degrees.push(this.createCareerGroup());
   }
 
   addCourse(): void {
-    this.courses.push(this.createCareerGroup());
+    this.courses.push(this.createCourseGroup());
   }
 
-  removeCareer(index: number): void {
-    this.careers.removeAt(index);
+  removeDegree(index: number): void {
+    this.degrees.removeAt(index);
   }
 
   removeCourse(index: number): void {
@@ -120,8 +121,8 @@ export class FacultyFormComponent {
     return this.facultyForm.controls['courseTime'];
   }
 
-  get careers(): FormArray {
-    return this.facultyForm.get('careers') as FormArray;
+  get degrees(): FormArray {
+    return this.facultyForm.get('degrees') as FormArray;
   }
 
   get courses(): FormArray {
