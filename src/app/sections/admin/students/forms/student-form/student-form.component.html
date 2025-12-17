@@ -94,7 +94,7 @@
                     [ngClass]="{'hidden-component' : isPreview === true }">
                         <option value="" disable selected>Seleccione una carrera</option>
                         @for(degreeOption of degreeList; track $index) {
-                            <option [ngValue]="degreeOption">{{ degreeOption.name }}</option>
+                            <option [ngValue]="degreeOption.id">{{ degreeOption.name }}</option>
                         }
                 </select>
                 @if(this.degree !== undefined && this.degree.touched && this.degree.status === formStatusEnum.INVALID) {

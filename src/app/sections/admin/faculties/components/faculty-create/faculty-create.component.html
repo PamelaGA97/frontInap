@@ -1,14 +1,24 @@
-<div class="container">
+<!-- <div class="container">
     <div class="faculty-create card">
         <div class="faculty-create__header">
-            <h3>Crear Facultad</h3>
         </div>
         <div class="faculty-create__content">
-            <app-faculty-form #facultyForm (submitFormEvent)="saveFaculty($event)"></app-faculty-form>
         </div>
         <div class="faculty-create__footer">
-            <button class="btn-triage btn__solid-primary mr-2 options" (click)="createfaculty()">Crear</button>
-            <button class="btn-triage btn__solid-tertiary option" (click)="backTofacultyList()">Cancelar</button>
+        </div>
+    </div>
+</div> -->
+<div class="container">
+    <div class="base-crud card">
+        <div class="base-crud__header">
+            <h3>Crear Facultad</h3>
+        </div>
+        <div class="base-crud__content">
+            <app-faculty-form #facultyForm (submitFormEvent)="saveFaculty($event)"></app-faculty-form>
+        </div>
+        <div class="base-crud__footer">
+            <button class="btn-triage medium btn__solid-primary mr-2 options" (click)="createfaculty()">Crear</button>
+            <button class="btn-triage medium btn__solid-tertiary option" (click)="backTofacultyList()">Cancelar</button>
         </div>
     </div>
 </div>

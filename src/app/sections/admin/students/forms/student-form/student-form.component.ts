@@ -94,21 +94,18 @@ export class StudentFormComponent {
 		});
 	}
 
-	// private generateYears(): void {
-	//   const currentYear = new Date().getFullYear();
-	//   const startYear = 2000;
-	//   this.years = Array.from(
-	//     { length: currentYear - startYear + 1 },
-	//     (_, i) => new Date(`${currentYear - i}-01-01T03:00:00.000Z`).getFullYear()
-	//   );
-	// }
-
 	private async addStudentDataToForm(): Promise<void> {
 		if(this.studentData){
-		this.studentForm.patchValue(this.studentData);
-		await this.addGraduationYearToForm();
-		// this.addFacultyToForm();
-		// this.addCareerToForm();
+			this.studentForm.patchValue({
+				...this.studentData,
+				faculty: this.studentData.faculty?.id,
+			});
+			await this.addGraduationYearToForm();
+			if (this.studentData.faculty?.id) {
+				await this.loadDegrees(this.studentData.faculty.id);
+			}
+
+			this.studentForm.controls['degree'].setValue(this.studentData.degree?.id);
 		}
 	}
 
@@ -122,27 +119,12 @@ export class StudentFormComponent {
 		return year ? year : 0 ;
 	}
 
-	// private addFacultyToForm(): void {
-	//   const facultyFounded = this.faculties.find((faculty)=>(faculty.id === this.studentData?.faculty?.id));
-	//   this.studentForm.controls['faculty'].setValue(facultyFounded);
-	//   this.loadCareers();
-	// }
-
-	// private addCareerToForm(): void {
-	//   const careerFounded = this.degreeList.find((career)=>(career.id === this.studentData?.career?.id));
-	//   this.studentForm.controls['career'].setValue(careerFounded);
-	// }
-
-	// private parseDateTuNumber(): number {
-	//   return this.studentData?.graduationYear ? new Date(this.studentData.graduationYear).getFullYear() : 2024;
-	// }
-
 	async loadDegrees($facultyId: string): Promise<void> {
 		this.degree.setValue('');
 		await firstValueFrom(this._facultyService.getDegrees($facultyId))
 		.then(
 			(response: PaginationResponse<Degree>) => {
-			this.degreeList = response.data;
+				this.degreeList = response.data;
 			})
 		.catch((error: Partial<HttpErrorResponse>) => {
 			this._toastService.showHttpError(error.error);

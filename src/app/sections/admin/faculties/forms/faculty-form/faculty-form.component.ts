@@ -3,10 +3,10 @@ import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } fr
 import { ValidatioErrorMessage } from '../../../../../core/validation-error-message';
 import { FormStatus } from '../../../../../shared/enums/form-status.enum';
 import { Faculty } from '../../models/faculty.model';
-import { CareerTimeEnum } from '../../../careers/enums/career-time.enum';
 import { CommonModule } from '@angular/common';
 import { Career } from '../../../careers/models/career.model';
 import { Course } from '../../../courses/model/course.model';
+import { CareerTimeEnum } from '../../../degrees/enums/career-time.enum';
 
 @Component({
     selector: 'app-faculty-form',
@@ -42,12 +42,12 @@ export class FacultyFormComponent {
     this.facultyForm = this._formBuilder.group({
       name: ['', Validators.required],
       code: ['', Validators.required],
-      degrees: this._formBuilder.array([this.createCareerGroup()]),
+      degrees: this._formBuilder.array([this.createDegreeGroup()]),
       courses: this._formBuilder.array([this.createCourseGroup()])
     });
   }
 
-  private createCareerGroup(): FormGroup {
+  private createDegreeGroup(): FormGroup {
     return this._formBuilder.group({
       name: ['', Validators.required],
       courseTime: ['', Validators.required]
@@ -71,7 +71,7 @@ export class FacultyFormComponent {
   private addDegreesToForm(): void {
     this.degrees.clear();
     this.facultyData?.degrees?.map((career: Career) => {
-      this.degrees.push(this.createCareerGroup());
+      this.degrees.push(this.createDegreeGroup());
     });
   }
 
@@ -93,8 +93,8 @@ export class FacultyFormComponent {
     }
   }
 
-  addCareer(): void {
-    this.degrees.push(this.createCareerGroup());
+  addDegree(): void {
+    this.degrees.push(this.createDegreeGroup());
   }
 
   addCourse(): void {

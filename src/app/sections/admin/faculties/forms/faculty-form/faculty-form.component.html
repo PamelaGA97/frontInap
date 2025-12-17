@@ -1,79 +1,91 @@
 <form action="" class="form-triage" [formGroup]="facultyForm">
-    <div class="form-group mb-3">
-        <label for="name" class="is-required">Nombre facultad</label>
-        <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.facultyData?.name}}</p>
-        <input type="text" name="name" formControlName="name" [ngClass]="{'hidden-component' : isPreview === true }">
-        @if(this.name !== undefined && this.name.touched && this.name.status === formStatusEnum.INVALID) {
-            <div class="error-content">
-                @if(this.name.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label for="name" class="is-required">Nombre facultad</label>
+                <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.facultyData?.name}}</p>
+                <input type="text" name="name" formControlName="name" [ngClass]="{'hidden-component' : isPreview === true }">
+                @if(this.name !== undefined && this.name.touched && this.name.status === formStatusEnum.INVALID) {
+                    <div class="error-content">
+                        @if(this.name.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+                    </div>
+                }
             </div>
-        }
-    </div>
-    <div class="form-group mb-3">
-        <label for="code" class="is-required">Codigo</label>
-        <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.facultyData?.code}}</p>
-        <input type="text" name="code" formControlName="code" [ngClass]="{'hidden-component' : isPreview === true }">
-        @if(this.code !== undefined && this.code.touched && this.code.status === formStatusEnum.INVALID) {
-            <div class="error-content">
-                @if(this.code.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+            <div class="form-group col-md-6 mb-3">
+                <label for="code" class="is-required">Codigo</label>
+                <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.facultyData?.code}}</p>
+                <input type="text" name="code" formControlName="code" [ngClass]="{'hidden-component' : isPreview === true }">
+                @if(this.code !== undefined && this.code.touched && this.code.status === formStatusEnum.INVALID) {
+                    <div class="error-content">
+                        @if(this.code.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+                    </div>
+                }
             </div>
-        }
-    </div>
-    <div formArrayName="degrees" class="space">
-        <div class="title-section mb-3">
-            <h4>Carreras</h4>
         </div>
-        @for (degree of degrees.controls; track $index) {
-            <div [formGroupName]="$index">
-                <div class="trash-content">
-                    <p>Carrera {{$index +1}}</p>
-                    <span class="icon-trash-2" (click)="removeDegree($index)" [ngClass]="{'hidden-component' : isPreview === true }"></span>
+        <div formArrayName="degrees" class="mb-2">
+            <div class="form-group col-md-12">
+                <div class="title-section mb-3">
+                    <h5>Carreras</h5>
                 </div>
-                <div class="form-group mb-3">
-                    <label for="degree-name" class="is-required">Nombre</label>
-                    <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.facultyData?.degrees?.at($index)?.name}}</p>
-                    <input type="text" name="degree-name" formControlName="name" [ngClass]="{'hidden-component' : isPreview === true }">
-                </div>
-                <div class="form-group mb-3">
-                    <label for="degree-time" class="is-required">Modalidad de ingreso</label>
-                    <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{degree}}</p>
-                    <select name="degree-time" formControlName="courseTime" [ngClass]="{'hidden-component' : isPreview === true }">
-                        <option [ngValue]="" [disabled]="true">Seleccione una modalidad de ingreso</option>
-                        @for(courseTime of courseTimes; track $index) {
-                            <option [ngValue]="courseTime">{{ courseTime }}</option>
-                        }
-                    </select>
-                    @if(this.courseTime !== undefined && this.courseTime.touched && this.courseTime.status === formStatusEnum.INVALID) {
-                        <div class="error-content">
-                            @if(this.courseTime.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+            </div>
+            @for (degree of degrees.controls; track $index) {
+                <div class="row" [formGroupName]="$index">
+                    <div class="form-group col-md-12">
+                        <div class="trash-content">
+                            <p>Carrera {{$index +1}}</p>
+                            <span class="icon-trash-2" (click)="removeDegree($index)" [ngClass]="{'hidden-component' : isPreview === true }"></span>
                         </div>
-                    }
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="degree-name" class="is-required">Nombre</label>
+                        <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.facultyData?.degrees?.at($index)?.name}}</p>
+                        <input type="text" name="degree-name" formControlName="name" [ngClass]="{'hidden-component' : isPreview === true }">
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="degree-time" class="is-required">Modalidad de ingreso</label>
+                        <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{degree}}</p>
+                        <select name="degree-time" formControlName="courseTime" [ngClass]="{'hidden-component' : isPreview === true }">
+                            <option [ngValue]="" [disabled]="true">Seleccione una modalidad de ingreso</option>
+                            @for(courseTime of courseTimes; track $index) {
+                                <option [ngValue]="courseTime">{{ courseTime }}</option>
+                            }
+                        </select>
+                        @if(this.courseTime !== undefined && this.courseTime.touched && this.courseTime.status === formStatusEnum.INVALID) {
+                            <div class="error-content">
+                                @if(this.courseTime.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+                            </div>
+                        }
+                    </div> 
                 </div>
+            }
+            <div class="footer-section">
+                <button type="button" class="btn-triage btn__solid-success" [ngClass]="{'hidden-component' : isPreview === true }" (click)="addDegree()">Agregar Carrera</button>
             </div>
-        }
-        <div class="footer-section">
-            <button type="button" class="btn-triage btn__solid-success" [ngClass]="{'hidden-component' : isPreview === true }" (click)="addCareer()">Agregar Carrera</button>
-        </div>   
-    </div>
-    <div formArrayName="courses" class="space">
-        <div class="title-section mb-3">
-            <h4>Materias</h4>
         </div>
-        @for (course of courses.controls; track $index) {
-            <div [formGroupName]="$index">
-                <div class="trash-content">
-                    <p>Materia {{$index +1}}</p>
-                    <span class="icon-trash-2" (click)="removeCourse($index)" [ngClass]="{'hidden-component' : isPreview === true }"></span>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="course-name" class="is-required">Nombre Materia</label>
-                    <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.degrees.at($index)}}</p>
-                    <input type="text" name="course-name" formControlName="name" [ngClass]="{'hidden-component' : isPreview === true }">
+        <div formArrayName="courses" class="mb-2">
+            <div class="form-group col-md-12">
+                <div class="title-section mb-3">
+                    <h5>Materias</h5>
                 </div>
             </div>
-        }
-        <div class="footer-section" >
-            <button type="button" class="btn-triage btn__solid-success" [ngClass]="{'hidden-component' : isPreview === true }" (click)="addCourse()">Agregar Materiaa</button>
+            @for (course of courses.controls; track $index) {
+                <div class="row" [formGroupName]="$index">
+                    <div class="form-group com-md-12">
+                        <div class="trash-content">
+                            <p>Materia {{$index +1}}</p>
+                            <span class="icon-trash-2" (click)="removeCourse($index)" [ngClass]="{'hidden-component' : isPreview === true }"></span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="course-name" class="is-required">Nombre Materia</label>
+                        <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.degrees.at($index)}}</p>
+                        <input type="text" name="course-name" formControlName="name" [ngClass]="{'hidden-component' : isPreview === true }">
+                    </div>
+                </div>
+            }
+            <div class="footer-section" >
+                <button type="button" class="btn-triage btn__solid-success" [ngClass]="{'hidden-component' : isPreview === true }" (click)="addCourse()">Agregar Materiaa</button>
+            </div>
         </div>
     </div>
 </form>
