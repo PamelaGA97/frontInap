@@ -56,12 +56,12 @@ export class StudentFormComponent {
 
 	ngOnInit(): void {
 		this.initialize();
-		this.loadFormValues();
 		this.addStudentDataToForm();
 	}
-
+	
 	private initialize(): void {
 		this.initializeForm();
+		this.loadFormValues();
 	}
 
 	private async loadFormValues(): Promise<void> {
@@ -95,7 +95,7 @@ export class StudentFormComponent {
 	}
 
 	private async addStudentDataToForm(): Promise<void> {
-		if(this.studentData){
+		if (this.studentData) {
 			this.studentForm.patchValue({
 				...this.studentData,
 				faculty: this.studentData.faculty?.id,
@@ -104,7 +104,6 @@ export class StudentFormComponent {
 			if (this.studentData.faculty?.id) {
 				await this.loadDegrees(this.studentData.faculty.id);
 			}
-
 			this.studentForm.controls['degree'].setValue(this.studentData.degree?.id);
 		}
 	}

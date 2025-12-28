@@ -76,7 +76,8 @@
                 <label for="name" class="is-required">Facultad</label>
                 <app-faculty-select
                     formControlName="faculty"
-                    (valueChange)="loadDegrees($event)">
+                    (valueChange)="loadDegrees($event)"
+                    [ngClass]="{ 'hidden-component': isPreview === true }">
                 </app-faculty-select>
                 <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.studentData?.faculty?.name}}</p> 
                 @if(this.faculty !== undefined && this.faculty.touched && this.faculty.status === formStatusEnum.INVALID) {
