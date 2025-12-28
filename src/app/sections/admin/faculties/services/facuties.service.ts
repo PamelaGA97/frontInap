@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { ApiQueryParams } from '../../../../shared/models/api-query-params';
 import { PaginationResponse } from '../../../../shared/models/pagination-response.model';
 import { Degree } from '../../degrees/models/degree.model';
+import { Course } from '../../courses/model/course.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -44,5 +45,10 @@ export class FacultyService {
 	getDegrees(id: string): Observable<PaginationResponse<Degree>> {
 		const path = `${this.apiUrl}${this.resource}/${id}/degrees`;
 		return this.http.get<PaginationResponse<Degree>>(path);
+	}
+
+	getCourses(id: string): Observable<PaginationResponse<Course>> {
+		const path = `${this.apiUrl}${this.resource}/${id}/courses`;
+		return this.http.get<PaginationResponse<Course>>(path);
 	}
 }
