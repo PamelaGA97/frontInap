@@ -23,11 +23,11 @@
                         <tr class="table-header">
                             <th>#</th>
                             <th>Nombres</th>
-                            <th>Apellidos</th>
+                            <!-- <th>Apellidos</th> -->
                             <th>Ci</th>
                             <th>Telefono</th>
+                            <th>Materias</th>
                             <!-- <th>Facultad</th>
-                            <th>Materia</th>
                             <th></th> -->
                         </tr>
                     </thead>
@@ -35,10 +35,17 @@
                         @for (professor of store.entities(); track $index) {
                             <tr class="table__body" [ngClass]="{'shadow-row': $index%2 === 0}">
                                 <td><img src="assets/image/avatar-user.jpg" alt=""></td>
-                                <td>{{professor.firstName}}</td>
-                                <td>{{professor.secondName}}</td>
+                                <td>{{professor.firstName}} {{professor.secondName}}</td>
+                                <!-- <td>{{professor.secondName}}</td> -->
                                 <td>{{professor.ci}}</td>
                                 <td>{{professor.phone}}</td>
+                                <td>
+                                    <ul>
+                                        @for(courses of professor.courses; track $index) {
+                                            <li>{{courses.name}}</li>
+                                        }
+                                    </ul>
+                                </td>
                                 <!-- <td>{{professor.faculty?.name}}</td>
                                 <td>{{professor.course?.name}}</td> -->
                                 <td class="position-right">
@@ -58,44 +65,4 @@
             }
         </div>
     </div>
-<!-- 
-    <div class="default-table-list__content"
-        #scrollContainer
-        infiniteScroll
-        [infiniteScrollDistance]="1"
-        [infiniteScrollThrottle]="150"
-        [infiniteScrollContainer]="scrollContainer"
-        (scrolled)="loadNextPage()"
-    >
-        <table class="advanced-table">
-            <thead>
-                <tr class="table-header">
-                    <th>Nombres</th>
-                    <th>Apellidos</th>
-                    <th>Ci</th>
-                    <th>Telefono</th>
-                    <th>Facultad</th>
-                    <th>Materia</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (professor of store.entities(); track $index) {
-                    <tr class="table__body" [ngClass]="{'shadow-row': $index%2 === 0}">
-                        <td>{{professor.firstName}}</td>
-                        <td>{{professor.secondName}}</td>
-                        <td>{{professor.ci}}</td>
-                        <td>{{professor.phone}}</td>
-                        <td>{{professor.faculty?.name}}</td>
-                        <td>{{professor.course?.name}}</td>
-                        <td class="position-right">
-                            <button class="btn-triage btn__solid-success option" (click)="viewDetail(professor.id)">Ver detalle</button>
-                            <button class="btn-triage btn__solid-primary option" (click)="openProfessorEdit(professor.id)">Editar</button>
-                            <button class="btn-triage btn__solid-danger option" (click)="openDeleteModal(professor)">eliminar</button>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>-->
 </div>
