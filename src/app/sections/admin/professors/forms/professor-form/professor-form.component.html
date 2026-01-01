@@ -4,7 +4,12 @@
             <div class="form-group col-md-6">
                 <label for="name" class="is-required">Nombres</label>
                 <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.professorData?.firstName}}</p>
-                <input type="text" name="name" formControlName="firstName" [ngClass]="{'hidden-component' : isPreview === true }">
+                <input
+                    type="text"
+                    id="name"
+                    autocomplete="given-name"
+                    formControlName="firstName"
+                    [ngClass]="{'hidden-component' : isPreview === true }">
                 @if(this.firstName !== undefined && this.firstName.touched && this.firstName.status === formStatusEnum.INVALID) {
                     <div class="error-content">
                         @if(this.firstName.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
@@ -14,7 +19,12 @@
             <div class="form-group col-md-6">
                 <label for="second-name" class="is-required">Apellidos</label>
                 <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.professorData?.secondName}}</p>
-                <input type="text" name="second-name" formControlName="secondName" [ngClass]="{'hidden-component' : isPreview === true }">
+                <input
+                    type="text"
+                    id="second-name"
+                    autocomplete="family-name"
+                    formControlName="secondName"
+                    [ngClass]="{'hidden-component' : isPreview === true }">
                 @if(this.secondName !== undefined && this.secondName.touched && this.secondName.status === formStatusEnum.INVALID) {
                     <div class="error-content">
                         @if(this.secondName.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
@@ -26,7 +36,12 @@
             <div class="form-group col-md-6">
                 <label for="ci" class="is-required">Ci</label>
                 <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.professorData?.ci}}</p>
-                <input type="text" name="ci" formControlName="ci" [ngClass]="{'hidden-component' : isPreview === true }">
+                <input 
+                    type="text"
+                    id="ci"
+                    autocomplete="off"
+                    formControlName="ci"
+                    [ngClass]="{'hidden-component' : isPreview === true }">
                 @if(this.ci !== undefined && this.ci.touched && this.ci.status === formStatusEnum.INVALID) {
                     <div class="error-content">
                         @if(this.ci.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
@@ -36,7 +51,13 @@
             <div class="form-group col-md-6">
                 <label for="phone" class="is-required">Telefono</label>
                 <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.professorData?.phone}}</p>
-                <input type="text" name="phone" appBlockInvalidNumberKeys formControlName="phone" [ngClass]="{'hidden-component' : isPreview === true }">
+                <input
+                    type="text"
+                    id="phone"
+                    autocomplete="tel"
+                    formControlName="phone"
+                    appBlockInvalidNumberKeys
+                    [ngClass]="{'hidden-component' : isPreview === true }">
                 @if(this.phone !== undefined && this.phone.touched && this.phone.status === formStatusEnum.INVALID) {
                     <div class="error-content">
                         @if(this.phone.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
@@ -49,7 +70,12 @@
             <div class="form-group col-md-6">
                 <label for="salary" class="is-required">Sueldo</label>
                 <p class="ml-1" [ngClass]="{'hidden-component' : isPreview === false}">{{this.professorData?.salary}}</p>
-                <input type="number" name="salary" formControlName="salary" [ngClass]="{'hidden-component' : isPreview === true}">
+                <input
+                    type="number"
+                    id="salary"
+                    autocomplete="off"
+                    formControlName="salary"
+                    [ngClass]="{'hidden-component' : isPreview === true}">
                 @if(this.salary !== undefined && this.salary.touched && this.salary.status === formStatusEnum.INVALID) {
                     <div class="error-content">
                         @if(this.salary.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
@@ -59,9 +85,13 @@
             <div class="form-group col-md-6">
                 <label for="isAvaible" class="is-required">Habilitado</label>
                 <p class="ml-1" [ngClass]="{'hidden-component' : isPreview === false }">{{this.professorData?.isAvaible}}</p>
-                <select name="isAvaible" formControlName="isAvaible" [ngClass]="{'hidden-component' : isPreview === true }">
-                    <option [ngValue]="true">{{ 'Habilitado' }}</option>
-                    <option [ngValue]="false">{{ 'No habilitado' }}</option>
+                <select
+                    id="isAvaible"
+                    autocomplete="off"
+                    formControlName="isAvaible"
+                    [ngClass]="{'hidden-component' : isPreview === true }">
+                        <option [ngValue]="true">{{ 'Habilitado' }}</option>
+                        <option [ngValue]="false">{{ 'No habilitado' }}</option>
                 </select>
                 @if(this.isAvaible !== undefined && this.isAvaible.touched && this.isAvaible.status === formStatusEnum.INVALID) {
                     <div class="error-content">
@@ -74,7 +104,12 @@
             <div class="form-group col-md-6">
                 <label for="email" class="is-required">Email</label>
                 <p class="ml-1" [ngClass]="{'hidden-component' : isPreview === false}">{{this.professorData?.email}}</p>
-                <input type="text" name="email" formControlName="email" [ngClass]="{'hidden-component' : isPreview === true}">
+                <input 
+                    type="text"
+                    id="email"
+                    formControlName="email"
+                    autocomplete="email"
+                    [ngClass]="{'hidden-component' : isPreview === true}">
                 @if(this.email !== undefined && this.email.touched && this.email.status === formStatusEnum.INVALID) {
                     <div class="error-content">
                         @if(this.email.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
@@ -88,7 +123,12 @@
             <div class="row mb-2">
                 <div class="form-group col-md-6">
                     <label for="password" class="is-required">Contraseña</label>
-                    <input type="password" name="password" formControlName="password" [ngClass]="{'hidden-component' : isPreview === true}">
+                    <input
+                        type="password"
+                        id="password"
+                        formControlName="password"
+                        autocomplete="new-password"
+                        [ngClass]="{'hidden-component' : isPreview === true}">
                     @if(this.password !== undefined && this.password.touched && this.password.status === formStatusEnum.INVALID) {
                         <div class="error-content">
                             @if(this.password.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
@@ -97,7 +137,12 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="confirmPassword" class="is-required">Confirmar contraseña</label>
-                    <input type="password" name="confirmPassword" formControlName="confirmPassword" [ngClass]="{'hidden-component' : isPreview === true}">
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        formControlName="confirmPassword"
+                        autocomplete="new-password"
+                        [ngClass]="{'hidden-component' : isPreview === true}">
                     @if(this.confirmPassword !== undefined && this.confirmPassword.touched && this.confirmPassword.status === formStatusEnum.INVALID) {
                         <div class="error-content">
                             @if(this.confirmPassword.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
@@ -107,13 +152,117 @@
                 </div>
             </div>
         }
+        <div class="row mt-4">
+            <div class="col-md-12 background-options">
+                <div class="row mb-4">
+                    <div class="form-group col-md-5">
+                        <label class="is-required">Facultad</label>
+                        <app-faculty-select
+                            formControlName="faculty"
+                            (valueChange)="loadCourses($event)"
+                            [ngClass]="{ 'hidden-component': isPreview === true }">
+                        </app-faculty-select>
+                        <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.professorData?.faculty?.name}}</p> 
+                        @if(this.faculty !== undefined && this.faculty.touched && this.faculty.status === formStatusEnum.INVALID) {
+                            <div class="error-content">
+                                @if(this.faculty.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+                            </div>
+                        }
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="degree" class="is-required">Cursos</label>
+                        <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.professorData?.degree?.name}}</p>
+                        <select 
+                            id="degree"
+                            autocomplete="off"
+                            formControlName="courseToAdd"
+                            [ngClass]="{'hidden-component' : isPreview === true }">
+                                <option value="" disable selected>Seleccione un curso</option>
+                                @for(courseOption of courseList; track $index) {
+                                    <option [ngValue]="courseOption.id">{{ courseOption.name }}</option>
+                                }
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2 button-section">
+                        <button
+                            type="button"
+                            class="btn-triage medium btn__solid-success"
+                            (click)="addCourse()"
+                            [ngClass]="{'hidden-component' : isPreview === true }">
+                        Agregar</button>
+                    </div>
+                </div>
+                @if (courses.length > 0) {
+                    <div class="row mb-2">
+                        <div class="col-md-12">
+                            <label class="is-required">Cursos asignados ({{ courses.length }})</label>
+                            <div class="selected-courses-list" formArrayName="courses">
+                                @for(courseControl of courses.controls; track $index) {
+                                    <div class="course-item" [formGroupName]="$index">
+                                        <span class="course-name">{{ courseControl.get('name')?.value }}</span>
+                                        @if(!isPreview) {
+                                            <button 
+                                                type="button"
+                                                class="btn-remove"
+                                                (click)="removeCourse($index)"
+                                                title="Eliminar curso">
+                                                ✕
+                                            </button>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <!-- <div class="row mb-2">
+            <div class="form-group col-md-5">
+                <label class="is-required">Facultad</label>
+                <app-faculty-select
+                    formControlName="faculty"
+                    (valueChange)="loadCourses($event)"
+                    [ngClass]="{ 'hidden-component': isPreview === true }">
+                </app-faculty-select>
+                <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.professorData?.faculty?.name}}</p> 
+                @if(this.faculty !== undefined && this.faculty.touched && this.faculty.status === formStatusEnum.INVALID) {
+                    <div class="error-content">
+                        @if(this.faculty.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+                    </div>
+                }
+            </div>
+            <div class="form-group col-md-5">
+                <label for="degree" class="is-required">Cursos</label>
+                <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.professorData?.degree?.name}}</p>
+                <select 
+                    id="degree"
+                    autocomplete="off"
+                    formControlName="courseToAdd"
+                    [ngClass]="{'hidden-component' : isPreview === true }">
+                        <option value="" disable selected>Seleccione un curso</option>
+                        @for(courseOption of courseList; track $index) {
+                            <option [ngValue]="courseOption.id">{{ courseOption.name }}</option>
+                        }
+                </select>
+            </div>
+            <div class="form-group col-md-2 button-section">
+                <button
+                    type="button"
+                    class="btn-triage medium btn__solid-success"
+                    (click)="addCourse()"
+                    [ngClass]="{'hidden-component' : isPreview === true }">
+                Agregar</button>
+            </div>
+        </div> -->
     </div>
+        
 
     <!-- <div formGroupName="user">
         <div class="form-group mb-2">
             <label for="name" class="is-required">Nombres</label>
             <p class="ml-1" [ngClass]="{'hidden-component' : isPreview === false }">{{ this.professorData?.user?.firstName}}</p>
-            <input type="text" name="name" formControlName="firstName" [ngClass]="{'hidden-component' : isPreview === true }">
+            <input type="text" id="phone" name="name" formControlName="firstName" [ngClass]="{'hidden-component' : isPreview === true }">
             @if(this.firstName !== undefined && this.firstName?.touched && this.firstName?.status === formStatusEnum.INVALID) {
                 <div class="error-content">
                     @if(this.firstName?.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
@@ -123,7 +272,7 @@
         <div class="form-group mb-2">
             <label for="second-name" class="is-required">Apellidos</label>
             <p class="ml-1" [ngClass]="{'hidden-component' : isPreview === false }">{{ this.professorData?.user?.secondName}}</p>
-            <input type="text" name="second-name" formControlName="secondName" [ngClass]="{'hidden-component' : isPreview === true }">
+            <input type="text" id="phone" name="second-name" formControlName="secondName" [ngClass]="{'hidden-component' : isPreview === true }">
             @if(this.secondName !== undefined && this.secondName?.touched && this.secondName?.status === formStatusEnum.INVALID) {
                 <div class="error-content">
                     @if(this.secondName?.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
