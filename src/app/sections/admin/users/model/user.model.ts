@@ -1,3 +1,4 @@
+import { Course } from "../../courses/model/course.model";
 import { Degree } from "../../degrees/models/degree.model";
 import { Faculty } from "../../faculties/models/faculty.model";
 import { UserRolEnum } from "../enums/user-rol.enum";
@@ -23,4 +24,5 @@ export interface User {
 
     faculty?: Faculty;
     degree?: Degree;
+    courses?: Course[];
 }
