@@ -18,7 +18,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 @Component({
     selector: 'app-student-list',
     standalone: true,
-    imports: [CommonModule, YearPipe, InfiniteScrollModule],
+    imports: [CommonModule, InfiniteScrollModule],
     templateUrl: './student-list.component.html',
     styleUrl: './student-list.component.scss'
 })
