@@ -16,10 +16,18 @@
 				padding: 0 0 0 1em;
 				width: 100%;
 				color: var(--sidebar-color);
-				&.active {
-					color: var(--sidebar-active-option);
+					
+			}
+
+			&.active {
+				background: #e1e7ef;
+				border-radius: 5px;
+
+				.item {
+					color: black !important;
 				}
 			}
+
             .item:hover {
                 color: var(--sidebar-hover-color);
             }
@@ -29,6 +37,8 @@
 		border-radius: 10px;
 	}
 }
+
+
 
 @media (width <= 720px) {
 	.sidebar {

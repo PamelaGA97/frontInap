@@ -6,34 +6,34 @@ export const adminPath = '/admin';
 export const pages: ViewPage[] = [
     {
         name: 'Home',
-        path: `${environment.baseUrl}${adminPath}/`
+        path: `${adminPath}/`
     },
     {
         name: 'Estudiantes',
-        path: `${environment.baseUrl}${adminPath}/students`
+        path: `${adminPath}/students`
     },
     {
         name: 'Secretarias',
-        path: `${environment.baseUrl}${adminPath}/secretaries`
+        path: `${adminPath}/secretaries`
     },
     {
         name: 'Docentes',
-        path: `${environment.baseUrl}${adminPath}/professors`
+        path: `${adminPath}/professors`
     },
     {
         name: 'Facultades',
-        path: `${environment.baseUrl}${adminPath}/faculties`
+        path: `${adminPath}/faculties`
     },
     {
         name: 'Cursos',
-        path: `${environment.baseUrl}${adminPath}/faculty-courses`
+        path: `${adminPath}/faculty-courses`
     },
     {
         name: 'Inscripciones',
-        path: `${environment.baseUrl}${adminPath}/inscriptions`
+        path: `${adminPath}/inscriptions`
     },
     {
         name: 'Pagos',
-        path: `${environment.baseUrl}${adminPath}/payments`
+        path: `${adminPath}/payments`
     }
 ]

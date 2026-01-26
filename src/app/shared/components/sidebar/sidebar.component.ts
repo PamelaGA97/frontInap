@@ -1,23 +1,26 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
-import { ViewPage } from '../../models/view-page.model';
 import { pages } from '../../../core/admin-url-path';
 
 @Component({
     selector: 'app-sidebar',
 	standalone: true,
-    imports: [CommonModule],
+    imports: [
+		CommonModule,
+		RouterModule
+	],
     templateUrl: './sidebar.component.html',
     styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
-	@Input() viewPages: ViewPage[];
-	@Input() currentView: string;
+	@Input() viewPages = pages;
+	// @Input() currentView: string;
 
 	constructor() {
 		this.viewPages = pages;
-		this.currentView = '';
+		// this.currentView = '';
 		this.initialize();
 	}
 
@@ -29,7 +32,7 @@ export class SidebarComponent {
 
 	};
 
-	public onClick(pageName: string): void {
-		this.currentView = pageName;
-	}
+	// public onClick(pageName: string): void {
+	// 	this.currentView = pageName;
+	// }
 }

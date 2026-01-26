@@ -1,8 +1,12 @@
 <ul class="sidebar">
 	@for (viewPage of viewPages; track $index) {
-		<li class="nav-item" (click)="onClick(viewPage.name)">
-			<a href="{{viewPage.path}}">
-				<div class="item" [ngClass]="{'active': currentView === viewPage.name}">
+		<li class="nav-item">
+			<a
+				[routerLink]="viewPage.path"
+				routerLinkActive="active"
+				[routerLinkActiveOptions]="{ exact: true }"
+			>
+				<div class="item">
 					<span>{{viewPage.name}}</span>
 				</div>
 			</a>
