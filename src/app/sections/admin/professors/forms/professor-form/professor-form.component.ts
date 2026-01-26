@@ -20,6 +20,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FacultySelectComponent } from '../../../../../shared/components/faculty-select/faculty-select.component';
 import { Course } from '../../../courses/model/course.model';
 import { AlertType } from '../../../../../shared/services/alert.enum';
+import { TeacherScheduleComponent } from '../../../../../shared/components/teacher-schedule/teacher-schedule.component';
 
 @Component({
     selector: 'app-professor-form',
@@ -29,7 +30,8 @@ import { AlertType } from '../../../../../shared/services/alert.enum';
       CommonModule,
       BlockInvalidNumberKeysDirective,
       // ScheduleTableComponent,
-      FacultySelectComponent
+      FacultySelectComponent,
+      TeacherScheduleComponent
     ],
     templateUrl: './professor-form.component.html',
     styleUrl: './professor-form.component.scss'

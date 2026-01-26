@@ -1,0 +1,102 @@
+<!-- <div class="teacher-schedule-container">
+  <div class="schedule-header">
+    <h4>Horarios Disponibles</h4>
+    <div class="schedule-actions">
+      <span class="selected-count">{{ getSelectedCount() }} horarios seleccionados</span>
+      @if (!isPreview && !disabled) {
+        <button 
+          type="button" 
+          class="btn-clear"
+          (click)="clearAll()">
+          Limpiar todos
+        </button>
+      }
+    </div>
+  </div>
+
+  <div class="schedule-grid">
+    <div class="schedule-table">
+
+      <div class="table-header">
+        <div class="day-column header-cell">Día</div>
+        @for (slot of timeSlots; track $index) {
+          <div class="time-slot-header header-cell">
+            <span class="time-label">{{ slot.label }}</span>
+          </div>
+        }
+        @if (!isPreview && !disabled) {
+          <div class="action-column header-cell">Acción</div>
+        }
+      </div>
+
+
+      @for (day of days; track day.day) {
+        <div class="table-row">
+          <div class="day-column day-label">
+            {{ day.dayLabel }}
+          </div>
+          
+          @for (slot of timeSlots; track $index) {
+            <div class="time-slot-cell">
+              <input
+                type="checkbox"
+                [id]="day.day + '-' + slot.startTime"
+                [checked]="isSlotSelected(day, slot)"
+                [disabled]="disabled || isPreview"
+                (change)="toggleSlot(day, slot, $event)"
+                class="slot-checkbox">
+              <label 
+                [for]="day.day + '-' + slot.startTime"
+                class="slot-label"
+                [class.selected]="isSlotSelected(day, slot)"
+                [class.disabled]="disabled || isPreview">
+              </label>
+            </div>
+          }
+
+          @if (!isPreview && !disabled) {
+            <div class="action-column">
+              <button
+                type="button"
+                class="btn-select-all"
+                (click)="selectAllDay(day, $event)"
+                [class.all-selected]="isDayFullySelected(day)">
+                {{ isDayFullySelected(day) ? 'Desmarcar' : 'Todo el día' }}
+              </button>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+
+  @if (isPreview && getSelectedCount() === 0) {
+    <div class="no-schedule-message">
+      <p>No hay horarios disponibles asignados</p>
+    </div>
+  }
+</div> -->
+
+<div class="schedule-table">
+    <div class="schedule-table__header">
+        <div class="schedule-table__header-cell">Día</div>
+        @for(day of days; track day) {
+            <div class="schedule-table__header-cell">{{ day.day }}</div>
+        }
+    </div>
+    <div class="schedule-table__body">
+        @for (time of timeSlots; track $index) {
+            <div class="schedule-table__row">
+                <div class="schedule-table__time-cell">
+                    {{ time.label }}
+                </div>
+                @for (day of days; track $index) {
+                    <div class="schedule-table__cell"
+                        (click)="selectSchedule(day, time)"
+                        [class.selected]="isTeacherScheduleSelected(day, time)"
+                    ></div>
+                }
+            </div>
+        }
+    </div>
+</div>
