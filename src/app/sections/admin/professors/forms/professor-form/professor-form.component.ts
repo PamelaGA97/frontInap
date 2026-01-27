@@ -81,7 +81,7 @@ export class ProfessorFormComponent {
       faculty: [null, Validators.required],
       courseToAdd: [''],
       courses: this._formBuilder.array([], Validators.required),
-      scheduleAviavilities: [null],
+      scheduleAvailabilities: [null],
     },
     { validators: matchValidator('password', 'confirmPassword') });
   }
