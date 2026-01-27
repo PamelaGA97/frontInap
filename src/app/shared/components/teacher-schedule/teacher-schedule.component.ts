@@ -1,11 +1,11 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Day } from '../../enums/day.enum';
+import { DayOfWeekEnum } from '../../enums/day-of-week.enum';
 import { TeacherAvailability } from './models/teacher-availability.model';
 import { TimeSlot } from './models/time-slot.model';
 
 export interface DaySchedule {
-  day: Day | string;
+  day: DayOfWeekEnum | string;
 }
 
 @Component({
