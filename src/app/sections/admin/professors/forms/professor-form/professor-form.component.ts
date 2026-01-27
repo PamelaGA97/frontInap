@@ -29,7 +29,6 @@ import { TeacherScheduleComponent } from '../../../../../shared/components/teach
       ReactiveFormsModule,
       CommonModule,
       BlockInvalidNumberKeysDirective,
-      // ScheduleTableComponent,
       FacultySelectComponent,
       TeacherScheduleComponent
     ],
@@ -45,7 +44,6 @@ export class ProfessorFormComponent {
   validationErrorMessage = ValidatioErrorMessage;
   formStatusEnum = FormStatus;
   faculties: Faculty[] = [];
-  // courses: Course[] = [];
   classSchedules: ClassSchedule[] = [];
 	courseList: Degree[] = [];
 
@@ -82,7 +80,8 @@ export class ProfessorFormComponent {
       isAvaible: [true, [Validators.required]],
       faculty: [null, Validators.required],
       courseToAdd: [''],
-      courses: this._formBuilder.array([], Validators.required)
+      courses: this._formBuilder.array([], Validators.required),
+      scheduleAviavilities: [null],
     },
     { validators: matchValidator('password', 'confirmPassword') });
   }
@@ -122,6 +121,7 @@ export class ProfessorFormComponent {
 
   submit(): void {
     this.professorForm.markAllAsTouched();
+    console.log(this.professorForm.value);
     if (this.professorForm.valid) {
       console.log('valido')
       // this.classScheduleTable.submit();
