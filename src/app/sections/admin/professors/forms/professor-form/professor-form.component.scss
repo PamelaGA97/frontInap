@@ -21,8 +21,8 @@ input[type="number"] {
 
 .background-options {
   padding: 10px;
-  background-color: #f8f9fa;
-  border: 1px solid #dee2e6;
+  // background-color: #f8f9fa;
+  // border: 1px solid #dee2e6;
   border-radius: 4px;
 }
 
@@ -88,4 +88,15 @@ input[type="number"] {
       transform: scale(0.95);
     }
   }
+}
+
+.info-text {
+  border: 1px solid #f7deb0;
+  border-radius: 10px;
+  background-color: #fff8c4;
+  padding: 0.5rem;
+}
+
+span {
+  color: red;
 }

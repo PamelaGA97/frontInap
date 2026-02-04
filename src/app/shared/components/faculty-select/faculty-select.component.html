@@ -1,17 +1,19 @@
-<ng-select
-    class="my-select"
-    [items]="faculties"
-    bindLabel="name"
-    bindValue="id"
-
-    [ngModel]="value"
-    (ngModelChange)="handleSelect($event)"
-
-    (search)="onSearch($event.term)"
-
-    (blur)="onTouched()"
-    placeholder="Seleccione facultad..."
-    [loading]="loading"
-    appendTo="body"
->
-</ng-select>
+<div class="faculty-selected">
+    <ng-select
+        class="my-select"
+        [items]="faculties"
+        bindLabel="name"
+        bindValue="id"
+    
+        [ngModel]="value"
+        [ngModelOptions]="{standalone: true}"
+        (ngModelChange)="handleSelect($event)"
+    
+        (search)="onSearch($event.term)"
+        (blur)="onTouched()"
+    
+        placeholder="Seleccione facultad..."
+        [loading]="loading"
+    >
+    </ng-select>
+</div>

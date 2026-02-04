@@ -1,8 +1,8 @@
+import { TeacherAvailability } from "../../../../shared/components/teacher-schedule/models/teacher-availability.model";
 import { Course } from "../../courses/model/course.model";
 import { Degree } from "../../degrees/models/degree.model";
 import { Faculty } from "../../faculties/models/faculty.model";
 import { UserRolEnum } from "../enums/user-rol.enum";
-import { UserEnum } from "../enums/user-type.enum";
 
 export interface User {
     id: string,
@@ -25,4 +25,5 @@ export interface User {
     faculty?: Faculty;
     degree?: Degree;
     courses?: Course[];
+    teacherAvailabilities?: TeacherAvailability[];
 }

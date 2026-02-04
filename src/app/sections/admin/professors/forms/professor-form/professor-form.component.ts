@@ -20,6 +20,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FacultySelectComponent } from '../../../../../shared/components/faculty-select/faculty-select.component';
 import { Course } from '../../../courses/model/course.model';
 import { AlertType } from '../../../../../shared/services/alert.enum';
+import { TeacherScheduleComponent } from '../../../../../shared/components/teacher-schedule/teacher-schedule.component';
+import { TeacherAvailability } from '../../../../../shared/components/teacher-schedule/models/teacher-availability.model';
 
 @Component({
     selector: 'app-professor-form',
@@ -28,8 +30,8 @@ import { AlertType } from '../../../../../shared/services/alert.enum';
       ReactiveFormsModule,
       CommonModule,
       BlockInvalidNumberKeysDirective,
-      // ScheduleTableComponent,
-      FacultySelectComponent
+      FacultySelectComponent,
+      TeacherScheduleComponent,
     ],
     templateUrl: './professor-form.component.html',
     styleUrl: './professor-form.component.scss'
@@ -43,7 +45,6 @@ export class ProfessorFormComponent {
   validationErrorMessage = ValidatioErrorMessage;
   formStatusEnum = FormStatus;
   faculties: Faculty[] = [];
-  // courses: Course[] = [];
   classSchedules: ClassSchedule[] = [];
 	courseList: Degree[] = [];
 
@@ -63,6 +64,14 @@ export class ProfessorFormComponent {
   
   private async initialize(): Promise<void> {
     this.initializeForm();
+    if (this.professorData && this.professorData.teacherAvailabilities) {
+      // this.teacherScheduleAvailabilities = this.professorData.teacherAvailabilities;
+      // this.professorForm.patchValue({
+      //   ...this.professorData,
+      // });
+      this.professorForm.controls['teacherAvailabilities'].setValue(this.professorData.teacherAvailabilities);
+    }
+    console.log(this.professorForm.value)
   }
 
   private initializeForm(): void {
@@ -80,7 +89,8 @@ export class ProfessorFormComponent {
       isAvaible: [true, [Validators.required]],
       faculty: [null, Validators.required],
       courseToAdd: [''],
-      courses: this._formBuilder.array([], Validators.required)
+      courses: this._formBuilder.array([], Validators.required),
+      teacherAvailabilities: [[]],
     },
     { validators: matchValidator('password', 'confirmPassword') });
   }
@@ -89,15 +99,14 @@ export class ProfessorFormComponent {
     return this._formBuilder.group({
       id: [course.id, Validators.required],
       name: [course.name, Validators.required],
-      //facultyName: [facultyName || this.getSelectedFacultyName(), Validators.required]
     });
   }
 
-  private getSelectedFacultyName(): string {
-    const facultyId = this.faculty.value;
-    const selectedFaculty = this.faculties.find(f => f.id === facultyId);
-    return selectedFaculty?.name || '';
-  }
+  // private getSelectedFacultyName(): string {
+  //   const facultyId = this.faculty.value;
+  //   const selectedFaculty = this.faculties.find(f => f.id === facultyId);
+  //   return selectedFaculty?.name || '';
+  // }
 
   private async addProfessorDataToForm(): Promise<void> {
     if (this.professorData) {
@@ -122,21 +131,11 @@ export class ProfessorFormComponent {
     this.professorForm.markAllAsTouched();
     if (this.professorForm.valid) {
       console.log('valido')
-      // this.classScheduleTable.submit();
-      // const data = { 
-      //   ...this.professorForm.value,
-      //   classSchedules: this.classSchedules
-      // }
-      // this.submitFormEvent.emit(data);
       this.submitFormEvent.emit(this.professorForm.value);
     } else {
       console.log('invalido')
       console.log(this.professorForm)
     }
-  }
-
-  addClassHourSelected(classSchedules: ClassSchedule[]): void {
-    this.classSchedules = classSchedules
   }
 
   async loadCourses($facultyId: string): Promise<void> {
@@ -158,7 +157,6 @@ export class ProfessorFormComponent {
       return;
     }
 
-    // Verificar si el curso ya fue agregado
     const courseExists = this.courses.value.some((course: Course) => course.id === courseId);
     
     if (courseExists) {
@@ -166,7 +164,6 @@ export class ProfessorFormComponent {
       return;
     }
 
-    // Buscar el curso en la lista y agregarlo al FormArray
     const courseToAdd = this.courseList.find(course => course.id === courseId);
     
     if (courseToAdd) {

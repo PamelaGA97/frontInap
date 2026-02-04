@@ -1,0 +1,24 @@
+<div class="schedule-table" >
+    <div class="schedule-table__header">
+        <div class="schedule-table__header-cell">Día</div>
+        @for(day of days; track day) {
+            <div class="schedule-table__header-cell">{{ day.day }}</div>
+        }
+    </div>
+    <div class="schedule-table__body">
+        @for (time of timeSlots; track $index) {
+            <div class="schedule-table__row">
+                <div class="schedule-table__time-cell">
+                    {{ time.label }}
+                </div>
+                @for (day of days; track $index) {
+                    <div class="schedule-table__cell"
+                        [class.disabled]="disabled || isPreview"
+                        (click)="selectSchedule(day, time)"
+                        [class.selected]="isTeacherScheduleSelected(day, time)"
+                    ></div>
+                }
+            </div>
+        }
+    </div>
+</div>
