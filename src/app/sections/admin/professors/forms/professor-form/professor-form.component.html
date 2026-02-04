@@ -3,7 +3,7 @@
         <div class="row mb-2">
             <div class="form-group col-md-6">
                 <label for="name" class="is-required">Nombres</label>
-                <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.professorData?.firstName}}</p>
+                <p class="ml-3" [ngClass]="{'hidden-component' : isPreview === false }">{{this.professorData?.firstName}}</p>
                 <input
                     type="text"
                     id="name"
@@ -18,7 +18,7 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="second-name" class="is-required">Apellidos</label>
-                <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.professorData?.secondName}}</p>
+                <p class="ml-3" [ngClass]="{'hidden-component' : isPreview === false }">{{this.professorData?.secondName}}</p>
                 <input
                     type="text"
                     id="second-name"
@@ -35,7 +35,7 @@
         <div class="row mb-2">
             <div class="form-group col-md-6">
                 <label for="ci" class="is-required">Ci</label>
-                <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.professorData?.ci}}</p>
+                <p class="ml-3" [ngClass]="{'hidden-component' : isPreview === false }">{{this.professorData?.ci}}</p>
                 <input 
                     type="text"
                     id="ci"
@@ -50,7 +50,7 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="phone" class="is-required">Telefono</label>
-                <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.professorData?.phone}}</p>
+                <p class="ml-3" [ngClass]="{'hidden-component' : isPreview === false }">{{this.professorData?.phone}}</p>
                 <input
                     type="text"
                     id="phone"
@@ -69,7 +69,7 @@
         <div class="row mb-2">
             <div class="form-group col-md-6">
                 <label for="salary" class="is-required">Sueldo</label>
-                <p class="ml-1" [ngClass]="{'hidden-component' : isPreview === false}">{{this.professorData?.salary}}</p>
+                <p class="ml-3" [ngClass]="{'hidden-component' : isPreview === false}">{{this.professorData?.salary}}</p>
                 <input
                     type="number"
                     id="salary"
@@ -84,7 +84,7 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="isAvaible" class="is-required">Habilitado</label>
-                <p class="ml-1" [ngClass]="{'hidden-component' : isPreview === false }">{{this.professorData?.isAvaible}}</p>
+                <p class="ml-3" [ngClass]="{'hidden-component' : isPreview === false }">{{this.professorData?.isAvaible ? 'Habilitado' : 'No habilitado'}}</p>
                 <select
                     id="isAvaible"
                     autocomplete="off"
@@ -103,7 +103,7 @@
         <div class="row mb-2">
             <div class="form-group col-md-6">
                 <label for="email" class="is-required">Email</label>
-                <p class="ml-1" [ngClass]="{'hidden-component' : isPreview === false}">{{this.professorData?.email}}</p>
+                <p class="ml-3" [ngClass]="{'hidden-component' : isPreview === false}">{{this.professorData?.email}}</p>
                 <input 
                     type="text"
                     id="email"
@@ -154,7 +154,13 @@
         }
         <div class="row mt-4">
             <div class="col-md-12 background-options">
-                <div class="row mb-4">
+                <div class="row">
+                    <div class="col-md-12 mt-2 mb-2 ml-2">
+                        <h5>Seleccione materias del docente.<span>*</span></h5>
+                        <p>Agregue las materias que dictara el docente.</p>
+                    </div>
+                </div>
+                <div class="row mb-4 ">
                     <div class="form-group col-md-5">
                         <label class="is-required">Facultad</label>
                         <app-faculty-select
@@ -162,14 +168,14 @@
                             (valueChange)="loadCourses($event)"
                             [ngClass]="{ 'hidden-component': isPreview === true }">
                         </app-faculty-select>
-                        <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.professorData?.faculty?.name}}</p> 
+                        <p class="ml-3" [ngClass]="{'hidden-component' : isPreview === false }">{{this.professorData?.faculty?.name}}</p> 
                         @if(this.faculty !== undefined && this.faculty.touched && this.faculty.status === formStatusEnum.INVALID) {
                             <div class="error-content">
                                 @if(this.faculty.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
                             </div>
                         }
                     </div>
-                    <div class="form-group col-md-5">
+                    <div class="form-group col-md-5" style="justify-content: end;">
                         <label for="degree" class="is-required">Cursos</label>
                         <p class="ml-2" [ngClass]="{'hidden-component' : isPreview === false }">{{this.professorData?.degree?.name}}</p>
                         <select 
@@ -217,12 +223,12 @@
                 }
             </div>
         </div>
-        <div class="row mb-2">
+        <div class="row mt-4 mb-2">
             <div class="col-md-12">
-                <label class="is-required">Horario del profesor</label>
                 <app-teacher-schedule
-                    formControlName="scheduleAvailabilities"
+                    formControlName="teacherAvailabilities"
                     [isPreview]="isPreview"
+                    [teacherScheduleAvailabilities]="professorData?.teacherAvailabilities || []"
                     >
                 </app-teacher-schedule>
             </div>

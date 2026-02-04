@@ -1,4 +1,4 @@
-<div class="schedule-table" [class.disabled]="disabled || isPreview">
+<div class="schedule-table" >
     <div class="schedule-table__header">
         <div class="schedule-table__header-cell">Día</div>
         @for(day of days; track day) {
@@ -13,6 +13,7 @@
                 </div>
                 @for (day of days; track $index) {
                     <div class="schedule-table__cell"
+                        [class.disabled]="disabled || isPreview"
                         (click)="selectSchedule(day, time)"
                         [class.selected]="isTeacherScheduleSelected(day, time)"
                     ></div>

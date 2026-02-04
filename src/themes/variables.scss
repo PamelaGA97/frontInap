@@ -46,9 +46,17 @@
 	--input-form-error: #fa3b1d;
 
 	/* Alerts */
-	--alert-color: #b81800;
-	--alert-border-color: #f48270;
-	--alert-background-color: #ffe0db;
+	--alert-error-color: #b81800;
+	--alert-error-border-color: #f48270;
+	--alert-error-background-color: #ffe0db;
+
+	--alert-warning-color: #756543;
+	--alert-warning-border-color: #f7deb0;
+	--alert-warning-background-color: #fff8c4a8;
+
+	--alert-success-color: black;
+	--alert-success-border-color: #cfe2c0;
+	--alert-success-background-color: #e9ffd9;
 
 	/* Asaid */
 	--asaid-backgroound-color: #222e3c;

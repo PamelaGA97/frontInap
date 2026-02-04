@@ -8,6 +8,7 @@ import { Faculty } from '../../../sections/admin/faculties/models/faculty.model'
 import { FacultyService } from '../../../sections/admin/faculties/services/facuties.service';
 import { ToastService } from '../../services/toast.service';
 import { PaginationResponse } from '../../models/pagination-response.model';
+import { ControlValueAccessor } from '@angular/forms';
 
 @Component({
   selector: 'app-faculty-select',
@@ -27,7 +28,7 @@ import { PaginationResponse } from '../../models/pagination-response.model';
     }
   ]
 })
-export class FacultySelectComponent {
+export class FacultySelectComponent implements ControlValueAccessor{
   @Output() valueChange = new EventEmitter<any>();
   faculties: Faculty[] = [];
   loading: boolean = false;
@@ -90,6 +91,10 @@ export class FacultySelectComponent {
 
   writeValue(value: any): void {
     this.value = value;
+
+    if (value && this.faculties.length === 0) {
+    this.search$.next('');
+  }
   }
 
   registerOnChange(change: any): void {

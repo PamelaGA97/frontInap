@@ -1,17 +1,9 @@
-export class TeacherAvailability {
-    day: string;
-    startTime: string;
-    endTime: string;
+import { BaseModel } from "../../../models/baseModel.model";
 
-    constructor(day: string, startTime: string, endTime: string) {
-        this.day = day;
-        this.startTime = startTime;
-        this.endTime = endTime;
-    }
-
-    compareTo(otherTeacherAvailability: TeacherAvailability): boolean {
-        return this.day === otherTeacherAvailability.day &&
-               this.startTime === otherTeacherAvailability.startTime &&
-               this.endTime === otherTeacherAvailability.endTime;
-    }
+export interface TeacherAvailability extends BaseModel {
+    id?: string;
+    day?: string;
+    startTime?: string;
+    endTime?: string;
+    isAvailable?: boolean;
 }

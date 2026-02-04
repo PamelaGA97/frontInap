@@ -1,8 +1,9 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DayOfWeekEnum } from '../../enums/day-of-week.enum';
-import { TeacherAvailability } from './models/teacher-availability.model';
 import { TimeSlot } from './models/time-slot.model';
+import { compareTeacherSchedules } from './utils/teacher-availability.utils';
+import { TeacherAvailability } from './models/teacher-availability.model';
 
 export interface DaySchedule {
   day: DayOfWeekEnum | string;
@@ -51,25 +52,29 @@ export class TeacherScheduleComponent {
   private onTouched: () => void = () => {};
 
   ngOnInit(): void {
+    console.log(this.isPreview)
     this.initialize();
   }
 
-  initialize(): void {}
+  initialize(): void {
+    if (this.teacherScheduleAvailabilities.length > 0) {
+      this.teacherScheduleAvailabilities = [...this.teacherScheduleAvailabilities];
+    }
+  }
 
   selectSchedule(daySchedule: DaySchedule, timeSlot: TimeSlot): void {
     if (this.disabled || this.isPreview) {
       return;
     }
 
-    const newScheduleAvailability = new TeacherAvailability(
-      daySchedule.day,
-      timeSlot.startTime,
-      timeSlot.endTime
-    );
+    const newScheduleAvailability = {
+      day: daySchedule.day,
+      startTime: timeSlot.startTime,
+      endTime: timeSlot.endTime
+    };
 
     const teacherAvailabilityFounded = this._foundTeacherSchedule(newScheduleAvailability);
-
-    if (teacherAvailabilityFounded !== -1) {
+    if (teacherAvailabilityFounded !== -1 ) {
       this.teacherScheduleAvailabilities.splice(teacherAvailabilityFounded, 1);
     } else {
       this.teacherScheduleAvailabilities.push(newScheduleAvailability);
@@ -80,11 +85,11 @@ export class TeacherScheduleComponent {
   }
 
   isTeacherScheduleSelected(daySchedule: DaySchedule, timeSlot: TimeSlot): boolean {
-    const scheduleToFind = new TeacherAvailability(
-      daySchedule.day,
-      timeSlot.startTime,
-      timeSlot.endTime
-    );
+    const scheduleToFind = {
+      day: daySchedule.day,
+      startTime: timeSlot.startTime,
+      endTime: timeSlot.endTime
+    }
     const teacherAvailabilityFounded = this._foundTeacherSchedule(scheduleToFind);
     return teacherAvailabilityFounded !== -1;
   }
@@ -92,7 +97,9 @@ export class TeacherScheduleComponent {
   private _foundTeacherSchedule(teacherAvailability: TeacherAvailability): number {
     const teacherAvailabilityFounded = this.teacherScheduleAvailabilities
       .findIndex((scheduleSelected) => {
-        return scheduleSelected.compareTo(teacherAvailability);
+        const scheduleSelect = { day: scheduleSelected.day, startTime: scheduleSelected.startTime, endTime: scheduleSelected.endTime };
+        const res = compareTeacherSchedules(scheduleSelect, teacherAvailability);
+        return res;
       });
     return teacherAvailabilityFounded;
   }
