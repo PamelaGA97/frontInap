@@ -88,8 +88,11 @@ export class ProfessorFormComponent {
       salary: ['', [Validators.required]],
       isAvaible: [true, [Validators.required]],
       faculty: [null, Validators.required],
-      courseToAdd: [''],
-      courses: this._formBuilder.array([], Validators.required),
+
+      selectedFaculty: [''],
+      selectedCourse: [''],
+
+      teacherSubjects: this._formBuilder.array([], Validators.required),
       teacherAvailabilities: [[]],
     },
     { validators: matchValidator('password', 'confirmPassword') });
@@ -101,12 +104,6 @@ export class ProfessorFormComponent {
       name: [course.name, Validators.required],
     });
   }
-
-  // private getSelectedFacultyName(): string {
-  //   const facultyId = this.faculty.value;
-  //   const selectedFaculty = this.faculties.find(f => f.id === facultyId);
-  //   return selectedFaculty?.name || '';
-  // }
 
   private async addProfessorDataToForm(): Promise<void> {
     if (this.professorData) {
@@ -150,7 +147,7 @@ export class ProfessorFormComponent {
   }
 
   addCourse(): void {
-    const courseId = this.courseToAdd.value;
+    const courseId = this.professorForm.value.selectedCourse.id;
     
     if (!courseId) {
       this._toastService.showToast('Debe seleccionar un curso', '', AlertType.WARNING);
@@ -168,7 +165,6 @@ export class ProfessorFormComponent {
     
     if (courseToAdd) {
       this.courses.push(this.createCourseFormGroup(courseToAdd as Course));
-      this.courseToAdd.setValue('');
       this._toastService.showToast('Curso agregado correctamente', '', AlertType.SUCCESS);
     }
   }
@@ -217,10 +213,6 @@ export class ProfessorFormComponent {
 	get faculty() {
 		return this.professorForm.controls['faculty'];
 	}
-
-  get courseToAdd() {
-    return this.professorForm.controls['courseToAdd'];
-  }
 
   get courses(): FormArray {
     return this.professorForm.get('courses') as FormArray;

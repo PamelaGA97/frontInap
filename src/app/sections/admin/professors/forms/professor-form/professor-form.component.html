@@ -164,7 +164,7 @@
                     <div class="form-group col-md-5">
                         <label class="is-required">Facultad</label>
                         <app-faculty-select
-                            formControlName="faculty"
+                            formControlName="selectedFaculty"
                             (valueChange)="loadCourses($event)"
                             [ngClass]="{ 'hidden-component': isPreview === true }">
                         </app-faculty-select>
@@ -181,7 +181,7 @@
                         <select 
                             id="degree"
                             autocomplete="off"
-                            formControlName="courseToAdd"
+                            formControlName="selectedCourse"
                             [ngClass]="{'hidden-component' : isPreview === true }">
                                 <option value="" disable selected>Seleccione un curso</option>
                                 @for(courseOption of courseList; track $index) {
