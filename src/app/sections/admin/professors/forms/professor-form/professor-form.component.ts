@@ -22,6 +22,7 @@ import { Course } from '../../../courses/model/course.model';
 import { AlertType } from '../../../../../shared/services/alert.enum';
 import { TeacherScheduleComponent } from '../../../../../shared/components/teacher-schedule/teacher-schedule.component';
 import { TeacherAvailability } from '../../../../../shared/components/teacher-schedule/models/teacher-availability.model';
+import { TeacherSubject } from '../../models/teacher-subject.model';
 
 @Component({
     selector: 'app-professor-form',
@@ -46,7 +47,7 @@ export class ProfessorFormComponent {
   formStatusEnum = FormStatus;
   faculties: Faculty[] = [];
   classSchedules: ClassSchedule[] = [];
-	courseList: Degree[] = [];
+	courseList: Course[] = [];
 
   private destroy$ = new Subject<void>();
 
@@ -112,15 +113,15 @@ export class ProfessorFormComponent {
         faculty: this.professorData.faculty?.id,
       });
       
-      if (this.professorData.faculty?.id) {
-        await this.loadCourses(this.professorData.faculty.id);
-      }
+      // if (this.professorData.faculty?.id) {
+      //   await this.loadCourses(this.professorData.faculty.id);
+      // }
       
-      if (this.professorData.courses && this.professorData.courses.length > 0) {
-        this.professorData.courses.forEach(course => {
-          this.courses.push(this.createCourseFormGroup(course));
-        });
-      }
+      // if (this.professorData.courses && this.professorData.courses.length > 0) {
+      //   this.professorData.courses.forEach(course => {
+      //     this.courses.push(this.createCourseFormGroup(course));
+      //   });
+      // }
     }
   }
 
@@ -146,33 +147,70 @@ export class ProfessorFormComponent {
       });
   }
 
-  addCourse(): void {
-    const courseId = this.professorForm.value.selectedCourse.id;
+  // addCourse(): void {
+  //   const courseId = this.professorForm.value.selectedCourse.id;
     
-    if (!courseId) {
-      this._toastService.showToast('Debe seleccionar un curso', '', AlertType.WARNING);
+  //   if (!courseId) {
+  //     this._toastService.showToast('Debe seleccionar un curso', '', AlertType.WARNING);
+  //     return;
+  //   }
+
+  //   const courseExists = this.courses.value.some((course: Course) => course.id === courseId);
+    
+  //   if (courseExists) {
+  //     this._toastService.showToast('Este curso ya fue agregado', '', AlertType.WARNING);
+  //     return;
+  //   }
+
+  //   const courseToAdd = this.courseList.find(course => course.id === courseId);
+    
+  //   if (courseToAdd) {
+  //     this.courses.push(this.createCourseFormGroup(courseToAdd as Course));
+  //     this._toastService.showToast('Curso agregado correctamente', '', AlertType.SUCCESS);
+  //   }
+  // }
+
+  createTeacherSubjectFormGroup(teacherSubject: TeacherSubject): FormGroup {
+    return this._formBuilder.group({
+      faculty: [teacherSubject.faculty, Validators.required],
+      course: [teacherSubject.course, Validators.required],
+    });
+  }
+
+  addTeacherSubject(): void {
+    const facultyId = this.selectedFaculty.value.id;
+    const courseId = this.selectedCourse.value.id;
+
+    if (!facultyId || !courseId) {
+      this._toastService.showToast('Debe seleccionar una facultad y una materia', '', AlertType.WARNING);
+    }
+
+    const teacherSubjectFounded = this.teacherSubjects.value.some(
+      (teacherSubject: TeacherSubject) => teacherSubject.course.id === courseId && teacherSubject.faculty.id === facultyId 
+    );
+
+    if (teacherSubjectFounded) {
+      this._toastService.showToast('La materia ya fue agregada.', '', AlertType.WARNING);
       return;
     }
 
-    const courseExists = this.courses.value.some((course: Course) => course.id === courseId);
+    const course = this.courseList.find((course => course.id === courseId));
+    const faculty = this.selectedFaculty.value;
     
-    if (courseExists) {
-      this._toastService.showToast('Este curso ya fue agregado', '', AlertType.WARNING);
-      return;
+    if (course && faculty) {
+      const teacherSubject: TeacherSubject = {
+        faculty: faculty,
+        course: course,
+      }
+      this.teacherSubjects.push(this.createTeacherSubjectFormGroup(teacherSubject));
     }
 
-    const courseToAdd = this.courseList.find(course => course.id === courseId);
-    
-    if (courseToAdd) {
-      this.courses.push(this.createCourseFormGroup(courseToAdd as Course));
-      this._toastService.showToast('Curso agregado correctamente', '', AlertType.SUCCESS);
-    }
   }
 
-  removeCourse(index: number): void {
-    this.courses.removeAt(index);
-    this._toastService.showToast('Curso eliminado correctamente', '', AlertType.SUCCESS);
-  }
+  // removeCourse(index: number): void {
+  //   this.courses.removeAt(index);
+  //   this._toastService.showToast('Curso eliminado correctamente', '', AlertType.SUCCESS);
+  // }
 
   get firstName() {
     return this.professorForm?.controls['firstName'];
@@ -210,13 +248,21 @@ export class ProfessorFormComponent {
     return this.professorForm.controls['isAvaible'];
   }
 
-	get faculty() {
-		return this.professorForm.controls['faculty'];
+	get selectedFaculty() {
+		return this.professorForm.controls['selectedFaculty'];
 	}
 
-  get courses(): FormArray {
-    return this.professorForm.get('courses') as FormArray;
+  get selectedCourse() {
+    return this.professorForm.controls['selectedCourse'];
   }
+
+  get teacherSubjects() {
+    return this.professorForm.controls['teacherSubjects'] as FormArray;
+  }
+
+  // get courses(): FormArray {
+  //   return this.professorForm.get('courses') as FormArray;
+  // }
 
   ngOnDestroy(): void {
 		this.destroy$.next();

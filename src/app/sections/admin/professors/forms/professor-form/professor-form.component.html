@@ -169,9 +169,9 @@
                             [ngClass]="{ 'hidden-component': isPreview === true }">
                         </app-faculty-select>
                         <p class="ml-3" [ngClass]="{'hidden-component' : isPreview === false }">{{this.professorData?.faculty?.name}}</p> 
-                        @if(this.faculty !== undefined && this.faculty.touched && this.faculty.status === formStatusEnum.INVALID) {
+                        @if(this.selectedFaculty !== undefined && this.selectedFaculty.touched && this.selectedFaculty.status === formStatusEnum.INVALID) {
                             <div class="error-content">
-                                @if(this.faculty.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
+                                @if(this.selectedFaculty.errors?.['required']) {<span>{{validationErrorMessage.required}}</span>}
                             </div>
                         }
                     </div>
@@ -193,7 +193,7 @@
                         <button
                             type="button"
                             class="btn-triage medium btn__solid-success"
-                            (click)="addCourse()"
+                            (click)="addTeacherSubject()"
                             [ngClass]="{'hidden-component' : isPreview === true }">
                         Agregar</button>
                     </div>
