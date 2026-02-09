@@ -100,3 +100,12 @@ input[type="number"] {
 span {
   color: red;
 }
+
+.course-detail {
+  display: flex;
+  flex-direction: column;
+  
+  .course-code {
+    color: black !important;
+  }
+}

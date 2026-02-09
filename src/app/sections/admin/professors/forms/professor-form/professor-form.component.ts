@@ -177,9 +177,12 @@ export class ProfessorFormComponent {
     });
   }
 
-  addTeacherSubject(): void {
-    const facultyId = this.selectedFaculty.value.id;
-    const courseId = this.selectedCourse.value.id;
+  async addTeacherSubject(): Promise<void> {
+    const facultyId = this.selectedFaculty.value;
+    const courseId = this.selectedCourse.value;
+
+    console.log('f: ', facultyId);
+    console.log('c: ', courseId);
 
     if (!facultyId || !courseId) {
       this._toastService.showToast('Debe seleccionar una facultad y una materia', '', AlertType.WARNING);
@@ -195,7 +198,9 @@ export class ProfessorFormComponent {
     }
 
     const course = this.courseList.find((course => course.id === courseId));
-    const faculty = this.selectedFaculty.value;
+    const faculty = await this.getFacultyForId(facultyId);
+    console.log(course)
+    console.log(faculty)
     
     if (course && faculty) {
       const teacherSubject: TeacherSubject = {
@@ -204,13 +209,23 @@ export class ProfessorFormComponent {
       }
       this.teacherSubjects.push(this.createTeacherSubjectFormGroup(teacherSubject));
     }
-
   }
 
-  // removeCourse(index: number): void {
-  //   this.courses.removeAt(index);
-  //   this._toastService.showToast('Curso eliminado correctamente', '', AlertType.SUCCESS);
-  // }
+  async getFacultyForId(id: string): Promise<Faculty> {
+    const faculty = await firstValueFrom(this._facultyService.get(id))
+      .then((faculty: Faculty) => {
+        return faculty;
+      }).catch((error: Partial<HttpErrorResponse>) => {
+        this._toastService.showHttpError(error.error);
+      });
+    
+    return faculty as Faculty;
+  }
+
+  removeTeacherSubject(index: number): void {
+    this.teacherSubjects.removeAt(index);
+    this._toastService.showToast('Curso eliminado correctamente', '', AlertType.SUCCESS);
+  }
 
   get firstName() {
     return this.professorForm?.controls['firstName'];
